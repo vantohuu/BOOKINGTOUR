@@ -1,0 +1,44 @@
+package BOOKINGTOUR.entity;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="CTDIEMDULICH")
+public class CTDiemDuLich {
+	@Id
+	@ManyToOne()
+	@JoinColumn(name="MATOUR")
+	private Tour tour1;
+	@Id
+	@ManyToOne()
+	@JoinColumn(name="MADIEMDULICH")
+	private DiemDuLich diemDuLich;
+
+	public Tour getTour1() {
+		return tour1;
+	}
+	public void setTour1(Tour tour1) {
+		this.tour1 = tour1;
+	}
+	public DiemDuLich getDiemDuLich() {
+		return diemDuLich;
+	}
+	public void setDiemDuLich(DiemDuLich diemDuLich) {
+		this.diemDuLich = diemDuLich;
+	}
+	
+	
+	
+	
+	
+
+}

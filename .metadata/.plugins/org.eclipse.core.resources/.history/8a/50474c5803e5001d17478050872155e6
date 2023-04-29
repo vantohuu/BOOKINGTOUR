@@ -1,0 +1,28 @@
+package BOOKINGTOUR.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="CTVE")
+public class CTVe {
+	@Id
+	@Column(name="IDCTVE")
+	private  int iDCTVe;
+	@Column(name="MAVE")
+	private  int maVe;
+	@Column(name="MAKM")
+	private  int maKM;
+	@Column(name="MAKH")
+	private  int maKH;
+	@Column(name="MANVXN")
+	private  String maNVXN;
+	@Column(name="MANVHUY")
+	private  String maNVHuy;
+	
+	
+	
+
+}

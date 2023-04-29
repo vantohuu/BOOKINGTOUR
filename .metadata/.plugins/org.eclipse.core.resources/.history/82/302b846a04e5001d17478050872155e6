@@ -1,0 +1,38 @@
+package BOOKINGTOUR.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import qlxb.entity.TaiKhoan;
+
+@Entity
+@Table(name="NHANVIEN")
+public class NhanVien {
+	@Id
+	@Column(name="MANV")
+	private  String maNV;
+	@Column(name="HO")
+	private  String ho;
+	@Column(name="TEN")
+	private  String ten;
+	@Column(name="CCCD")
+	private  String cCCD;
+	@Column(name="GIOITINH")
+	private  String gioiTinh;
+	@Column(name="SDT")
+	private  String sDT;
+	@Column(name="DIACHI")
+	private  String diaChi;
+	@Column(name="EMAIL")
+	private  String email;
+	@Column(name="TRANGTHAI")
+	private  boolean trangThai;
+	
+	@OneToOne(mappedBy = "nhanVien", fetch = FetchType.EAGER)
+    private TaiKhoan taikhoan;
+
+}

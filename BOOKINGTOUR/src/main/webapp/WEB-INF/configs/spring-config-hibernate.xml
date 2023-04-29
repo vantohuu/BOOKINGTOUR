@@ -18,7 +18,7 @@
 	<bean id="dataSource" 
 	    	class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 			p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-			p:url="jdbc:sqlserver://localhost:1433; Database=QLXB_31; encrypt=true;trustServerCertificate=true;"
+			p:url="jdbc:sqlserver://localhost:1433; Database=BOOKINGTOUR; encrypt=true;trustServerCertificate=true;"
 			p:username="sa"
 			p:password="123">
 	</bean>
@@ -34,7 +34,7 @@
 	            <prop key="hibernate.show_sql">false</prop>
 	       </props>
 	    </property>
-		<property name="packagesToScan" value="qlxb.entity"/>
+		<property name="packagesToScan" value="BOOKINGTOUR.entity"/>
 	</bean>
 	
 	<!-- Transaction Manager -->
@@ -42,5 +42,4 @@
     		class="org.springframework.orm.hibernate4.HibernateTransactionManager" 
        		p:sessionFactory-ref="sessionFactory" />
     <tx:annotation-driven transaction-manager="transactionManager" />
-</beans>
-
+</beans> 

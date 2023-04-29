@@ -1,0 +1,62 @@
+package BOOKINGTOUR.entity;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="CTVE")
+public class CTVe {
+	@Id
+	@Column(name="IDCTVE")
+	private  int iDCTVe;
+	
+	@ManyToOne()
+	@JoinColumn(name="MAKH")
+	private KhachHang khachHang;
+	
+
+	
+	@ManyToOne()
+	@JoinColumn(name="MAKM")
+	private KhuyenMai khuyenMai;
+	
+	
+
+	public int getiDCTVe() {
+		return iDCTVe;
+	}
+
+	public void setiDCTVe(int iDCTVe) {
+		this.iDCTVe = iDCTVe;
+	}
+
+	public KhachHang getKhachHang() {
+		return khachHang;
+	}
+
+	public void setKhachHang(KhachHang khachHang) {
+		this.khachHang = khachHang;
+	}
+
+
+	public KhuyenMai getKhuyenMai() {
+		return khuyenMai;
+	}
+
+	public void setKhuyenMai(KhuyenMai khuyenMai) {
+		this.khuyenMai = khuyenMai;
+	}
+
+
+	
+
+}

@@ -1,0 +1,22 @@
+package BOOKINGTOUR.entity;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="TAIKHOAN")
+public class LoaiLuuTru {
+	@Id
+	@Column(name="MALLT")
+	private  int maLLT;
+	@Column(name="TENLOAILUUTRU")
+	private  String tenLoaiLuuTru;
+	@OneToMany(mappedBy = "loaiLuuTru", fetch = FetchType.EAGER)
+	private List<NoiLuuTru> noiLuuTru;
+}

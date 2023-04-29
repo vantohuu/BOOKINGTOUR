@@ -1,0 +1,41 @@
+package BOOKINGTOUR.entity;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="CTVE")
+public class CTVe {
+	@Id
+	@Column(name="IDCTVE")
+	private  int iDCTVe;
+	
+	@ManyToOne()
+	@JoinColumn(name="MAKH")
+	private KhachHang khachHang;
+	
+	@ManyToOne()
+	@JoinColumn(name="MAVE")
+	private VeTour veTour;
+	
+	@ManyToOne()
+	@JoinColumn(name="MAKM")
+	private KhuyenMai khuyenMai;
+	
+	@OneToMany(mappedBy = "cTve", fetch = FetchType.EAGER)
+	private List<NhanVien> nhanVienXN;
+	
+	@OneToMany(mappedBy = "cTve1", fetch = FetchType.EAGER)
+	private List<NhanVien> nhanVienHuy;
+	
+
+}

@@ -1,2 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.KhachHang"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.KhuyenMai"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.LoaiVe"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.VeTour"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.LoaiTour"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.CTPhongLuuTru"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.LoaiLuuTru"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.NoiLuuTru"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.BookingTour"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.NhanVien"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.CTVe"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.Phong"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.DiemDuLich"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.Tour"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.CTDiemDuLich"/>
+    <fullyQualifiedTypeName name="javax.persistence.EmbeddedId"/>
+    <fullyQualifiedTypeName name="javax.persistence.Embeddable"/>
+    <fullyQualifiedTypeName name="java.io.Serializable"/>
+    <fullyQualifiedTypeName name="javax.persistence.Id"/>
+</qualifiedTypeNameHistroy>

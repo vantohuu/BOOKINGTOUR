@@ -1,0 +1,18 @@
+package BOOKINGTOUR.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="TOUR")
+public class Tour {
+	@Id
+	@Column(name="MATOUR")
+	private  int maTour;
+	@Column(name="TENTOUR")
+	private  String tenTour;
+	@Column(name="MOTA")
+	private  String moTa;
+}

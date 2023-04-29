@@ -1,0 +1,50 @@
+package BOOKINGTOUR.entity;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
+@Table(name="BOOKINGTOUR")
+public class BookingTour {
+	@Id
+	@Column(name="MABK")
+	private int maBK;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name="TGBD")
+	private  Date tGBD;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name="TGKT")
+	private Date tGKT;
+	
+	@Column(name="MAXNL")
+	private  String maxNL;
+	@Column(name="MAXTE")
+	private String maxTE;
+	@Column(name="MAXTN")
+	private  String maxtn;
+	@Column(name="MINNL")
+	private String minNL;
+	@Column(name="MINTE")
+	private  String minTE;
+	@Column(name="MINTN")
+	private String minTN;
+	@Column(name="TRANGTHAI")
+	private  String trangThai;
+	@Column(name="GHICHU")
+	private String ghiChu;
+	@Column(name="MATOUR")
+	private  String maTour;
+	@Column(name="MALT")
+	private  String maLT;
+
+}
