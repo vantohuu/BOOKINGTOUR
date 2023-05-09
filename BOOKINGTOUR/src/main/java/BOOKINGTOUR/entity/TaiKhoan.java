@@ -23,8 +23,11 @@ public class TaiKhoan {
     private NhanVien nhanVien;
 	@Column(name="PASSWORD")
 	private  String PASSWORD;
+	
+	
 	@Column(name="ISADMIN")
-	private  boolean isAdmin;
+	private  int isAdmin;
+	
 	public String getMANV() {
 		return MANV;
 	}
@@ -43,12 +46,15 @@ public class TaiKhoan {
 	public void setPASSWORD(String pASSWORD) {
 		PASSWORD = pASSWORD;
 	}
-	public boolean isAdmin() {
+	public int getIsAdmin() {
 		return isAdmin;
 	}
-	public void setAdmin(boolean isAdmin) {
+	public void setIsAdmin(int isAdmin) {
 		this.isAdmin = isAdmin;
 	}
+	
+
+	
 	
 	
 	

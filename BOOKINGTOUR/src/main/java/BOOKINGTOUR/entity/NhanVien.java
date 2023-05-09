@@ -38,11 +38,11 @@ public class NhanVien {
 	@OneToOne(mappedBy = "nhanVien", fetch = FetchType.EAGER)
     private TaiKhoan taikhoan;
 
-	@OneToMany(mappedBy = "nhanVienXN", fetch = FetchType.EAGER)
-	private List<CTVe> ctVeXN;
-	
-	@OneToMany(mappedBy = "nhanVienHuy", fetch = FetchType.EAGER)
-	private List<CTVe> ctVeHuy;
+//	@OneToMany(mappedBy = "nhanVienXN", fetch = FetchType.EAGER)
+//	private List<CTVe> ctVeXN;
+//	
+//	@OneToMany(mappedBy = "nhanVienHuy", fetch = FetchType.EAGER)
+//	private List<CTVe> ctVeHuy;
 
 	public String getMaNV() {
 		return maNV;
@@ -116,21 +116,21 @@ public class NhanVien {
 		this.trangThai = trangThai;
 	}
 
-	public List<CTVe> getCtVeXN() {
-		return ctVeXN;
-	}
-
-	public void setCtVeXN(List<CTVe> ctVeXN) {
-		this.ctVeXN = ctVeXN;
-	}
-
-	public List<CTVe> getCtVeHuy() {
-		return ctVeHuy;
-	}
-
-	public void setCtVeHuy(List<CTVe> ctVeHuy) {
-		this.ctVeHuy = ctVeHuy;
-	}
+//	public List<CTVe> getCtVeXN() {
+//		return ctVeXN;
+//	}
+//
+//	public void setCtVeXN(List<CTVe> ctVeXN) {
+//		this.ctVeXN = ctVeXN;
+//	}
+//
+//	public List<CTVe> getCtVeHuy() {
+//		return ctVeHuy;
+//	}
+//
+//	public void setCtVeHuy(List<CTVe> ctVeHuy) {
+//		this.ctVeHuy = ctVeHuy;
+//	}
 
 	public TaiKhoan getTaikhoan() {
 		return taikhoan;

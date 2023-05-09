@@ -13,3 +13,22 @@ Apr 26, 2023 14:17:11.263 [19884:16592:0426/141711.262:ERROR:connection_factory_
 Apr 26, 2023 14:17:11.617 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 Apr 26, 2023 14:17:39.227 [19884:16592:0426/141739.227:ERROR:connection_factory_impl.cc(429)] Failed to connect to MCS endpoint with error -106
 Apr 26, 2023 14:18:21.304 [19884:16592:0426/141821.304:ERROR:connection_factory_impl.cc(429)] Failed to connect to MCS endpoint with error -106
+
+May 04, 2023 14:10:15.789 NEW SESSION
+May 04, 2023 14:10:15.789 [14048:3408:0504/141015.786:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
+
+May 04, 2023 20:21:55.862 NEW SESSION
+May 04, 2023 20:21:55.862 [19668:21960:0504/202155.862:ERROR:gpu_process_host.cc(953)] GPU process exited unexpectedly: exit_code=34
+May 04, 2023 20:27:50.745 [19668:20736:0504/202750.745:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+
+May 06, 2023 13:57:08.538 NEW SESSION
+May 06, 2023 13:57:08.538 [10024:6132:0506/135708.536:ERROR:device_event_log_impl.cc(222)] [13:57:08.536] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: Element not found. (0x490)
+May 06, 2023 14:13:01.586 [10024:16260:0506/141301.586:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+May 06, 2023 14:13:22.477 [10024:16260:0506/141322.477:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 06, 2023 14:13:35.71 [10024:16260:0506/141335.071:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 06, 2023 14:13:37.102 [10024:16260:0506/141337.102:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+May 06, 2023 14:14:11.610 [10024:16260:0506/141411.610:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+
+May 09, 2023 09:31:39.32 NEW SESSION
+May 09, 2023 09:31:39.32 [18292:15632:0509/093139.031:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+May 09, 2023 09:32:05.49 [18292:15632:0509/093205.049:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
