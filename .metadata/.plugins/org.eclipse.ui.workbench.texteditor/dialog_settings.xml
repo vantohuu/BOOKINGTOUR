@@ -6,7 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
+		<item key="selection" value="them"/>
 		<list key="findhistory">
+			<item value="them"/>
 			<item value="&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&#x09;&lt;li&gt;&lt;a href=&quot;bangluong.htm&quot; class=&quot;nav-link px-0&quot;&gt; &lt;span"/>
 		</list>
 		<list key="replacehistory">
