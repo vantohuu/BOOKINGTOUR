@@ -55,3 +55,7 @@ May 10, 2023 13:21:03.253 [19636:11864:0510/132103.245:ERROR:connection_factory_
 May 10, 2023 13:21:31.372 [19636:11864:0510/132131.372:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
 May 10, 2023 13:22:28.59 [19636:11864:0510/132228.059:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
 May 10, 2023 13:23:58.997 [19636:11864:0510/132358.997:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+
+May 11, 2023 10:26:05.393 NEW SESSION
+May 11, 2023 10:26:05.393 [20704:7772:0511/102605.390:ERROR:device_event_log_impl.cc(222)] [10:26:05.390] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: Element not found. (0x490)
+May 11, 2023 11:37:55.33 [20704:2184:0511/113755.032:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
