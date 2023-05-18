@@ -42,7 +42,7 @@ public class NhanVien {
 	@Column(name="EMAIL")
 	private  String email;
 	@Column(name="TRANGTHAI")
-	private  boolean trangThai;
+	private  int trangThai;
 	
 	@OneToOne(mappedBy = "nhanVien", fetch = FetchType.EAGER)
     private TaiKhoan taikhoan;
@@ -117,13 +117,7 @@ public class NhanVien {
 		this.email = email;
 	}
 
-	public boolean isTrangThai() {
-		return trangThai;
-	}
 
-	public void setTrangThai(boolean trangThai) {
-		this.trangThai = trangThai;
-	}
 
 //	public List<CTVe> getCtVeXN() {
 //		return ctVeXN;
@@ -140,6 +134,14 @@ public class NhanVien {
 //	public void setCtVeHuy(List<CTVe> ctVeHuy) {
 //		this.ctVeHuy = ctVeHuy;
 //	}
+
+	public int getTrangThai() {
+		return trangThai;
+	}
+
+	public void setTrangThai(int trangThai) {
+		this.trangThai = trangThai;
+	}
 
 	public TaiKhoan getTaikhoan() {
 		return taikhoan;

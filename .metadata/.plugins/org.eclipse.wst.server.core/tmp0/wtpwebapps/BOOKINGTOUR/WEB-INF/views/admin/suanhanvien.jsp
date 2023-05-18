@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="f"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,42 +53,53 @@
 						<h1>Sửa thông tin nhân viên</h1>
 					</div>
 					<div class="modal-body">
-						<form:form action="update.htm" modelAttribute="nhanVien">
+						<form:form action="update.htm" modelAttribute="nhanVien1">
 							<div class="form-group">
 								<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Mã
-											nhân viên :</label> <input type="text" class="form-control"
-											name="maNV" value="${nhanVien.maNV}"> <span
+											nhân viên :</label> 
+											<form:input path="maNV" type="text" class="form-control" readonly="true" value="${nhanVien.maNV}"/>
+											 <span
 											style="color: red;">${messageMaNV}</span>
 									</div>
 									<div class="col">
-										<label for="recipient-name" class="col-form-label">Họ
-											và tên :</label> <input type="text" class="form-control" name="hoTen"
-											value="${nhanVien.ho} ${nhanVien.ten}">
+										<label for="recipient-name" class="col-form-label">Họ:</label> 
+											<form:input type="text" class="form-control" path="ho"
+											value="${nhanVien.ho}"/>
+											
+									</div>
+									<div class="col">
+										<label for="recipient-name" class="col-form-label">Tên:</label> 
+											<form:input type="text" class="form-control" path="ten"
+											value="${nhanVien.ten}"/>
+											
 									</div>
 								</div>
 								<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Căn
-											cước công dân :</label> <input type="text" class="form-control"
-											name="cCCD" value="${nhanVien.cCCD}"> <span
+											cước công dân :</label> 
+											<form:input type="text" class="form-control"
+											path="cCCD" value="${nhanVien.cCCD}"/>
+										 <span
 											style="color: red;">${messageCCCD}</span>
 									</div>
+									
 									<div class="col">
-										<c:if test="${nhanVien.gioiTinh =='nam'}">
+										<c:if test="${nhanVien.gioiTinh == 'nam'}">
 											<label for="recipient-name" class="col-form-label">Giới
 												tính :</label>
 											<br>
 											<div class="form-check form-check-inline">
-												<input class="form-check-input" type="radio" name="gioiTinh"
-													checked value="nam"> <label
+												<form:radiobutton class="form-check-input" name="gioiTinh"  path="gioiTinh" 
+													 value="nam" checked="checked" /> <label
 													class="form-check-label" for="nam">Nam</label>
 											</div>
 											<div class="form-check form-check-inline">
-												<input class="form-check-input" type="radio" name="gioiTinh"
-													value="nu"> <label class="form-check-label"
-													for="nu">Nữ</label>
+												<form:radiobutton class="form-check-input"  name="gioiTinh"  path="gioiTinh" 
+													value="nữ"/> <label class="form-check-label"
+													for="nữ">Nữ</label>
 											</div>
 										</c:if>
 										<c:if test="${nhanVien.gioiTinh == 'nữ'}">
@@ -95,66 +107,107 @@
 												tính :</label>
 											<br>
 											<div class="form-check form-check-inline">
-												<input class="form-check-input" type="radio" name="gioiTinh"
-													value="nam"> <label class="form-check-label"
+												<form:radiobutton class="form-check-input"  name="gioiTinh"  path="gioiTinh"
+													value="nam"/> <label class="form-check-label"
 													for="nam">Nam</label>
 											</div>
 											<div class="form-check form-check-inline">
-												<input class="form-check-input" type="radio" name="gioiTinh"
-													checked value="nu"> <label class="form-check-label"
-													for="nu">Nữ</label>
+												<form:radiobutton class="form-check-input" name="gioiTinh"  path="gioiTinh"
+													checked="checked"  value="nữ"/> <label class="form-check-label"
+													for="nữ">Nữ</label>
 											</div>
-										</c:if>
+										</c:if> 
 									</div>
 								</div>
 								<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Ngày
-											sinh :</label> <input type="date" class="form-control"
-											value="${nhanVien.ngaySinh}">
+											sinh :</label> <form:input type="date" class="form-control" 
+											value="${nhanVien.ngaySinh}"
+											path="ngaySinh"
+											/>
+											
 									</div>
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Số
-											điện thoại :</label> <input type="tel" class="form-control"
-											id="phone" name="sDT" value="${nhanVien.sDT}">
+											điện thoại :</label> <form:input type="tel" class="form-control"
+											id="phone" path="sDT" value="${nhanVien.sDT}"/>
 									</div>
 								</div>
-
+									<div class="row">
+									<div class="col">
 								<label for="recipient-name" class="col-form-label">Địa
-									chỉ:</label> <input type="text" class="form-control" name="${diaChi}"
-									value="${nhanVien.diaChi}"> <label for="recipient-name"
-									class="col-form-label">Email :</label> <input type="email"
-									class="form-control" name="email" id="inputEmail4"
-									value="${nhanVien.email}"> <label for="recipient-name"
+									chỉ:</label> <form:input type="text" class="form-control" path="diaChi"
+									value="${nhanVien.diaChi}"/>
+									</div>
+									</div>
+									<div class="row">
+									<div class="col">
+									 <label for="recipient-name"
+									class="col-form-label">Email :</label> <form:input type="email"
+									class="form-control" path="email" id="inputEmail4"
+									value="${nhanVien.email}"/> 
+									</div>
+									</div>
+									<div class="row">
+									<div class="col">
+									<label for="recipient-name"
 									class="col-form-label">Chức vụ :</label><br>
-								<c:if test="${nhanVien.taikhoan.isAdmin ==0}">
+								 <c:if test="${nhanVien.taikhoan.isAdmin == 0}">
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="isAdmin"
-											checked value="0"> <label class="form-check-label"
+										<form:radiobutton class="form-check-input"  name="isAdmin" path="taikhoan.isAdmin" 
+											checked="checked"  value="0" /> <label class="form-check-label"
 											for="0">Nhân viên quản lý</label>
 									</div>
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="isAdmin"
-											value="1"> <label class="form-check-label" for="1">Admin</label>
+										<form:radiobutton class="form-check-input"  name="isAdmin" path="taikhoan.isAdmin" 
+											value="1"/> <label class="form-check-label" for="1">Admin</label>
 									</div>
 								</c:if>
 								<c:if test="${nhanVien.taikhoan.isAdmin ==1}">
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="isAdmin"
-											value="0"> <label class="form-check-label" for="0">Nhân
+										<form:radiobutton class="form-check-input"  name="isAdmin" path="taikhoan.isAdmin" 
+											value="0"/> <label class="form-check-label" for="0">Nhân
 											viên quản lý</label>
 									</div>
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="isAdmin"
-											checked value="1"> <label class="form-check-label"
+										<form:radiobutton class="form-check-input"  name="isAdmin" path="taikhoan.isAdmin"
+											checked="checked"  value="1"  /> <label class="form-check-label"
 											for="1">Admin</label>
 									</div>
 								</c:if>
-							</div>
-							<div>
+								</div>
+										<div class="col">
+										<label for="recipient-name"
+									class="col-form-label">Trạng thái :</label>
+									<br>
+								 <c:if test="${nhanVien.trangThai == 1}">
+									<div class="form-check form-check-inline">
+										<form:radiobutton class="form-check-input"  name="TT" path="trangThai" 
+											  value="1" /> <label class="form-check-label"
+											for="1">Hoạt động</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<form:radiobutton class="form-check-input"  name="TT" path="trangThai" 
+											value="0"/> <label class="form-check-label" for="0">Ngưng hoạt động</label>
+									</div>
+								</c:if>
+								<c:if test="${nhanVien.trangThai == 0}">
+									<div class="form-check form-check-inline">
+										<form:radiobutton class="form-check-input"  name="TT" path="trangThai" 
+											value="1"/> <label class="form-check-label" for="1">Hoạt động</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<form:radiobutton class="form-check-input"  name="TT" path="trangThai"
+											  value="0"  /> <label class="form-check-label"
+											for="0">Ngừng hoạt động</label>
+									</div>
+								</c:if>
+								</div>
+								</div>
 								<span style="color: red;">${message}</span>
 							</div>
-							<button class="btn btn-primary">cập nhập nhân viên</button>
+							 <form:button class="btn btn-primary">cập nhập</form:button>
 						</form:form>
 					</div>
 				</div>
@@ -181,7 +234,7 @@
 
 								<tr>
 									<th scope="row">${nhanvien.maNV}</th>
-									<td>${nhanvien.ho}${nhanvien.ten}</td>
+									<td>${nhanvien.ho} ${nhanvien.ten}</td>
 									<td>${nhanvien.cCCD}</td>
 									<td><c:if test="${nhanvien.taikhoan.isAdmin ==0}">
 									Quản lý</c:if> <c:if test="${nhanvien.taikhoan.isAdmin ==1 }">
@@ -205,8 +258,7 @@
 															<div class="col">
 																<label for="recipient-name" class="col-form-label">Họ
 																	và tên :</label> <label for="recipient-name"
-																	class="col-form-label"> ${nhanvien.ho}
-																	${nhanvien.ten}</label>
+																	class="col-form-label"> ${nhanvien.ho} ${nhanvien.ten}</label>
 															</div>
 														</div>
 														<div class="row">
@@ -259,7 +311,18 @@
 																	class="col-form-label"> ${nhanvien.diaChi} </label>
 															</div>
 														</div>
-
+														<div class="row">
+															<div class="col">
+														 <c:if test="${nhanVien.trangThai == 1}">
+									<label for="recipient-name" class="col-form-label">Trạng thái :</label> <label for="recipient-name"
+																	class="col-form-label">Hoạt động</label>
+								</c:if>
+								<c:if test="${nhanVien.trangThai == 0}">
+									<label for="recipient-name" class="col-form-label">Trạng thái :</label> <label for="recipient-name"
+																	class="col-form-label">Ngưng hoạt động</label>
+								</c:if>
+</div>
+														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary"
 																data-dismiss="modal">Đóng</button>

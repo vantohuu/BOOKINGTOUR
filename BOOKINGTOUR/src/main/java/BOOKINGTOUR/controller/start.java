@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import BOOKINGTOUR.entity.NhanVien;
 import BOOKINGTOUR.entity.TaiKhoan;
+import javassist.expr.NewArray;
 
 
 
@@ -45,7 +46,7 @@ public class start {
 		String password = request.getParameter("password");
 		TaiKhoan taikhoan = queryLogin(username, password);
 		if (taikhoan != null) {
-			if (taikhoan.getNhanVien().isTrangThai()==true) {
+			if (taikhoan.getNhanVien().getTrangThai()==1) {
 				session.setAttribute("TaiKhoan", taikhoan);
 				if (taikhoan.getIsAdmin()==1) {
 					return "admin/admin";
@@ -76,10 +77,33 @@ public class start {
 	}
 	
 	@RequestMapping(value="suanhanvien/{maNV}")
-	public String update(ModelMap model ,@PathVariable String maNV) {
+	public String suanhanvien(ModelMap model ,@PathVariable String maNV) {
+		model.addAttribute("nhanVien1", new NhanVien());
 		model.addAttribute("nhanVien",this.searchNhanVien(maNV));
 		model.addAttribute("nhanviens",getListNhanVien());
 		return"admin/suanhanvien";
+	}
+	
+	@RequestMapping(value="suanhanvien/update", method = RequestMethod.POST) 
+	public String editNhanVien(@ModelAttribute("nhanVien1") NhanVien nhanVien,ModelMap model) {
+		
+		Session session = factory.openSession();
+			Transaction t = session.beginTransaction();
+			try {
+				session.update(nhanVien);
+				t.commit();
+				model.addAttribute("message", "Update thành công");
+			} catch (Exception e) {
+				t.rollback();
+				model.addAttribute("message", "Update thất bại");
+				
+			} finally {
+				session.close();
+			}
+			model.addAttribute("nhanVien1", new NhanVien());
+			model.addAttribute("nhanVien",nhanVien);
+			model.addAttribute("nhanviens",getListNhanVien());
+		return "admin/suanhanvien";
 	}
 	
 	
@@ -118,7 +142,7 @@ public class start {
 		nhanVien.setcCCD(request.getParameter("cCCD"));
 		nhanVien.setsDT(request.getParameter("sDT"));
 		nhanVien.setEmail(request.getParameter("email"));
-		nhanVien.setTrangThai(true);
+		nhanVien.setTrangThai(1);
 		/*
 		 * System.out.println(nhanVien.getMaNV()); System.out.println(nhanVien.getHo());
 		 * System.out.println(nhanVien.getTen());
@@ -163,6 +187,12 @@ public class start {
 		model.addAttribute("nhanviens",getListNhanVien());
 		return "admin/themnhanvien";
 	}
+
+	
+	
+	
+	
+	
 	
 	public NhanVien searchNhanVien(String maNV) {
 		Session session = factory.getCurrentSession();

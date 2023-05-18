@@ -34,4 +34,5 @@
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.NhanVien"/>
+    <fullyQualifiedTypeName name="javassist.expr.NewArray"/>
 </qualifiedTypeNameHistroy>
