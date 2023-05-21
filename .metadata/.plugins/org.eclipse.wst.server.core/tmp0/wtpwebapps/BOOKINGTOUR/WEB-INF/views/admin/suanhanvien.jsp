@@ -48,6 +48,26 @@
 		<div class="row flex-nowrap">
 			<%@ include file="../includes/backNavAdmin.jsp"%>
 			<div class="col py-3">
+			<c:if test="${message==1}">
+				
+					
+					<div class="alert alert-success fade show" role="alert"
+						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
+						<h4 class="alert-heading">SUCCESS!</h4>
+						<p>Cập nhập thông tin nhân viên thành công</p>
+						<hr>
+					</div>
+				</c:if>
+				<c:if test="${message==2}">
+				
+					<div class="alert alert-danger" role="alert"
+						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100' >
+						<h4 class="alert-heading">ERROR!</h4>
+						<p>Cập nhập thông tin nhân viên thất bại</p>
+						<hr>
+					</div>
+				</c:if>
+				<c:set var="message" value="0" />
 				<div class="container form-dang-nhap">
 					<div>
 						<h1>Sửa thông tin nhân viên</h1>
@@ -205,7 +225,6 @@
 								</c:if>
 								</div>
 								</div>
-								<span style="color: red;">${message}</span>
 							</div>
 							 <form:button class="btn btn-primary">cập nhập</form:button>
 						</form:form>
@@ -347,6 +366,11 @@
 			</div>
 		</div>
 	</div>
+	<script>
+  setTimeout(function() {
+    document.querySelector('.alert').classList.add('d-none');
+  }, 2000);
+</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"

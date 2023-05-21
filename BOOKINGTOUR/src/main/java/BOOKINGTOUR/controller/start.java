@@ -65,8 +65,9 @@ public class start {
 		
 	}
 	@RequestMapping(value="danhsachnhanvien")
-	public String danhsachtaikhoan(HttpServletRequest request,ModelMap model) {
+	public String danhsachtaikhoan(HttpServletRequest request,ModelMap model,@ModelAttribute("message") String message) {
 		model.addAttribute("nhanviens",getListNhanVien());
+		model.addAttribute("message", message);
 		return"admin/dsnhanvien";
 	}
 	
@@ -92,10 +93,10 @@ public class start {
 			try {
 				session.update(nhanVien);
 				t.commit();
-				model.addAttribute("message", "Update thành công");
+				model.addAttribute("message", 1);
 			} catch (Exception e) {
 				t.rollback();
-				model.addAttribute("message", "Update thất bại");
+				model.addAttribute("message", 2);
 				
 			} finally {
 				session.close();
@@ -104,6 +105,30 @@ public class start {
 			model.addAttribute("nhanVien",nhanVien);
 			model.addAttribute("nhanviens",getListNhanVien());
 		return "admin/suanhanvien";
+	}
+	
+	@RequestMapping(value="xoanhanvien/{maNV}")
+	public String xoanhanvien(ModelMap model ,@PathVariable String maNV) {
+		NhanVien nhanVien = searchNhanVien(maNV);
+		TaiKhoan taiKhoan=nhanVien.getTaikhoan();
+		
+		 
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			session.delete(taiKhoan);
+			session.delete(nhanVien);
+			t.commit();
+			model.addAttribute("message", 1);
+		} catch (Exception e) {
+			t.rollback();
+			model.addAttribute("message", 2);
+			
+		} finally {
+			session.close();
+		}
+		
+		return"redirect:/danhsachnhanvien.htm";
 	}
 	
 	
@@ -177,10 +202,10 @@ public class start {
 			session.save(nhanVien);
 			session.save(tk);
 			tr.commit();
-			model.addAttribute("message","Đã thêm mới nhân viên thành công!");
+			model.addAttribute("message",1);
 		} catch (Exception e) {
 			tr.rollback();
-			model.addAttribute("message","Nhân viên đã tồn tại!");
+			model.addAttribute("message",2);
 		} finally {
 			session.close();
 		}

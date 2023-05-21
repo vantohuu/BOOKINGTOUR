@@ -6,8 +6,11 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="update"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="&#x09;&#x09;&#x09;&#x09;&lt;% "/>
+			<item value="delete"/>
+			<item value="xoa"/>
 			<item value="update"/>
 			<item value="&lt;%@page import=&quot;BOOKINGTOUR.entity.NhanVien&quot;%&gt;"/>
 			<item value="them"/>
