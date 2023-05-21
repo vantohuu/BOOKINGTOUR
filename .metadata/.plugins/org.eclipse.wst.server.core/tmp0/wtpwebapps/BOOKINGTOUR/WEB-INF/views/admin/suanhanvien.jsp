@@ -60,7 +60,7 @@
 				</c:if>
 				<c:if test="${message==2}">
 				
-					<div class="alert alert-danger" role="alert"
+					<div class="alert alert-danger fade show" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100' >
 						<h4 class="alert-heading">ERROR!</h4>
 						<p>Cập nhập thông tin nhân viên thất bại</p>

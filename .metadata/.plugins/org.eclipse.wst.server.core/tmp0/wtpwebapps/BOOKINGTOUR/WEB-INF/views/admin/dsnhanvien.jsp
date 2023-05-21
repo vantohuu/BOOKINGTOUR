@@ -36,7 +36,12 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
 	integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
 	crossorigin="anonymous"></script>
-
+<style>
+.dropdown-menu.show {
+	left: -400px;
+	background-color: aliceblue;
+}
+</style>
 </head>
 <body>
 
@@ -99,7 +104,93 @@
 									Quản lý</c:if> <c:if test="${nhanvien.taikhoan.isAdmin ==1 }">
 									Admin</c:if>
 									</td>
-									<td style='display: flex; justify-content: flex-start;'><a
+									
+									<td style='display: flex; justify-content: flex-start;'>
+									<div class="dropdown" style="margin-right: 10px;">
+											<button class="btn btn-primary dropdown-toggle"
+												data-toggle="dropdown">Chi tiết</button>
+											<div class="dropdown-menu"
+												aria-labelledby="dropdownMenuButton">
+												<div class="container">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Thông
+															tin nhân viên</h5>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close"></button>
+													</div>
+													<div class="modal-body" style="width: 500px;">
+
+														<div class="row">
+															<div class="col">
+																<label for="recipient-name" class="col-form-label">Họ
+																	và tên :</label> <label for="recipient-name"
+																	class="col-form-label"> ${nhanvien.ho}
+																	${nhanvien.ten}</label>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col">
+																<label for="recipient-name" class="col-form-label">Mã
+																	nhân viên :</label> <label for="recipient-name"
+																	class="col-form-label">${nhanvien.maNV}</label>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col">
+																<label for="recipient-name" class="col-form-label">CCCD
+																	:</label> <label for="recipient-name" class="col-form-label">
+																	${nhanvien.cCCD}</label>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col">
+																<label for="recipient-name" class="col-form-label">Giới
+																	tính :</label> <label for="recipient-name"
+																	class="col-form-label">${nhanvien.gioiTinh }</label>
+															</div>
+
+														</div>
+														<div class="row">
+															<div class="col">
+																<label for="recipient-name" class="col-form-label">Ngày
+																	sinh :</label> <label for="recipient-name"
+																	class="col-form-label"> ${nhanvien.ngaySinh} </label>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col">
+																<label for="recipient-name" class="col-form-label">Số
+																	điện thoại :</label> <label for="recipient-name"
+																	class="col-form-label">${nhanvien.sDT }</label>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col">
+																<label for="recipient-name" class="col-form-label">Email
+																	:</label> <label for="recipient-name" class="col-form-label">
+																	${nhanvien.email} </label>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col">
+																<label for="recipient-name" class="col-form-label">Địa
+																	chỉ :</label> <label for="recipient-name"
+																	class="col-form-label"> ${nhanvien.diaChi} </label>
+															</div>
+														</div>
+
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary"
+																data-dismiss="modal">Đóng</button>
+														</div>
+
+
+													</div>
+												</div>
+											</div>
+										</div>
+									
+									<a
 										href="suanhanvien/${nhanvien.maNV}.htm"><button
 												class="btn btn-primary">chỉnh sửa</button> </a> <!-- 		<button type="button" class="btn btn-danger"
 												style='margin-left: 7px;'>xóa</button> -->
@@ -107,6 +198,7 @@
 										<button
 											onclick="if(confirm('bạn có chắc chắn muốn xóa nhân viên này không ?')){location.href='xoanhanvien/${nhanvien.maNV}.htm'}"
 											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button>
+											
 									</td>
 									<td>
 								</tr>

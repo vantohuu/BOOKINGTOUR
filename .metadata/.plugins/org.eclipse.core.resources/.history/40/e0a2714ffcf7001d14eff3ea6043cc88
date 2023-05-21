@@ -1,0 +1,74 @@
+package BOOKINGTOUR.entity;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="DIEMDULICH")
+public class DiemDuLich {
+	@Id
+	@GeneratedValue
+	@Column(name="ID")
+	private  int id;
+	@Column(name="TEN")
+	private  String ten;
+	@Column(name="DIACHI")
+	private  String diaChi;
+	@Column(name="MOTA")
+	private  String moTa;
+	@Column(name="HINHANH")
+	private  String hinhAnh;
+	
+//	@ManyToMany
+//    private List<Tour> tours ;
+//	
+	
+	
+	public String getTen() {
+		return ten;
+	}
+	public void setTen(String ten) {
+		this.ten = ten;
+	}
+	public String getDiaChi() {
+		return diaChi;
+	}
+	public void setDiaChi(String diaChi) {
+		this.diaChi = diaChi;
+	}
+	public String getMoTa() {
+		return moTa;
+	}
+	public void setMoTa(String moTa) {
+		this.moTa = moTa;
+	}
+	public String getHinhAnh() {
+		return hinhAnh;
+	}
+	public void setHinhAnh(String hinhAnh) {
+		this.hinhAnh = hinhAnh;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
+
+	
+	
+
+}

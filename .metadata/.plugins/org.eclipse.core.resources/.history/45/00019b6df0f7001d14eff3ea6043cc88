@@ -1,0 +1,45 @@
+package BOOKINGTOUR.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import BOOKINGTOUR.entity.DiemDuLich;
+import BOOKINGTOUR.entity.NhanVien;
+
+@Transactional
+@Controller
+public class diemdulichController {
+	@Autowired
+    SessionFactory factory;
+	@RequestMapping("diemdulich")
+	public String diemdulich(HttpServletRequest request,ModelMap model,@ModelAttribute("message") String message) {
+		model.addAttribute("diemDuLichs",getListDiemDuLich());
+		model.addAttribute("message", message);
+		return "diemdulich/dsdiemdulich";
+	}
+	
+	
+	
+	
+	
+	
+	public List<DiemDuLich> getListDiemDuLich() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM DiemDuLich";
+		List<DiemDuLich> diemDuLich = session.createQuery(hql).list();
+		return  diemDuLich;
+	}
+}
+
+
+

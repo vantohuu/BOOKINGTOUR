@@ -28,7 +28,7 @@
                                 <a href="../doanhthu.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Danh sách đặt tour</span></a>
                             </li>
                             <li>
-                                <a href="../nhanvien.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Điểm du lịch</span></a>
+                                <a href="../diemdulich.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Điểm du lịch</span></a>
                             </li>
                                <li>
                                 <a href="../nhanvien.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Điểm lưu trú</span></a>
