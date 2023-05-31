@@ -57,7 +57,7 @@
 					</div>
 				</c:if>
 				<c:if test="${message==2}">
-					<div class="alert alert-danger fade show"" role="alert"style='position: fixed; width:50%; margin-left:230px;'>
+					<div class="alert alert-danger fade show"" role="alert"style='position: fixed; width:50%; margin-left:230px; z-index: 100'>
 						<h4 class="alert-heading">ERROR!</h4>
 						<p>Cập nhật địa điểm thất bại</p>
 						<hr>
@@ -102,7 +102,8 @@
 									<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Mô tả :</label> 
-										<textarea name="moTa" class="form-control">${diemDuLich.moTa}</textarea>
+										
+										<textarea name="moTa" class="form-control" >${diemDuLich.moTa}</textarea>
 											<%-- <form:input path="moTa" type="textarea" class="form-control"/> --%>
 											 <span
 											style="color: red;">${messageMaNV}</span>

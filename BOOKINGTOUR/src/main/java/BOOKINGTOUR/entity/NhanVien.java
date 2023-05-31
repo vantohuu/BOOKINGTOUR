@@ -1,12 +1,13 @@
 package BOOKINGTOUR.entity;
 
 import java.util.Date;
-
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -47,11 +48,11 @@ public class NhanVien {
 	@OneToOne(mappedBy = "nhanVien", fetch = FetchType.EAGER)
     private TaiKhoan taikhoan;
 
-//	@OneToMany(mappedBy = "nhanVienXN", fetch = FetchType.EAGER)
-//	private List<CTVe> ctVeXN;
-//	
-//	@OneToMany(mappedBy = "nhanVienHuy", fetch = FetchType.EAGER)
-//	private List<CTVe> ctVeHuy;
+	@OneToMany(mappedBy = "nhanVienXN", fetch = FetchType.EAGER)
+	private List<CTVe> ctVeXN;
+	
+	@OneToMany(mappedBy = "nhanVienHuy", fetch = FetchType.EAGER)
+	private List<CTVe> ctVeHuy;
 
 	public String getMaNV() {
 		return maNV;
@@ -119,21 +120,23 @@ public class NhanVien {
 
 
 
-//	public List<CTVe> getCtVeXN() {
-//		return ctVeXN;
-//	}
-//
-//	public void setCtVeXN(List<CTVe> ctVeXN) {
-//		this.ctVeXN = ctVeXN;
-//	}
-//
-//	public List<CTVe> getCtVeHuy() {
-//		return ctVeHuy;
-//	}
-//
-//	public void setCtVeHuy(List<CTVe> ctVeHuy) {
-//		this.ctVeHuy = ctVeHuy;
-//	}
+
+
+	public List<CTVe> getCtVeXN() {
+		return ctVeXN;
+	}
+
+	public void setCtVeXN(List<CTVe> ctVeXN) {
+		this.ctVeXN = ctVeXN;
+	}
+
+	public List<CTVe> getCtVeHuy() {
+		return ctVeHuy;
+	}
+
+	public void setCtVeHuy(List<CTVe> ctVeHuy) {
+		this.ctVeHuy = ctVeHuy;
+	}
 
 	public int getTrangThai() {
 		return trangThai;

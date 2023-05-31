@@ -59,3 +59,92 @@ May 10, 2023 13:23:58.997 [19636:11864:0510/132358.997:ERROR:connection_factory_
 May 11, 2023 10:26:05.393 NEW SESSION
 May 11, 2023 10:26:05.393 [20704:7772:0511/102605.390:ERROR:device_event_log_impl.cc(222)] [10:26:05.390] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: Element not found. (0x490)
 May 11, 2023 11:37:55.33 [20704:2184:0511/113755.032:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+
+May 22, 2023 10:33:34.758 NEW SESSION
+May 22, 2023 10:33:34.758 [1828:22352:0522/103334.753:ERROR:device_event_log_impl.cc(222)] [10:33:34.752] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: Element not found. (0x490)
+May 22, 2023 10:38:25.215 [1828:22352:0522/103825.215:ERROR:device_event_log_impl.cc(222)] [10:38:25.215] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: Element not found. (0x490)
+May 22, 2023 10:52:25.20 [1828:22352:0522/105225.019:ERROR:device_event_log_impl.cc(222)] [10:52:25.019] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: Element not found. (0x490)
+May 22, 2023 11:02:35.538 [1828:20908:0522/110235.537:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+
+May 22, 2023 17:27:31.523 NEW SESSION
+May 22, 2023 17:27:31.523 [9132:7336:0522/172731.523:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+May 22, 2023 17:27:33.540 [9132:7336:0522/172733.540:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+
+May 25, 2023 14:27:45.816 NEW SESSION
+May 25, 2023 14:27:45.816 [5108:3124:0525/142745.813:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+May 25, 2023 14:28:00.453 [5108:3124:0525/142800.453:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 14:28:29.161 [5108:3124:0525/142829.160:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 14:28:57.607 [5108:3124:0525/142857.607:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 14:29:05.209 [5108:3124:0525/142905.209:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 14:29:59.597 [5108:3124:0525/142959.597:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 14:30:34.837 [5108:19256:0525/143034.837:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
+May 25, 2023 14:30:39.845 [5108:3124:0525/143039.845:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 14:30:47.455 [5108:3124:0525/143047.455:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 14:31:49.758 [5108:3124:0525/143149.758:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 14:32:07.954 [5108:3124:0525/143207.954:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 14:32:10.447 [5108:3124:0525/143210.447:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 14:32:32.923 [5108:3124:0525/143232.922:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 14:32:40.435 [5108:3124:0525/143240.435:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 14:32:42.937 [5108:3124:0525/143242.936:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 14:32:47.489 [5108:3124:0525/143247.489:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:12:41.894 [5108:3124:0525/151241.893:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+May 25, 2023 15:21:54.244 [5108:3124:0525/152154.243:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+May 25, 2023 15:32:19.678 [5108:3124:0525/153219.676:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+May 25, 2023 15:53:42.672 [5108:3124:0525/155342.671:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+May 25, 2023 15:53:52.329 [5108:3124:0525/155352.328:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:53:54.826 [5108:3124:0525/155354.825:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:53:57.433 [5108:3124:0525/155357.433:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:54:04.578 [5108:3124:0525/155404.578:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:54:27.851 [5108:3124:0525/155427.850:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:55:30.265 [5108:3124:0525/155530.265:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:55:35.328 [5108:3124:0525/155535.327:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:55:57.870 [5108:3124:0525/155557.870:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:56:07.985 [5108:3124:0525/155607.984:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:56:15.619 [5108:3124:0525/155615.619:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:56:33.674 [5108:3124:0525/155633.674:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:56:41.672 [5108:3124:0525/155641.672:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:56:44.161 [5108:3124:0525/155644.161:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:57:02.393 [5108:3124:0525/155702.392:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:57:04.881 [5108:3124:0525/155704.880:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:57:07.383 [5108:3124:0525/155707.382:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:57:27.645 [5108:3124:0525/155727.644:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:57:35.425 [5108:3124:0525/155735.425:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:57:45.565 [5108:3124:0525/155745.564:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:57:55.729 [5108:3124:0525/155755.728:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:58:00.815 [5108:3124:0525/155800.815:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:58:08.325 [5108:3124:0525/155808.325:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:58:16.36 [5108:3124:0525/155816.035:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:59:33.480 [5108:3124:0525/155933.480:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 15:59:56.435 [5108:3124:0525/155956.435:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 16:00:12.171 [5108:3124:0525/160012.171:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 16:00:27.604 [5108:3124:0525/160027.603:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 16:01:00.639 [5108:3124:0525/160100.639:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 16:01:31.875 [5108:3124:0525/160131.874:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 16:01:39.848 [5108:3124:0525/160139.848:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 16:02:08.11 [5108:3124:0525/160208.011:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 16:02:48.918 [5108:3124:0525/160248.918:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 16:04:08.71 [5108:3124:0525/160408.071:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 16:04:36.251 [5108:3124:0525/160436.251:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 16:04:59.587 [5108:3124:0525/160459.587:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 16:05:19.780 [5108:3124:0525/160519.780:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 16:05:24.885 [5108:3124:0525/160524.885:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+May 25, 2023 16:08:39.939 [5108:3124:0525/160839.939:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+May 25, 2023 16:21:34.606 [5108:19256:0525/162134.606:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
+
+May 28, 2023 03:04:25.932 NEW SESSION
+May 28, 2023 03:04:25.932 [17368:22468:0528/030425.926:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+May 28, 2023 03:10:03.798 [17368:5392:0528/031003.798:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
+May 28, 2023 03:10:14.330 [17368:5392:0528/031014.329:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
+May 28, 2023 03:18:00.882 [17368:5392:0528/031800.882:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
+May 28, 2023 03:18:46.570 [17368:5392:0528/031846.570:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
+
+May 29, 2023 24:18:59.482 NEW SESSION
+May 29, 2023 24:18:59.482 [17452:18692:0529/001859.481:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+May 29, 2023 24:55:35.868 [17452:18952:0529/005535.867:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
+May 29, 2023 02:06:26.285 [17452:18952:0529/020626.285:ERROR:CONSOLE(1)] "Request Storage.getStorageKeyForFrame failed. {"code":-32602,"message":"Frame tree node for given frame not found"}", source: devtools://devtools/bundled/devtools-frontend/front_end/core/protocol_client/protocol_client.js (1)
+May 29, 2023 02:06:26.286 [17452:18952:0529/020626.286:ERROR:CONSOLE(1)] "Request Storage.getStorageKeyForFrame failed. {"code":-32602,"message":"Frame tree node for given frame not found"}", source: devtools://devtools/bundled/devtools-frontend/front_end/core/protocol_client/protocol_client.js (1)
+May 29, 2023 02:06:26.289 [17452:18952:0529/020626.289:ERROR:CONSOLE(1)] "Request Storage.getStorageKeyForFrame failed. {"code":-32602,"message":"Frame tree node for given frame not found"}", source: devtools://devtools/bundled/devtools-frontend/front_end/core/protocol_client/protocol_client.js (1)
+May 29, 2023 02:37:58.526 [17452:18952:0529/023758.526:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
+
+May 30, 2023 01:44:39.89 NEW SESSION
+May 30, 2023 01:44:39.89 [9924:18900:0530/014439.085:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2

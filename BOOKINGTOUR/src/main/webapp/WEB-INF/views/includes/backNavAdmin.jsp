@@ -31,7 +31,7 @@
                                 <a href="../diemdulich.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Điểm du lịch</span></a>
                             </li>
                                <li>
-                                <a href="../nhanvien.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Điểm lưu trú</span></a>
+                                <a href="../dsdiemluutru.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Điểm lưu trú</span></a>
                             </li>
                         </ul>
                     </li>
@@ -50,7 +50,7 @@
                                 <a href="../nhanvien.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Giá vé</span></a>
                             </li>
                             <li>
-                                <a href="../nhanvien.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Khuyến mãi</span></a>
+                                <a href="../dsdotkhuyenmai.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Khuyến mãi</span></a>
                             </li>
                         </ul>
                     </li>

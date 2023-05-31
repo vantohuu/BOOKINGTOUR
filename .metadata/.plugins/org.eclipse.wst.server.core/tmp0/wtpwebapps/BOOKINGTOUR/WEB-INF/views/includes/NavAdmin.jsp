@@ -19,19 +19,24 @@
 							<i class="fa-regular fa-calendar-days"></i> <span
 								class="ms-1 d-none d-sm-inline">Danh sách nhân viên</span>
 						</a></li>
+						     </li>
+                 <!--  <li><button onclick="goHome()">Go to Intro Page</button></li> -->
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" class="nav-link text-white px-0 align-middle ">
                             <i class="fa-solid fa-map-location-dot"></i>
                             <span class="ms-1 d-none d-sm-inline">Quản lí du lịch</span></a>
                         <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="doanhthu.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Danh sách đặt tour</span></a>
+                                <a href="dsdattour.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Danh sách đặt tour</span></a>
                             </li>
                             <li>
                                 <a href="diemdulich.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Điểm du lịch</span></a>
                             </li>
                                <li>
-                                <a href="nhanvien.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Điểm lưu trú</span></a>
+                                <a href="dsdiemluutru.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Điểm lưu trú</span></a>
+                            </li>
+                            <li>
+                                <a href="dsTour.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Tour</span></a>
                             </li>
                         </ul>
                     </li>
@@ -41,21 +46,24 @@
                             <span class="ms-1 d-none d-sm-inline">Quản lý chung</span></a>
                         <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="doanhthu.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Doanh thu</span></a>
+                                <a location.href="doanhthu.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Doanh thu</span></a>
                             </li>
+                            
                             <li>
                                 <a href="nhanvien.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Khách hàng</span></a>
                             </li>
                             <li>
-                                <a href="nhanvien.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Giá vé</span></a>
+                                <a href="dsvetour.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Vé tour</span></a>
                             </li>
                             <li>
-                                <a href="nhanvien.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Khuyến mãi</span></a>
+                                <a href="dsdotkhuyenmai.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Khuyến mãi</span></a>
                             </li>
                         </ul>
                     </li>
                     
                 <hr>
+                </ul>
+                
               
                 <div class="dropdown pb-4">
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -74,6 +82,10 @@
                 </div>
             </div>
         </div>
-        <div class=""col py-3 d-flex justify-content-center align-items-center"">
+        
+     <script>
+    /* function goHome() {
+        window.location.href = "danhsachnhanvien.htm";
+    } */
+</script>
 
-        </div>

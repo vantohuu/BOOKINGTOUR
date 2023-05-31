@@ -1,0 +1,11 @@
+package BOOKINGTOUR.controller;
+
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+public class vetourController {
+	@Autowired
+    SessionFactory factory;
+	@RequestMapping("dsve")
+}

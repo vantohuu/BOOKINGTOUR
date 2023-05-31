@@ -158,7 +158,7 @@ public class start {
 		Session session = factory.openSession();
 		Transaction tr = session.beginTransaction();
 		NhanVien nhanVien = new NhanVien();
-		nhanVien.setMaNV(request.getParameter("maNV"));
+		nhanVien.setMaNV(request.getParameter("idllt"));
 		nhanVien.setHo(getHo(request.getParameter("hoTen")));
 		nhanVien.setTen(getTen(request.getParameter("hoTen")));
 		nhanVien.setGioiTinh(request.getParameter("gioiTinh"));

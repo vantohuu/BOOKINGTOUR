@@ -1,0 +1,24 @@
+package BOOKINGTOUR.entity;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="CTTOUR")
+public class CTTour {
+	
+	@Id
+	@Column(name="ID")
+	private  int id;
+	@Column(name="IDDDL")
+	private  String idDDL;
+	@Column(name="IDTOUR")
+	private  String idTour;
+	
+	
+}

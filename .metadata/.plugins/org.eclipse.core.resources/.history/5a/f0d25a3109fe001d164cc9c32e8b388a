@@ -1,0 +1,50 @@
+package BOOKINGTOUR.entity;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
+@Table(name="VETOUR")
+public class VeTour {
+	@Id
+	@Column(name="ID")
+	private  int id;
+	@Column(name="GIAVE")
+	private  int giaVe;
+	@Column(name="PHIDICHUYEN")
+	private  int phiDiChuyen;
+	@Column(name="GIACOC")
+	private  int giaCoc;
+	
+	
+	
+	@ManyToOne() 
+	 @JoinColumn(name="IDBK")
+	private BookingTour bookingTour1;
+	
+	@OneToMany(mappedBy = "veTour", fetch = FetchType.EAGER)
+	private List<CTVe> cTve;
+	
+	@ManyToOne()
+	@JoinColumn(name="MALOAIVE")
+	private LoaiVe loaiVe;
+
+	
+	
+	
+	
+
+}

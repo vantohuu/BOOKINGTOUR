@@ -2,14 +2,18 @@ package BOOKINGTOUR.entity;
 
 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name="DIEMDULICH")
@@ -28,9 +32,8 @@ public class DiemDuLich {
 //	@Lob 
 //	   private byte[] image;
 	
-//	@ManyToMany
-//    private List<Tour> tours ;
-//	
+	 @OneToMany(mappedBy = "diemDuLich", fetch = FetchType.EAGER) private List<CTTour> ctTours ;
+	 
 	
 	
 	public String getTen() {
@@ -57,6 +60,10 @@ public class DiemDuLich {
 	public void setId(int id) {
 		this.id = id;
 	}
+	/*
+	 * public List<CTTour> getCtTours() { return ctTours; } public void
+	 * setCtTours(List<CTTour> ctTours) { this.ctTours = ctTours; }
+	 */
 
 	
 
