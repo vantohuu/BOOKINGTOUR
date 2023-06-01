@@ -88,7 +88,8 @@
 								<th scope="col">Tên</th>
 								<th scope="col">Thời gian bắt đầu</th>
 								<th scope="col">Thời gian kết thúc</th>
-								<th scope="col">Danh sách vé tham gia</th>
+								<th scope="col">DS vé Tour</th>
+								<th scope="col">DS vé tham gia</th>
 								<th scope="col">Quản lý đặt phòng</th>
 								<th scope="col">Xử lý</th>
 							</tr>
@@ -103,8 +104,11 @@
 									<td>${bookingtour.tGBD}</td>
 									<td>${bookingtour.tGKT}</td>
 									<td><a
+										href="dsvetour/${bookingtour.id}.htm"><button
+												class="btn btn-primary">DS vé tour</button> </a></td>
+									<td><a
 										href="dsve/${bookingtour.id}.htm"><button
-												class="btn btn-primary">DS vé</button> </a></td>
+												class="btn btn-primary">DS vé tg</button> </a></td>
 													
 									<td><a
 										href="dsdatphong/${bookingtour.id}.htm"><button

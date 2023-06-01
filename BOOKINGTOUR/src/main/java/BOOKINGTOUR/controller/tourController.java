@@ -44,6 +44,7 @@ public class tourController {
 		model.addAttribute("tour", new Tour());
 		return"tour/themtour";
 	}
+	
 	@RequestMapping(value="insertTour", method = RequestMethod.POST) 
 	public String inserttour(@ModelAttribute("tour") Tour tour,ModelMap model) {
 		

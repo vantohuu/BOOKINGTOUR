@@ -54,7 +54,7 @@ public class BookingTour {
 
 	
 	@OneToMany(mappedBy = "bookingTour1", fetch = FetchType.EAGER)
-	private List<VeTour> veTours;
+	private Set<VeTour> veTours;
 	
 	@ManyToOne()
 	@JoinColumn(name="IDTOUR")
@@ -182,14 +182,15 @@ public class BookingTour {
 		this.ctPhongLuuTrus = ctPhongLuuTrus;
 	}
 
-	public List<VeTour> getVeTours() {
+	public Set<VeTour> getVeTours() {
 		return veTours;
 	}
 
-	public void setVeTours(List<VeTour> veTours) {
+	public void setVeTours(Set<VeTour> veTours) {
 		this.veTours = veTours;
 	}
 
+	
 	
 
 	

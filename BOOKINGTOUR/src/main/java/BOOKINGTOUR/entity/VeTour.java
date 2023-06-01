@@ -40,7 +40,7 @@ public class VeTour {
 	 @JoinColumn(name="IDBK")
 	private BookingTour bookingTour1;
 	
-	@OneToMany(mappedBy = "veTour", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "veTour", fetch = FetchType.LAZY)
 	private List<CTVe> cTve;
 	
 	@ManyToOne()

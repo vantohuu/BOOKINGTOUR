@@ -21,8 +21,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import BOOKINGTOUR.entity.BookingTour;
+import BOOKINGTOUR.entity.CTVe;
+import BOOKINGTOUR.entity.KhachHang;
+import BOOKINGTOUR.entity.KhuyenMai;
 import BOOKINGTOUR.entity.NhanVien;
 import BOOKINGTOUR.entity.TaiKhoan;
+import BOOKINGTOUR.entity.VeTour;
 import javassist.expr.NewArray;
 
 
@@ -41,12 +46,15 @@ public class start {
 		return "login/login";
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(ModelMap model, HttpServletRequest request, HttpSession session) {
+	public String login(ModelMap model, HttpServletRequest request) {
+		 HttpSession session = request.getSession();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		TaiKhoan taikhoan = queryLogin(username, password);
 		if (taikhoan != null) {
 			if (taikhoan.getNhanVien().getTrangThai()==1) {
+				 
+			       
 				session.setAttribute("TaiKhoan", taikhoan);
 				if (taikhoan.getIsAdmin()==1) {
 					return "admin/admin";
@@ -263,4 +271,5 @@ public String getHo(String hoTen) {
     
   return ho.trim();
 }
+
 }

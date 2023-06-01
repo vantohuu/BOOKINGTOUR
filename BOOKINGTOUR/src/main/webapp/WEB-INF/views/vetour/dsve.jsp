@@ -73,8 +73,29 @@
 				<div class="container form-dang-nhap">
 					<div style='display: flex; justify-content: space-between;'>
 
-						<button type="button" class="btn btn-success"
-							onclick="location.href = 'themdiemluutru.htm'">Thêm điểm vé tour mới</button>
+						<a href="#submenu" style="display: inline;"
+										data-bs-toggle="collapse"
+										class="nav-link text-white px-0 align-middle "> <i
+											class="fa-solid fa-map-location-dot"></i><
+											<button class="btn btn-success">Thêm vào danh sách</button>
+									</a>
+										<ul class="collapse nav flex-column ms-1" id="submenu" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <form action="themvetg.htm" method="post" >
+							<div class="form-group">
+							<div>
+								</div>
+								<label for="recipient-name" class="col-form-label">Căn cước công dân:</label>
+								<input name="CCCD" type="text" class="form-control"  />
+									             <input name=idBK type="text" class="form-control" value ="${idBK}"style='display: none'/>
+				
+								</div>
+								
+							
+							 <button class="btn btn-success">thêm </button>
+						</form>
+                           
+                        </ul>
 
 						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
 							style='padding: 3px'>
@@ -95,7 +116,7 @@
 						</thead>
 						<tbody>
 						
-							<c:forEach var="ctvetour" items="${ctvetour}">
+							<c:forEach var="ctvetour" items="${ctvetours}">
 
 								<tr>
 									<th scope="row">${ctvetour.id}</th>
@@ -231,11 +252,11 @@
 											
 									
 										<a
-										href="suadiemluutru/${diemluutru.id}.htm"><button
+										href="suactve/${ctvetour.id}.htm"><button
 												class="btn btn-primary">chỉnh sửa</button> </a> 
 
 										<button
-											onclick="if(confirm('bạn có chắc chắn muốn xóa nhân viên này không ?')){location.href='xoadiemluutru/${diemluutru.id}.htm'}"
+											onclick="if(confirm('bạn có chắc chắn muốn xóa nhân viên này không ?')){location.href='xoactve/${ctvetour.id}.htm'}"
 											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button>
 </td>
 								</tr>

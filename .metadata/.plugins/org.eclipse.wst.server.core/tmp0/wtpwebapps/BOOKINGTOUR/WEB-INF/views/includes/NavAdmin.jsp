@@ -50,7 +50,7 @@
                             </li>
                             
                             <li>
-                                <a href="nhanvien.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Khách hàng</span></a>
+                                <a href="dskhachhang.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Khách hàng</span></a>
                             </li>
                             <li>
                                 <a href="dsvetour.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Vé tour</span></a>

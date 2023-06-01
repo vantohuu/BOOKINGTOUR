@@ -148,3 +148,22 @@ May 29, 2023 02:37:58.526 [17452:18952:0529/023758.526:ERROR:interface_endpoint_
 
 May 30, 2023 01:44:39.89 NEW SESSION
 May 30, 2023 01:44:39.89 [9924:18900:0530/014439.085:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+
+Jun 01, 2023 12:20:57.15 NEW SESSION
+Jun 01, 2023 12:20:57.16 [6056:18324:0601/122057.015:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
+Jun 01, 2023 12:53:50.474 [6056:19468:0601/125350.474:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+Jun 01, 2023 13:03:55.137 [6056:19468:0601/130355.136:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+Jun 01, 2023 14:12:32.576 [6056:18324:0601/141232.575:ERROR:device_event_log_impl.cc(222)] [14:12:32.572] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: Element not found. (0x490)
+Jun 01, 2023 14:23:20.783 [6056:18324:0601/142320.783:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
+Jun 01, 2023 14:30:23.397 [6056:18324:0601/143023.396:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received", source: https://ogs.google.com/u/0/widget/app?origin=chrome-untrusted%3A%2F%2Fnew-tab-page&origin=chrome%3A%2F%2Fnew-tab-page&cn=app&pid=1&spid=243&hl=vi (0)
+Jun 01, 2023 15:14:37.381 [6056:19468:0601/151437.381:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+Jun 01, 2023 18:14:37.615 [6056:19468:0601/181437.615:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+Jun 01, 2023 18:36:43.597 [6056:19468:0601/183643.597:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+Jun 01, 2023 18:36:43.616 [6056:2872:0601/183643.616:ERROR:get_updates_processor.cc(264)] PostClientToServerMessage() failed during GetUpdates with error 2
+
+Jun 01, 2023 19:07:10.459 NEW SESSION
+Jun 01, 2023 19:07:10.460 [3628:12304:0601/190710.454:ERROR:device_event_log_impl.cc(222)] [19:07:10.454] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: Element not found. (0x490)
+Jun 01, 2023 19:46:06.546 [3628:12304:0601/194606.545:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
+Jun 01, 2023 20:03:35.848 [3628:12304:0601/200335.847:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
+Jun 01, 2023 20:04:04.414 [3628:12304:0601/200404.414:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
+Jun 01, 2023 20:21:27.914 [3628:12304:0601/202127.914:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost

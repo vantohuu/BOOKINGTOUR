@@ -162,7 +162,7 @@ public class dattourController {
 		System.out.println(request.getParameter("tgden"));
 		System.out.println(request.getParameter("tgdi"));
 		
-		
+	
 		
 		
 		Phong phong= this.searchPhong(Integer.parseInt(id));
