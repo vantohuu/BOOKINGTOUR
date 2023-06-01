@@ -138,7 +138,7 @@ public class tourController {
 		model.addAttribute("cttours",tour.getCtTours());
 		return"tour/cttour";
 	}
-	@RequestMapping(value="themcttour/insertcttour", method = RequestMethod.POST)
+	@RequestMapping(value="cttour/themcttour/insertcttour", method = RequestMethod.POST)
 	public String insertcctour(ModelMap model ,@ModelAttribute("id") String id,@ModelAttribute("idtour") String idtour) {
 		DiemDuLich diemdulich= this.searchDiemDuLich(Integer.parseInt(id));
 		Tour tour =this.searchTour( Integer.parseInt(idtour));
@@ -169,12 +169,12 @@ public class tourController {
 			int id1=Integer.parseInt(idtour);
 			
 			
-			return "redirect:/themcttour/" + id1 + ".htm";
+			return "redirect:/cttour/themcttour/" + id1 + ".htm";
 			
 			
 	}
 	
-	@RequestMapping(value="themcttour/{id}")
+	@RequestMapping(value="cttour/themcttour/{id}")
 	public String themcttour(HttpServletRequest request,ModelMap model,@PathVariable int id,@ModelAttribute("message") String message) {
 		Tour tour= new Tour();
 		tour=searchTour(id);

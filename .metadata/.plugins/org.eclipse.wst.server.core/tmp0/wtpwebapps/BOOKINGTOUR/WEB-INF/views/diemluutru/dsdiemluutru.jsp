@@ -47,7 +47,7 @@
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/NavAdmin.jsp"%>
+			<%@ include file="../includes/Navbarc1.jsp"%>
 			<div class="col py-3">
 				<c:if test="${message==1}">
 				
@@ -74,7 +74,7 @@
 					<div style='display: flex; justify-content: space-between;'>
 
 						<button type="button" class="btn btn-success"
-							onclick="location.href = 'themdiemluutru.htm'">Thêm điểm lưu trú mới mới</button>
+							onclick="location.href = 'themdiemluutru.htm'">Thêm điểm lưu trú mới</button>
 
 						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
 							style='padding: 3px'>

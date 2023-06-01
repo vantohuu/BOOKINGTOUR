@@ -47,7 +47,7 @@
 <body>
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/NavAdmin.jsp"%>
+			<%@ include file="../includes/Navbarc1.jsp"%>
 			<div class="col py-3">
 					<c:if test="${message==1}">
 					<div class="alert alert-success fade show" role="alert"style='position: fixed; width:50%; margin-left:300px; z-index: 100 '>

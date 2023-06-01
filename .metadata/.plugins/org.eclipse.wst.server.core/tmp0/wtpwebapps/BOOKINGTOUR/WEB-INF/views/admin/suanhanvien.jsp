@@ -46,7 +46,7 @@
 <body>
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/backNavAdmin.jsp"%>
+			<%@ include file="../includes/Navbarc2.jsp"%>
 			<div class="col py-3">
 			<c:if test="${message==1}">
 				

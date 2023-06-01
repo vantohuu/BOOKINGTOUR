@@ -40,12 +40,12 @@
     <fullyQualifiedTypeName name="java.util.Set"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.LoaiVe"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.VeTour"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.KhachHang"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.KhuyenMai"/>
-    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.CTVe"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.BookingTour"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.TaiKhoan"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.NhanVien"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.CTVe"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
 </qualifiedTypeNameHistroy>

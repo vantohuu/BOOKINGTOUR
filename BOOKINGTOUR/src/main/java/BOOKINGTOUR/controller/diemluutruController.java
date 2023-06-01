@@ -189,14 +189,14 @@ public class diemluutruController {
 		return"diemluutru/dsphong";
 	}
 	
-	@RequestMapping(value="themphong/{idNLT}")
+	@RequestMapping(value="dsphong/themphong/{idNLT}")
 	public String themphong(HttpServletRequest request,ModelMap model,@PathVariable int idNLT) {
 		Phong phong= new Phong();
 		phong.setNoiLuuTru1(searchDiemLuuTru(idNLT));
 		model.addAttribute("phong",phong);
 		return"diemluutru/themphong";
 	}
-	@RequestMapping(value="themphong/insertphong", method = RequestMethod.POST) 
+	@RequestMapping(value="dsphong/themphong/insertphong", method = RequestMethod.POST) 
 	public String insertphong(@ModelAttribute("phong") Phong phong,ModelMap model) {
 		
 		Session session = factory.openSession();
@@ -216,13 +216,13 @@ public class diemluutruController {
 		
 		return "diemluutru/themphong";
 	}
-	@RequestMapping(value="suaphong/{id}")
+	@RequestMapping(value="dsphong/suaphong/{id}")
 	public String suaphong(ModelMap model ,@PathVariable int id) {
 		Phong phong =this.searchPhong(id);
 		model.addAttribute("phong",phong);
 		return"diemluutru/suaphong";
 	}
-	@RequestMapping(value="suaphong/update", method = RequestMethod.POST) 
+	@RequestMapping(value="dsphong/suaphong/update", method = RequestMethod.POST) 
 	public String editphong(@ModelAttribute("phong") Phong phong,ModelMap model) {
 	
 		System.out.println(phong.getNoiLuuTru1().getId());

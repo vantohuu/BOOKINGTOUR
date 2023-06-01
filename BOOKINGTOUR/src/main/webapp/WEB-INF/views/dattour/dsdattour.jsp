@@ -47,7 +47,7 @@
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/NavAdmin.jsp"%>
+			<%@ include file="../includes/Navbarc1.jsp"%>
 			<div class="col py-3">
 				<c:if test="${message==1}">
 				
@@ -86,10 +86,10 @@
 							<tr>
 								<th scope="col">ID</th>
 								<th scope="col">Tên</th>
-								<th scope="col">Thời gian bắt đầu</th>
-								<th scope="col">Thời gian kết thúc</th>
-								<th scope="col">DS vé Tour</th>
-								<th scope="col">DS vé tham gia</th>
+								<th scope="col">Bắt đầu</th>
+								<th scope="col">Kết thúc</th>
+								<th scope="col">Vé Tour</th>
+								<th scope="col">Vé tham gia</th>
 								<th scope="col">Quản lý đặt phòng</th>
 								<th scope="col">Xử lý</th>
 							</tr>
@@ -105,14 +105,14 @@
 									<td>${bookingtour.tGKT}</td>
 									<td><a
 										href="dsvetour/${bookingtour.id}.htm"><button
-												class="btn btn-primary">DS vé tour</button> </a></td>
+												class="btn btn-primary">DS</button> </a></td>
 									<td><a
 										href="dsve/${bookingtour.id}.htm"><button
-												class="btn btn-primary">DS vé tg</button> </a></td>
+												class="btn btn-primary">DS</button> </a></td>
 													
 									<td><a
 										href="dsdatphong/${bookingtour.id}.htm"><button
-												class="btn btn-primary">DS đặt phòng</button> </a></td>
+												class="btn btn-primary">DS</button> </a></td>
 													
 								
 																	<td style='display: flex; justify-content: flex-start;'>

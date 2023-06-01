@@ -47,7 +47,7 @@
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/NavAdmin.jsp"%>
+			<%@ include file="../includes/Navbarc2.jsp"%>
 			<div class="col py-3">
 				<c:if test="${message==1}">
 				
@@ -72,7 +72,7 @@
 <c:set var="message" value="0" />
 				<div class="container form-dang-nhap">
 					<div style='display: flex; justify-content: space-between;'>
-						<a href="../themphong/${idNLT}.htm"><button
+						<a href="themphong/${idNLT}.htm"><button
 								class="btn btn-success">Thêm Phòng</button> </a>
 
 						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
@@ -177,7 +177,7 @@
 											
 									
 										<a
-										href="../suaphong/${phong.id}.htm"><button
+										href="suaphong/${phong.id}.htm"><button
 												class="btn btn-primary">chỉnh sửa</button> </a> 
 
 										<button
