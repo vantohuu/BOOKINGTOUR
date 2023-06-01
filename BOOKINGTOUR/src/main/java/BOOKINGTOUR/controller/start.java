@@ -16,6 +16,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import BOOKINGTOUR.entity.BookingTour;
 import BOOKINGTOUR.entity.CTVe;
+import BOOKINGTOUR.entity.DiemDuLich;
 import BOOKINGTOUR.entity.KhachHang;
 import BOOKINGTOUR.entity.KhuyenMai;
 import BOOKINGTOUR.entity.NhanVien;
@@ -42,14 +44,25 @@ public class start {
 	@Autowired
     SessionFactory factory;
 	@RequestMapping("index")
-	public String welcome() {
+	public String welcome(HttpServletRequest request,ModelMap model) {
+		model.addAttribute("taiKhoan", new TaiKhoan());
 		return "login/login";
 	}
+
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(ModelMap model, HttpServletRequest request) {
+	public String login(ModelMap model, HttpServletRequest request,@ModelAttribute("taiKhoan") TaiKhoan taiKhoan, BindingResult errors) {
+		if (taiKhoan.getMANV().trim().length() == 0) {
+			errors.rejectValue("MANV", "taiKhoan", "Vui lòng nhập username !");
+		}
+		else if (taiKhoan.getPASSWORD().trim().length() == 0) {
+			errors.rejectValue("PASSWORD", "taiKhoan", "Vui lòng nhập password !");
+		}
+		else if(taiKhoan.getPASSWORD().trim().length() <5) {
+			errors.rejectValue("PASSWORD", "taiKhoan", "Password phải từ 5 kí tự trở lên!");}
+		else {
 		 HttpSession session = request.getSession();
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		String username = taiKhoan.getMANV();
+		String password = taiKhoan.getPASSWORD();
 		TaiKhoan taikhoan = queryLogin(username, password);
 		if (taikhoan != null) {
 			if (taikhoan.getNhanVien().getTrangThai()==1) {
@@ -68,10 +81,20 @@ public class start {
 			}
 		}
 		else
-			model.addAttribute("error", "Mã tài khoản hoặc mật khẩu chưa đúng !!!");
+			model.addAttribute("error", "Mã tài khoản hoặc mật khẩu chưa đúng !!!");}
 			return "login/login"; 
 		
 	}
+	
+	@RequestMapping(value = "/logout")
+	public String logout(HttpSession session) {
+		// Xóa thông tin người dùng khỏi phiên làm việc và kết thúc phiên
+		session.removeAttribute("TaiKhoan");
+		/* session.removeAttribute("quyenHan"); */
+		session.invalidate();
+		return "redirect:/index.htm";
+	}
+	
 	@RequestMapping(value="danhsachnhanvien")
 	public String danhsachtaikhoan(HttpServletRequest request,ModelMap model,@ModelAttribute("message") String message) {
 		model.addAttribute("nhanviens",getListNhanVien());

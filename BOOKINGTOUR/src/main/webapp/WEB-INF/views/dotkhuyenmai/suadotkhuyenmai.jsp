@@ -89,8 +89,8 @@
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Tên đợt :</label> 
 											<form:input path="ten" type="text" class="form-control"  />
-											 <span
-											style="color: red;">${messageMaNV}</span>
+											<form:errors path="ten" />
+											
 									</div>
 									</div>
 									<div class="row">
@@ -99,6 +99,7 @@
 											bắt đầu :</label> <form:input type="date" class="form-control"
 											
 											path="tGBD" />
+											<form:errors path="tGBD" />
 									</div>
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Ngày
@@ -112,16 +113,15 @@
 										<label for="recipient-name" class="col-form-label">Mô tả :</label> 
 										<textarea name="moTa" class="form-control"></textarea>
 											<%-- <form:input path="moTa" type="textarea" class="form-control"/> --%>
-											 <span
-											style="color: red;">${messageMaNV}</span>
+											
 									</div>
 									</div>
 									<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Phần trăm giảm  :</label> 
 											<form:input path="phanTramGiam" type="text" class="form-control"  />
-											 <span
-											style="color: red;">${messageMaNV}</span>
+											<form:errors path="phanTramGiam" />
+											 
 									</div>
 									</div>
 									

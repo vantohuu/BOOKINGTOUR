@@ -12,6 +12,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,9 +44,17 @@ public class diemdulichController {
 	}
 	
 	@RequestMapping(value="insertDiemDuLich", method = RequestMethod.POST) 
-	public String insertdiemdulich(@ModelAttribute("diemDuLich1") DiemDuLich diemDuLich,ModelMap model) {
+	public String insertdiemdulich(@ModelAttribute("diemDuLich1") DiemDuLich diemDuLich,ModelMap model, BindingResult errors) {
+		if (diemDuLich.getTen().trim().length() == 0) {
+			errors.rejectValue("ten", "diemDuLich", "Vui lòng nhập tên điểm du lịch !");
+		}
+		else if (diemDuLich.getDiaChi().trim().length() == 0) {
+			errors.rejectValue("diaChi", "diemDuLich", "Vui lòng nhập tên địa chỉ !");
+		}
+		else {
+		
 		if(checkTenDiemDuLichTrung(diemDuLich.getTen())==1) {
-			model.addAttribute("message", 3);
+			errors.rejectValue("ten", "diemDuLich", "Tên địa điểm đã bị trùng !");
 			model.addAttribute("diemDuLichs",getListDiemDuLich());
 			System.out.println(3);
 			return "diemdulich/themdiemdulich";
@@ -63,7 +72,7 @@ public class diemdulichController {
 				
 			} finally {
 				session.close();
-			}
+			}}
 		
 			model.addAttribute("diemDuLichs",getListDiemDuLich());
 		return "diemdulich/themdiemdulich";

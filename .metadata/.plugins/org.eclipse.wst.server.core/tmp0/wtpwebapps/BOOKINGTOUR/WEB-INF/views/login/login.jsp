@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
     
 <!DOCTYPE html>
 <html>
@@ -27,6 +28,13 @@ background-size: auto 100%;
 height: 100%;
 }
 }</style>
+<style type="text/css">
+*[id$=errors] {
+	color: red;
+	font-style: italic;
+}
+</style>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> 
      <script src="https://kit.fontawesome.com/ee36f81461.js" crossorigin="anonymous"></script>
@@ -45,7 +53,7 @@ height: 100%;
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
 
-               <form action="login.htm" method="post">
+               <form:form  action="login.htm" method="post" modelAttribute="taiKhoan">
                   <div class="d-flex align-items-center mb-3 pb-1">
                     <span class="h1 fw-bold mb-0">QUẢN LÝ ĐẶT TOUR DU LỊCH</span>
                   </div>
@@ -54,23 +62,27 @@ height: 100%;
                  
 
                   <div class="form-outline mb-4">
-                    <input type="text" id="form2Example17" class="form-control form-control-lg" name="username" />
-                     <form:errors path="username"/>
+                     <form:input type="text" id="form2Example17" class="form-control form-control-lg" path="MANV" />
+                     
                     <label class="form-label" for="form2Example17">Tên đăng nhập</label>
+                    <form:errors path="MANV"/>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" id="form2Example27" class="form-control form-control-lg" name="password"/>
-                    <form:errors path="password"/>
+                     <form:input type="password" id="form2Example27" class="form-control form-control-lg" path="PASSWORD"/>
+                  
                     <label class="form-label" for="form2Example27">Mật khẩu</label>
+                      
+                      <form:errors path="PASSWORD"/>
                   </div>
 
                   <div class="pt-1 mb-4">
                     <button class="btn btn-dark btn-lg btn-block" >ĐĂNG NHẬP </button>
                   </div>
                   <a class="small text-muted" href="#!">Quên mật khẩu?</a>
-                </form>
-				<div>${error }</div>
+                </form:form>
+				<div style="color: red;
+	font-style: italic;">${error }</div>
               </div>
             </div>
           </div>

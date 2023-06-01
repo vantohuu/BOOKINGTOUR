@@ -41,8 +41,15 @@
 	left: -400px;
 	background-color: aliceblue;
 }
-</style>
 
+
+</style>
+<style type="text/css">
+*[id$=errors] {
+	color: red;
+	font-style: italic;
+}
+</style>
 
 </head>
 <body>
@@ -83,6 +90,7 @@
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Tên điểm :</label> 
 											<form:input path="ten" type="text" class="form-control"  />
+											<form:errors path="ten" />
 											 <span
 											style="color: red;">${messageMaNV}</span>
 									</div>
@@ -91,6 +99,7 @@
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Địa chỉ :</label> 
 											<form:input path="diaChi" type="text" class="form-control"  />
+											<form:errors path="diaChi" />
 											 <span
 											style="color: red;">${messageMaNV}</span>
 									</div>

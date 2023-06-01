@@ -43,7 +43,11 @@
 }
 </style>
 
-
+<style type="text/css">
+*[id$=errors] {
+	color: red;
+	font-style: italic;
+}</style>
 </head>
 <body>
 	<div class="container-fluid">
@@ -83,6 +87,7 @@
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Tên đợt :</label> 
 											<form:input path="ten" type="text" class="form-control"  />
+											<form:errors path="ten" />
 											 <span
 											style="color: red;">${messageMaNV}</span>
 									</div>
@@ -93,6 +98,7 @@
 											bắt đầu :</label> <form:input type="date" class="form-control"
 											value="2023-01-01"
 											path="tGBD" />
+											<form:errors path="tGBD" />
 									</div>
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Ngày
@@ -114,6 +120,7 @@
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Phần trăm giảm  :</label> 
 											<form:input path="phanTramGiam" type="text" class="form-control"  />
+											<form:errors path="phanTramGiam" />
 											 <span
 											style="color: red;">${messageMaNV}</span>
 									</div>

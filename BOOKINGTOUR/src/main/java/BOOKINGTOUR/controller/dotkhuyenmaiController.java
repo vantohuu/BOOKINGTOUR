@@ -13,6 +13,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,13 +43,18 @@ public class dotkhuyenmaiController {
 		return"dotkhuyenmai/themdotkhuyenmai";
 	}
 	@RequestMapping(value="insertDotKhuyenMai", method = RequestMethod.POST) 
-	public String insertDotKhuyenMai(@ModelAttribute("dotKhuyenMai1") KhuyenMai dotkhuyenmai,ModelMap model) {
-		System.out.println(dotkhuyenmai.getId());
-		System.out.println(dotkhuyenmai.getTen());
-		System.out.println(dotkhuyenmai.getMoTa());
-		System.out.println(dotkhuyenmai.getPhanTramGiam());
-		System.out.println(dotkhuyenmai.gettGBD());
-		System.out.println(dotkhuyenmai.gettGKT());
+	public String insertDotKhuyenMai(@ModelAttribute("dotKhuyenMai1") KhuyenMai dotkhuyenmai,ModelMap model,BindingResult errors) {
+		int compareResult = dotkhuyenmai.gettGBD().compareTo(dotkhuyenmai.gettGKT());
+		if (dotkhuyenmai.getTen().trim().length() == 0) {
+			errors.rejectValue("ten", "dotkhuyenmai", "Vui lòng nhập tên!");
+		}
+		else if (compareResult > 0) {
+			errors.rejectValue("tGBD", "dotkhuyenmai", "Ngày bắt đầu phải trước ngày kết thúc !");
+		}
+		else if (dotkhuyenmai.getPhanTramGiam() >100||dotkhuyenmai.getPhanTramGiam() <=0  ) {
+			errors.rejectValue("phanTramGiam", "dotkhuyenmai", "Vui lòng nhập đúng phần trăm muốn giảm !");
+		}
+		else {
 		
 		Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
@@ -64,7 +70,7 @@ public class dotkhuyenmaiController {
 			} finally {
 				session.close();
 			}
-		
+		}
 			model.addAttribute("dotkhuyenmais",getKhuyenMais());
 		return "dotkhuyenmai/themdotkhuyenmai";
 	}
@@ -78,11 +84,19 @@ public class dotkhuyenmaiController {
 	}
 	
 	@RequestMapping(value="suadotkhuyenmai/update", method = RequestMethod.POST) 
-	public String editdotkhuyenmai(@ModelAttribute("dotKhuyenMai1") KhuyenMai dotKhuyenMai,ModelMap model) {
-		System.out.println(dotKhuyenMai.getId());
-		System.out.println(dotKhuyenMai.getTen());
+	public String editdotkhuyenmai(@ModelAttribute("dotKhuyenMai1") KhuyenMai dotKhuyenMai,ModelMap model,BindingResult errors) {
+		int compareResult = dotKhuyenMai.gettGBD().compareTo(dotKhuyenMai.gettGKT());
+		if (dotKhuyenMai.getTen().trim().length() == 0) {
+			errors.rejectValue("ten", "dotKhuyenMai", "Vui lòng nhập tên!");
+		}
 		
-		System.out.println(dotKhuyenMai.getMoTa());
+		else if (compareResult > 0) {
+			errors.rejectValue("tGBD", "dotKhuyenMai", "Ngày bắt đầu phải trước ngày kết thúc !");
+		}
+		else if (dotKhuyenMai.getPhanTramGiam() >100||dotKhuyenMai.getPhanTramGiam() <=0 ) {
+			errors.rejectValue("phanTramGiam", "dotKhuyenMai", "Vui lòng nhập phần trăm muốn giảm từ 0-100% !");
+		}
+		else {
 		Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
 			try {
@@ -95,7 +109,7 @@ public class dotkhuyenmaiController {
 				
 			} finally {
 				session.close();
-			}
+			}}
 			
 			model.addAttribute("dotKhuyenMai1",dotKhuyenMai);
 			model.addAttribute("dotkhuyenmais",getKhuyenMais());
