@@ -72,7 +72,7 @@
 <c:set var="message" value="0" />
 				<div class="container form-dang-nhap">
 					<div style='display: flex; justify-content: space-between;'>
-						<a href="../themdatphong/${idBK}.htm"><button
+						<a href="themdatphong/${idBK}.htm"><button
 								class="btn btn-success">Thêm Phòng vào danh sách</button> </a>
 
 						<input type="text" name="timkiem" placeholder=" Tìm kiếm"

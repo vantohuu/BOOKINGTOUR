@@ -88,6 +88,7 @@
 								<th scope="col">CCCD</th>
 								<th scope="col">Sđt</th>
 								<th scope="col">Email</th>
+								<th scope="col">Xử lý</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -101,7 +102,10 @@
 									<th scope="row">${khachhang.cCCD}</th>
 									<td scope="row">${khachhang.sDT}</td>
 									<td scope="row">${khachhang.email}</td>
-									
+									<td>
+									<button
+											onclick="if(confirm('bạn có chắc chắn muốn xóa nhân viên này không ?')){location.href='xoakhachang/${khachhang.cCCD}.htm'}"
+											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button></td>
 								</tr>
 
 							</c:forEach>

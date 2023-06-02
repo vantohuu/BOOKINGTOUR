@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="f"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
 <html>
@@ -42,6 +43,12 @@
 	background-color: aliceblue;
 }
 </style>
+<style type="text/css">
+*[id$=errors] {
+	color: red;
+	font-style: italic;
+}
+</style>
 
 
 </head>
@@ -67,7 +74,8 @@
 					<c:set var="message" value="0" />
 				<div class="container form-dang-nhap">
 					<div class="modal-body">
-						<form action="themnhanvien.htm" method="post">
+					<form:form action="insert.htm" modelAttribute="nhanvien">
+						
 							<div class="form-group">
 								<div>
 									<h1>Thêm nhân viên</h1>
@@ -75,58 +83,65 @@
 								<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Mã
-											nhân viên :</label> <input type="text" class="form-control"
-											name="maNV" placeholder="Mã nhân viên" value="${maNV}">
-										<span style="color: red;">${messageMaNV}</span>
+											nhân viên :</label> <form:input type="text" class="form-control"
+											path="maNV" placeholder="Mã nhân viên" />
+											<form:errors path="maNV" />
+										
 									</div>
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Họ
-											và tên :</label> <input type="text" class="form-control" name="hoTen"
-											placeholder="Nguyen Van A">
+											 </label>  <form:input type="text" class="form-control" path="ho"
+											placeholder="Nguyen Van"/>
+											<form:errors path="ho" />
+									</div>
+									<div class="col">
+										<label for="recipient-name" class="col-form-label">Tên
+											 </label>  <form:input type="text" class="form-control" path="ten"
+											placeholder="A"/>
+											<form:errors path="ten" />
 									</div>
 								</div>
 								<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Căn
-											cước công dân :</label> <input type="text" class="form-control"
-											name="cCCD""> <span style="color: red;">${messageCCCD}</span>
+											cước công dân :</label>  <form:input type="text" class="form-control"
+											path="cCCD"/> 
+											<form:errors path="cCCD" />
 									</div>
-									<div class="col">
+									
+									 <div class="col">
 										<label for="recipient-name" class="col-form-label">Giới
 											tính :</label><br>
 										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="radio" name="gioiTinh"
-												checked value="nam"> <label class="form-check-label"
-												for="nam">Nam</label>
+											<form:radiobutton path="gioiTinh" value="nam" label="Nam" checked="true"></form:radiobutton> 
 										</div>
 										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="radio" name="gioiTinh"
-												value="nu"> <label class="form-check-label" for="nu">Nữ</label>
+											<form:radiobutton path="gioiTinh" value="nữ" label="Nữ"></form:radiobutton>
 										</div>
-									</div>
+									</div> 
 								</div>
 								<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Ngày
-											sinh :</label> <input type="date" class="form-control"
-											value="2000-01-01"
-											name="ngaySinh" >
+											sinh :</label> <form:input type="date" class="form-control"
+											
+											path="ngaySinh" />
 									</div>
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Số
-											điện thoại :</label> <input type="tel" class="form-control"
-											id="phone" name="sDT" placeholder="0999999999">
+											điện thoại :</label>  <form:input type="tel" class="form-control"
+											id="phone" path="sDT" />
 									</div>
 								</div>
 
 								<label for="recipient-name" class="col-form-label">Địa
-									chỉ:</label> <input type="text" class="form-control" name="${diaChi}"
-									placeholder="54, đường số 8, Linh Trung ,Tp. Thủ Đức, Tp. Hồ Chí Minh">
+									chỉ:</label>  <form:input type="text" class="form-control" path="diaChi"
+									/>
 								<label for="recipient-name" class="col-form-label">Email
-									:</label> <input type="email" class="form-control" name="email"
-									id="inputEmail4" placeholder="nguyenvana@gmail.com"> <label
+									:</label> <form:input type="email" class="form-control" path="email"
+									id="inputEmail4" placeholder="nguyenvana@gmail.com"/> <label
 									for="recipient-name" class="col-form-label">Chức vụ :</label><br>
-								<div class="form-check form-check-inline">
+								 <div class="form-check form-check-inline">
 									<input class="form-check-input" type="radio" name="isAdmin"
 										checked value="0"> <label class="form-check-label"
 										for="0">Nhân viên quản lý</label>
@@ -134,11 +149,11 @@
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="radio" name="isAdmin"
 										value="1"> <label class="form-check-label" for="1">Admin</label>
-								</div>
+								</div> 
 							</div>
 							
 							<button class="btn btn-primary">Thêm nhân viên</button>
-						</form>
+						</form:form>
 					</div>
 				</div>
 				<div class="modal-footer">

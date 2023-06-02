@@ -42,7 +42,12 @@
 	background-color: aliceblue;
 }
 </style>
-
+<style type="text/css">
+*[id$=errors] {
+	color: red;
+	font-style: italic;
+}
+</style>
 
 </head>
 <body>
@@ -74,7 +79,7 @@
 					<c:set var="message" value="0" />
 				<div class="container form-dang-nhap">
 					<div class="modal-body">
-						<form:form action="../updatetour.htm" modelAttribute="bookingtour">
+						<form:form action="updatetour.htm" modelAttribute="bookingtour">
 							<div class="form-group">
 							<div>
 									<h1>Sửa đặt tour</h1>
@@ -113,10 +118,12 @@
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Thời gian bắt đầu
 											</label><form:input path="tGBD" type="date" class="form-control"  />
+											<form:errors path="tGBD" />
 									</div>
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Thời gian kết thúc
 											</label><form:input path="tGKT" type="date" class="form-control"  />
+											<form:errors path="tGKT" />
 									</div>
 									</div>
 							
@@ -128,10 +135,12 @@
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">SL người lớn :tối đa
 											</label><form:input path="maxNL" type="text" class="form-control"  />
+											<form:errors path="maxNL" />
 									</div>
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">SL người lớn :tối thiểu
 											</label><form:input path="minNL" type="text" class="form-control"  />
+											<form:errors path="minNL" />
 									</div>
 									</div>
 									<div class="row">
@@ -139,20 +148,25 @@
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">SL trẻ nhỏ :tối đa
 											</label><form:input path="maxTN" type="text" class="form-control"  />
+											<form:errors path="maxTN" />
+											
 									</div>
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">SL trẻ nhỏ :tối thiểu
 											</label><form:input path="minTN" type="text" class="form-control"  />
+											<form:errors path="minTN" />
 									</div>
 									</div>
 									<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">SL trẻ em :tối đa
 											</label><form:input path="maxTE" type="text" class="form-control"  />
+											<form:errors path="maxTE" />
 									</div>
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">SL trẻ em :tối thiểu
 											</label><form:input path="minTE" type="text" class="form-control"  />
+											<form:errors path="minTE" />
 									</div>
 									</div>
 									

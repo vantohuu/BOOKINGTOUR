@@ -51,15 +51,17 @@ public class start {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(ModelMap model, HttpServletRequest request,@ModelAttribute("taiKhoan") TaiKhoan taiKhoan, BindingResult errors) {
+		boolean kt=true;
 		if (taiKhoan.getMANV().trim().length() == 0) {
 			errors.rejectValue("MANV", "taiKhoan", "Vui lòng nhập username !");
+			kt=false;
 		}
-		else if (taiKhoan.getPASSWORD().trim().length() == 0) {
-			errors.rejectValue("PASSWORD", "taiKhoan", "Vui lòng nhập password !");
+		 if (taiKhoan.getPASSWORD().trim().length() == 0) {
+			errors.rejectValue("PASSWORD", "taiKhoan", "Vui lòng nhập password !");kt=false;
 		}
-		else if(taiKhoan.getPASSWORD().trim().length() <5) {
-			errors.rejectValue("PASSWORD", "taiKhoan", "Password phải từ 5 kí tự trở lên!");}
-		else {
+		if(taiKhoan.getPASSWORD().trim().length() <5) {
+			errors.rejectValue("PASSWORD", "taiKhoan", "Password phải từ 5 kí tự trở lên!");kt=false;}
+		if(kt==true) {
 		 HttpSession session = request.getSession();
 		String username = taiKhoan.getMANV();
 		String password = taiKhoan.getPASSWORD();
@@ -104,20 +106,36 @@ public class start {
 	
 	@RequestMapping(value="themnhanvien")
 	public String themnhanvien(HttpServletRequest request,ModelMap model) {
+		NhanVien nhanVien =new NhanVien();
+		TaiKhoan taiKhoan =new TaiKhoan();
+		nhanVien.setTaikhoan(taiKhoan);
+		model.addAttribute("nhanvien",nhanVien);
 		model.addAttribute("nhanviens",getListNhanVien());
 		return"admin/themnhanvien";
 	}
 	
 	@RequestMapping(value="suanhanvien/{maNV}")
 	public String suanhanvien(ModelMap model ,@PathVariable String maNV) {
-		model.addAttribute("nhanVien1", new NhanVien());
-		model.addAttribute("nhanVien",this.searchNhanVien(maNV));
+		model.addAttribute("nhanVien1",this.searchNhanVien(maNV));
 		model.addAttribute("nhanviens",getListNhanVien());
 		return"admin/suanhanvien";
 	}
 	
 	@RequestMapping(value="suanhanvien/update", method = RequestMethod.POST) 
-	public String editNhanVien(@ModelAttribute("nhanVien1") NhanVien nhanVien,ModelMap model) {
+	public String editNhanVien(@ModelAttribute("nhanVien1") NhanVien nhanVien,ModelMap model,BindingResult errors) {
+	
+		boolean kt=true;
+		if (nhanVien.getHo().trim().length() == 0) {
+			errors.rejectValue("ho", "nhanVien", "Vui lòng nhập họ!");
+			kt=false;
+		}
+		 if (nhanVien.getTen().trim().length() == 0) {
+			errors.rejectValue("ten", "nhanVien", "Vui lòng nhập tên !");kt=false;
+		}
+		if (nhanVien.getcCCD().trim().length() == 0) {
+			errors.rejectValue("cCCD", "nhanVien", "Vui lòng nhập CCCD !");kt=false;
+		}
+		if(kt==true) {
 		
 		Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
@@ -131,9 +149,8 @@ public class start {
 				
 			} finally {
 				session.close();
-			}
-			model.addAttribute("nhanVien1", new NhanVien());
-			model.addAttribute("nhanVien",nhanVien);
+			}}
+			model.addAttribute("nhanVien1", nhanVien);
 			model.addAttribute("nhanviens",getListNhanVien());
 		return "admin/suanhanvien";
 	}
@@ -141,15 +158,25 @@ public class start {
 	@RequestMapping(value="xoanhanvien/{maNV}")
 	public String xoanhanvien(ModelMap model ,@PathVariable String maNV) {
 		NhanVien nhanVien = searchNhanVien(maNV);
-		TaiKhoan taiKhoan=nhanVien.getTaikhoan();
-		
-		 
+		TaiKhoan taiKhoan = nhanVien.getTaikhoan(); 
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			session.delete(taiKhoan);
-			session.delete(nhanVien);
+			String hql2 = "delete from TaiKhoan where maNV =:maNV ";
+			String hql1 = "delete from NhanVien where maNV=:maNV";
+			
+			           
+
+			
+			Query query2 = session.createQuery(hql2);
+			query2.setParameter("maNV", maNV);
+			int result2 = query2.executeUpdate();
+			Query query1 = session.createQuery(hql1);
+			query1.setParameter("maNV", maNV);
+			int result1 = query1.executeUpdate();
+
 			t.commit();
+			
 			model.addAttribute("message", 1);
 		} catch (Exception e) {
 			t.rollback();
@@ -184,48 +211,41 @@ public class start {
 		}
 		return  (TaiKhoan)query.list().get(0);
 	}
-	@RequestMapping(value="/themnhanvien",method = RequestMethod.POST) 
-	public String themMoi(HttpServletRequest request,ModelMap model) throws ParseException  {
-		Session session = factory.openSession();
-		Transaction tr = session.beginTransaction();
-		NhanVien nhanVien = new NhanVien();
-		nhanVien.setMaNV(request.getParameter("idllt"));
-		nhanVien.setHo(getHo(request.getParameter("hoTen")));
-		nhanVien.setTen(getTen(request.getParameter("hoTen")));
-		nhanVien.setGioiTinh(request.getParameter("gioiTinh"));
-		String tmp = request.getParameter("ngaySinh");
-		nhanVien.setNgaySinh(formatter.parse(tmp));
-		nhanVien.setcCCD(request.getParameter("cCCD"));
-		nhanVien.setsDT(request.getParameter("sDT"));
-		nhanVien.setEmail(request.getParameter("email"));
-		nhanVien.setTrangThai(1);
-		/*
-		 * System.out.println(nhanVien.getMaNV()); System.out.println(nhanVien.getHo());
-		 * System.out.println(nhanVien.getTen());
-		 * System.out.println(nhanVien.getGioiTinh());
-		 * System.out.println(nhanVien.getcCCD());
-		 * System.out.println(nhanVien.getEmail());
-		 */
-		if(searchNhanVien(nhanVien.getMaNV()) != null) {
-			model.addAttribute("messageMaNV", "** Mã nhân viên bị trùng !");
-			model.addAttribute("maNV",taoMaNV());
-			model.addAttribute("nhanviens",getListNhanVien());
-			return "admin/themnhanvien";
-		}else {
-			model.addAttribute("messageMaNV", "");
+	@RequestMapping(value="insert", method = RequestMethod.POST) 
+	public String insertdiemdulich(HttpServletRequest request,@ModelAttribute("nhanvien") NhanVien nhanVien,ModelMap model, BindingResult errors) {
+		
+	
+		boolean kt=true;
+		if (nhanVien.getMaNV().trim().length() == 0) {
+			errors.rejectValue("maNV", "nhanVien", "Vui lòng nhập mã nhân viên !");kt=false;
+		}
+		 if(searchNhanVien(nhanVien.getMaNV()) != null) {
+			errors.rejectValue("maNV", "nhanVien", "Mã nhân viên bị trùng !");kt=false;
+		}
+		 if (nhanVien.getHo().trim().length() == 0) {
+			errors.rejectValue("ho", "nhanVien", "Vui lòng nhập họ!");kt=false;
+		}
+		 if (nhanVien.getTen().trim().length() == 0) {
+			errors.rejectValue("ten", "nhanVien", "Vui lòng nhập tên !");kt=false;
+		}
+		if (nhanVien.getcCCD().trim().length() == 0) {
+			errors.rejectValue("cCCD", "nhanVien", "Vui lòng nhập CCCD !");kt=false;
 		}
 		if(checkTrungCCCD(nhanVien.getcCCD())== 1) {
-			model.addAttribute("messageCCCD", "** CCCD bị trùng !");
-			model.addAttribute("nhanviens",getListNhanVien());
-			System.out.println(3);
-			return "admin/themnhanvien";
-		}else {
-			model.addAttribute("messageCCCD", "");
+			errors.rejectValue("cCCD", "nhanVien", "Vui lòng nhập CCCD !");kt=false;
 		}
+		if(kt==true) {
+		
+		
+		
+		Session session = factory.openSession();
+		Transaction tr = session.beginTransaction();
+		nhanVien.setTrangThai(1);
+	
 		try {
 			String mkDefault = "123456";
 			TaiKhoan tk = new TaiKhoan();
-			tk.setMANV(nhanVien.getMaNV());
+			/* tk.setMANV(nhanVien.getMaNV()); */
 			tk.setPASSWORD(mkDefault);
 			tk.setIsAdmin(Integer.valueOf(request.getParameter("isAdmin")));
 			System.out.println(Integer.valueOf(request.getParameter("isAdmin")));
@@ -239,7 +259,7 @@ public class start {
 			model.addAttribute("message",2);
 		} finally {
 			session.close();
-		}
+		}}
 		model.addAttribute("nhanviens",getListNhanVien());
 		return "admin/themnhanvien";
 	}

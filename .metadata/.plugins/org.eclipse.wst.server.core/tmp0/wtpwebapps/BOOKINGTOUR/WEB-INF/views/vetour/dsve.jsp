@@ -88,11 +88,13 @@
 								<label for="recipient-name" class="col-form-label">Căn cước công dân:</label>
 								<input name="CCCD" type="text" class="form-control"  />
 									             <input name=idBK type="text" class="form-control" value ="${idBK}"style='display: none'/>
+									             
 				
 								</div>
 								
 							
 							 <button class="btn btn-success">thêm </button>
+							 
 						</form>
                            
                         </ul>

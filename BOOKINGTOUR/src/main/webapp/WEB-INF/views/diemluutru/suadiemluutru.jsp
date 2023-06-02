@@ -41,6 +41,11 @@
 	background-color: aliceblue;
 }
 </style>
+<style type="text/css">
+*[id$=errors] {
+	color: red;
+	font-style: italic;
+}</style>
 
 
 </head>
@@ -73,7 +78,7 @@
 					<c:set var="message" value="0" />
 				<div class="container form-dang-nhap">
 					<div class="modal-body">
-						<form:form action="update.htm" modelAttribute="diemluutru1" >
+						<form:form action="update.htm" modelAttribute="diemluutru" >
 							<div class="form-group">
 							<div>
 									<h1>Sửa thông tin địa điểm lưu trú</h1>
@@ -81,7 +86,7 @@
 								<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">ID :</label> 
-											<form:input path="id" type="text" class="form-control"  readonly="true" value="${diemluutru.id}"/>
+											<form:input path="id" type="text" class="form-control"  readonly="true" />
 											
 									</div>
 									</div>
@@ -117,14 +122,16 @@
 								<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Tên điểm :</label> 
-											<form:input path="tenNLT" type="text" class="form-control" value="${diemluutru.tenNLT}"  />
+											<form:input path="tenNLT" type="text" class="form-control"  />
+											<form:errors path="tenNLT" />
 											 
 									</div>
 									</div>
 									<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Địa chỉ :</label> 
-											<form:input path="diaChi" type="text" class="form-control" value="${diemluutru.diaChi}"  />
+											<form:input path="diaChi" type="text" class="form-control"  />
+											<form:errors path="diaChi" />
 											
 											
 									</div>
@@ -133,14 +140,15 @@
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Số điện thoại liên hệ :</label> 
 											<form:input path="sDT"  type="tel" class="form-control"
-											id="phone" value="${diemluutru.sDT}"  />
+											id="phone"   />
+											<form:errors path="sDT" />
 											
 									</div>
 									</div>
 									<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Email liên hệ :</label> 
-											<form:input path="email"  type="email"  class="form-control" value="${diemluutru.email}" 
+											<form:input path="email"  type="email"  class="form-control" 
 											  />
 											
 									</div>

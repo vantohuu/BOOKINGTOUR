@@ -17,7 +17,6 @@
     <fullyQualifiedTypeName name="org.springframework.format.annotation.DateTimeFormat"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
-    <fullyQualifiedTypeName name="javassist.expr.NewArray"/>
     <fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
     <fullyQualifiedTypeName name="javax.persistence.Lob"/>
     <fullyQualifiedTypeName name="org.eclipse.jdt.internal.compiler.ast.ThisReference"/>
@@ -46,6 +45,9 @@
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.BookingTour"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.CTVe"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="javassist.expr.NewArray"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.NhanVien"/>
+    <fullyQualifiedTypeName name="javax.persistence.PrimaryKeyJoinColumn"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.TaiKhoan"/>
+    <fullyQualifiedTypeName name="javax.persistence.MapsId"/>
 </qualifiedTypeNameHistroy>

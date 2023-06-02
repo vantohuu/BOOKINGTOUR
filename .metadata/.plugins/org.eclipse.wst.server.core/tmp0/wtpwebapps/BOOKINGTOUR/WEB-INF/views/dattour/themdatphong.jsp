@@ -48,7 +48,7 @@
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc2.jsp"%>
+			<%@ include file="../includes/Navbarc3.jsp"%>
 			<div class="col py-3">
 				<c:if test="${message==1}">
 				
@@ -183,12 +183,12 @@
 										<a href="#submenu${phong.id}" style="display: inline;"
 										data-bs-toggle="collapse"
 										class="nav-link text-white px-0 align-middle "> <i
-											class="fa-solid fa-map-location-dot"></i><
+											class="fa-solid fa-map-location-dot"></i>
 											<button class="btn btn-success">Thêm vào danh sách</button>
 									</a>
 										<ul class="collapse nav flex-column ms-1" id="submenu${phong.id}" data-bs-parent="#menu">
                             <li class="w-100">
-                                <form action="insertdatphong.htm" method="post" >
+                                <form action="insert.htm" method="post" >
 							<div class="form-group">
 							<div>
 								</div>
@@ -200,7 +200,7 @@
 										
 											<input  name="tgden" type="date" class="form-control"  />
 											 <span
-											style="color: red;">${messageMaNV}</span>
+											style="color: red;">${erroNgayDen}</span>
 									</div>
 									</div>
 									<div class="row">
@@ -208,7 +208,7 @@
 										<label for="recipient-name" class="col-form-label">thời gian đi :</label> 
 											<input  name="tgdi" type="date" class="form-control"  />
 											 <span
-											style="color: red;">${messageMaNV}</span>
+											style="color: red;">${erroNgayDi}</span>
 									</div>
 									</div>
 									<div class="row">

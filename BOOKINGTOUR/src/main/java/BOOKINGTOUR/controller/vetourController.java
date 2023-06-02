@@ -18,6 +18,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,7 +71,9 @@ public class vetourController {
 	@RequestMapping(value="dsve/themvetg", method = RequestMethod.POST)
 	public String thembvetg(HttpServletRequest request,HttpSession session,ModelMap model,@ModelAttribute("CCCD") String CCCD,@ModelAttribute("idBK") String idBK )  {
 		
-		
+		if(CCCD.trim().length()<4) {
+			return "redirect:/dsve/" + idBK + ".htm";
+		}
 		KhachHang khachHang = searchKhachHang(CCCD);
 		BookingTour bookingTour = searchbBookingTour(Integer.parseInt(idBK));
 		if (khachHang == null) {
@@ -89,7 +92,22 @@ public class vetourController {
 			return "vetour/themctve";	
 	}
 	@RequestMapping(value="dsve/insert", method = RequestMethod.POST) 
-	public String insertdattour(@ModelAttribute("ctve") CTVe ctVe,ModelMap model) {
+	public String insertdattour(@ModelAttribute("ctve") CTVe ctVe,ModelMap model, BindingResult errors) {
+		
+		boolean kt=true;
+		if (ctVe.getKhachHang().getHo().trim().length() == 0) {
+			errors.rejectValue("khachHang.ho", "ctVe", "Vui lòng nhập họ !");
+			kt=false;
+		}
+		if (ctVe.getKhachHang().getTen().trim().length() == 0) {
+			errors.rejectValue("khachHang.ten", "ctVe", "Vui lòng nhập tên !");
+			kt=false;
+		}
+		if (ctVe.getKhachHang().getsDT().trim().length() <= 5) {
+			errors.rejectValue("khachHang.sDT", "ctVe", "Vui lòng nhập sdt đúng !");
+			kt=false;
+		}
+		if(kt==true) {
 		ctVe.setNhanVienXN(searchNhanVien(ctVe.getNhanVienXN().getcCCD()));
 		ctVe.setVeTour(searcVeTour(ctVe.getVeTour().getId()));
 		ctVe.setKhuyenMai(searchKhuyenMai(ctVe.getKhuyenMai().getId()));
@@ -114,7 +132,16 @@ public class vetourController {
 				
 			} finally {
 				session.close();
-			}
+			}}
+		else {
+			ctVe.setNhanVienXN(searchNhanVien(ctVe.getNhanVienXN().getcCCD()));
+				model.addAttribute("ctve", ctVe);
+				model.addAttribute("vetours", searcVeTour(ctVe.getVeTour().getId()).getBookingTour1().getVeTours());
+				model.addAttribute("dotkhuyenmai", getKhuyenMais());
+				model.addAttribute("tennvXN",ctVe.getNhanVienXN().getHo() + " "+ctVe.getNhanVienXN().getTen());
+			 
+				return "vetour/themctve";	
+		}
 			
 			return "redirect:/dsve/" + ctVe.getVeTour().getBookingTour1().getId() + ".htm";
 	}
@@ -209,14 +236,10 @@ public class vetourController {
 	}
 	
 	@RequestMapping(value="dsvetour/themvetour/insert", method = RequestMethod.POST) 
-	public String insertdiemluutru(@ModelAttribute("vetour") VeTour vetour,ModelMap model) {
+	public String insertdiemluutru(@ModelAttribute("vetour") VeTour vetour,ModelMap model, BindingResult errors) {
 		
-	System.out.println(vetour.getGiaVe());
-	System.out.println(vetour.getGiaCoc());
-	System.out.println(vetour.getPhiDiChuyen());
-	System.out.println(vetour.getBookingTour1().getId());
-	System.out.println(vetour.getLoaiVe().getId());
-	
+		
+		
 
 		Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
@@ -299,7 +322,28 @@ public class vetourController {
 		return"redirect:/dsvetour/"+veTour.getBookingTour1().getId()+".htm";
 	}
 		
-	
+	@RequestMapping(value="xoakhachang/{cCCD}")
+	public String xoanhanvien(ModelMap model ,@PathVariable String cCCD) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			String hql = "delete from KhachHang where cCCD =:cCCD ";
+			Query query1 = session.createQuery(hql);
+			query1.setParameter("cCCD", cCCD);
+			int result1 = query1.executeUpdate();
+
+			t.commit();
+			
+			model.addAttribute("message", 1);
+		} catch (Exception e) {
+			t.rollback();
+			model.addAttribute("message", 2);
+			
+		} finally {
+			session.close();
+		}
+		return"redirect:/dskhachhang.htm";
+	}
 	
 	
 	@RequestMapping(value="dskhachhang")

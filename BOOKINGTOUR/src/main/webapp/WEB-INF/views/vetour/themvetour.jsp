@@ -43,7 +43,12 @@
 }
 </style>
 
-
+<style type="text/css">
+*[id$=errors] {
+	color: red;
+	font-style: italic;
+}
+</style>
 </head>
 <body>
 	<div class="container-fluid">
@@ -99,18 +104,21 @@
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Giá vé
 											</label><form:input path="giaVe" type="text" class="form-control"  />
+											<form:errors path="giaVe" />
 									</div>
 									</div>
 									<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Phi di chuyển
 											</label><form:input path="phiDiChuyen" type="text" class="form-control"  />
+											<form:errors path="phiDiChuyen" />
 									</div>
 									</div>
 									<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Giá cọc
 											</label><form:input path="giaCoc" type="text" class="form-control"  />
+											<form:errors path="giaCoc" />
 									</div>
 									</div>
 									

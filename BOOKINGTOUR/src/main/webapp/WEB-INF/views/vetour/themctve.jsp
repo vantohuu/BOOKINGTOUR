@@ -42,7 +42,12 @@
 	background-color: aliceblue;
 }
 </style>
-
+<style type="text/css">
+*[id$=errors] {
+	color: red;
+	font-style: italic;
+}
+</style>
 
 </head>
 <body>
@@ -90,10 +95,12 @@
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Họ và tên đệm  :</label> 
 										<form:input path="khachHang.ho" type="text" class="form-control"   />
+										<form:errors path="khachHang.ho" />
 										</div>
 										<div class="col">
 										<label for="recipient-name" class="col-form-label">Tên  :</label> 
 										<form:input path="khachHang.ten" type="text" class="form-control"   />
+										<form:errors path="khachHang.ten" />
 										</div>
 										</div>
 									
@@ -102,6 +109,7 @@
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Số điện thoại  :</label> 
 										<form:input path="khachHang.sDT" type="text" class="form-control"   />
+										<form:errors path="khachHang.sDT" />
 										</div>
 										</div>
 									<div class="row">

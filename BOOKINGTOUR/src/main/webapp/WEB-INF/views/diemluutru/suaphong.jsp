@@ -41,7 +41,12 @@
 	background-color: aliceblue;
 }
 </style>
-
+<style type="text/css">
+*[id$=errors] {
+	color: red;
+	font-style: italic;
+}
+</style>
 
 </head>
 <body>
@@ -101,40 +106,35 @@
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Tên phòng :</label> 
 											<form:input path="ten" type="text" class="form-control"  />
-											 <span
-											style="color: red;">${messageMaNV}</span>
+											<form:errors path="ten" />
 									</div>
 									</div>
 									<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Giá :</label> 
 											<form:input path="gia" type="text" class="form-control"  />
-											 <span
-											style="color: red;">${messageMaNV}</span>
+											<form:errors path="gia" />
 									</div>
 									</div>
 										<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Số giường :</label> 
 											<form:input path="soGiuong" type="text" class="form-control"  />
-											 <span
-											style="color: red;">${messageMaNV}</span>
+											 <form:errors path="soGiuong" />
 									</div>
 									</div>
 										<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Số lượng người tối đa :</label> 
 											<form:input path="sLNMax" type="text" class="form-control"  />
-											 <span
-											style="color: red;">${messageMaNV}</span>
+											 <form:errors path="sLNMax" />
 									</div>
 									</div>
 									<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Hạng phòng :</label> 
 											<form:input path="hangPhong" type="text" class="form-control"  />
-											 <span
-											style="color: red;">${messageMaNV}</span>
+											
 									</div>
 									</div>
 									

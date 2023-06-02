@@ -4,7 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 
@@ -19,8 +21,10 @@ public class TaiKhoan {
 	private String MANV;
 	
 	@OneToOne()
-	@JoinColumn(name="MANV")
+	@MapsId
+	 @JoinColumn(name="MANV")
     private NhanVien nhanVien;
+	
 	@Column(name="PASSWORD")
 	private  String PASSWORD;
 	

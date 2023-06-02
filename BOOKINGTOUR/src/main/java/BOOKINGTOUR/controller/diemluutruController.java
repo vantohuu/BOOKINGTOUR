@@ -13,6 +13,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,17 +45,26 @@ public class diemluutruController {
 		return"diemluutru/themdiemluutru";
 	}
 	@RequestMapping(value="insertdiemluutru", method = RequestMethod.POST) 
-	public String insertdiemluutru(@ModelAttribute("diemluutru1") NoiLuuTru diemluutru,ModelMap model) {
-		
+	public String insertdiemluutru(@ModelAttribute("diemluutru1") NoiLuuTru diemluutru,ModelMap model, BindingResult errors) {
+		boolean kt=true;
+		if (diemluutru.getTenNLT().trim().length() == 0) {
+			errors.rejectValue("tenNLT", "diemluutru", "Vui lòng nhập tên !");
+			kt=false;
+		}
+		else if(checkTenDiemLuuTruTrung(diemluutru.getTenNLT())==1) {
+			errors.rejectValue("tenNLT", "diemluutru", "Tên đã bị trùng !");
+			kt=false;
+		}
+		 if (diemluutru.getDiaChi().trim().length() == 0) {
+			errors.rejectValue("diaChi", "diemluutru", "Vui lòng nhập địa chỉ !");kt=false;
+		}
+		 if (diemluutru.getsDT().trim().length() < 5  ) {
+				errors.rejectValue("sDT", "diemluutru", "Vui lòng nhập sdt !");kt=false;
+			}
+		if(kt==true) {
 	
 
-		if(checkTenDiemLuuTruTrung(diemluutru.getTenNLT())==1) {
-			model.addAttribute("message", 3);
-			model.addAttribute("loailuutrus",this.geLoaiLuuTrus());
-			model.addAttribute("diemluutrus",gettNoiLuuTrus());
-			
-			return "diemluutru/themdiemluutru";
-		}
+		
 		Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
 			try {
@@ -68,7 +78,7 @@ public class diemluutruController {
 				
 			} finally {
 				session.close();
-			}
+			}}
 			
 			model.addAttribute("loailuutrus",this.geLoaiLuuTrus());
 			model.addAttribute("diemluutrus",gettNoiLuuTrus());
@@ -86,11 +96,19 @@ public class diemluutruController {
 		return"diemluutru/suadiemluutru";
 	}
 	@RequestMapping(value="suadiemluutru/update", method = RequestMethod.POST) 
-	public String editdiemluutru(@ModelAttribute("diemluutru1") NoiLuuTru diemluutru,ModelMap model) {
-		System.out.println(diemluutru.getId());
-		System.out.println(diemluutru.getTenNLT());
-		System.out.println(diemluutru.getDiaChi());
-		System.out.println(diemluutru.getMoTa());
+	public String editdiemluutru(@ModelAttribute("diemluutru") NoiLuuTru diemluutru,ModelMap model,BindingResult errors) {
+		boolean kt=true;
+		if (diemluutru.getTenNLT().trim().length() == 0) {
+			errors.rejectValue("tenNLT", "diemluutru", "Vui lòng nhập tên !");
+			kt=false;
+		}
+		 if (diemluutru.getDiaChi().trim().length() == 0) {
+			errors.rejectValue("diaChi", "diemluutru", "Vui lòng nhập địa chỉ !");kt=false;
+		}
+		 if (diemluutru.getsDT().trim().length() < 5  ) {
+				errors.rejectValue("sDT", "diemluutru", "Vui lòng nhập sdt !");kt=false;
+			}
+		if(kt==true) {
 		Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
 			try {
@@ -103,9 +121,8 @@ public class diemluutruController {
 				
 			} finally {
 				session.close();
-			}
+			}}
 			model.addAttribute("loailuutrus",this.geLoaiLuuTrus());
-			model.addAttribute("diemluutru1", new NoiLuuTru());
 			model.addAttribute("diemluutru",diemluutru);
 			model.addAttribute("diemluutrus",gettNoiLuuTrus());
 		return "diemluutru/suadiemluutru";
@@ -197,7 +214,19 @@ public class diemluutruController {
 		return"diemluutru/themphong";
 	}
 	@RequestMapping(value="dsphong/themphong/insertphong", method = RequestMethod.POST) 
-	public String insertphong(@ModelAttribute("phong") Phong phong,ModelMap model) {
+	public String insertphong(@ModelAttribute("phong") Phong phong,ModelMap model,BindingResult errors) {
+		boolean kt=true;
+		if (phong.getTen().trim().length() == 0) {
+			errors.rejectValue("ten", "phong", "Vui lòng nhập tên !");
+			kt=false;
+		}
+		 if (phong.getSoGiuong() < 1) {
+			errors.rejectValue("soGiuong", "phong", "Số giường phải lớn hơn 0 !");kt=false;
+		}
+		 if (phong.getsLNMax() < 1  ) {
+				errors.rejectValue("sLNMax", "phong", "Số lượng người tối đa phải lớn hơn 0 !");kt=false;
+			}
+		if(kt==true) {
 		
 		Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
@@ -212,7 +241,7 @@ public class diemluutruController {
 				
 			} finally {
 				session.close();
-			}
+			}}
 		
 		return "diemluutru/themphong";
 	}
@@ -223,11 +252,20 @@ public class diemluutruController {
 		return"diemluutru/suaphong";
 	}
 	@RequestMapping(value="dsphong/suaphong/update", method = RequestMethod.POST) 
-	public String editphong(@ModelAttribute("phong") Phong phong,ModelMap model) {
+	public String editphong(@ModelAttribute("phong") Phong phong,ModelMap model,BindingResult errors) {
 	
-		System.out.println(phong.getNoiLuuTru1().getId());
-		System.out.println(phong.getNoiLuuTru1().getTenNLT());
-		System.out.println(phong.getTen());
+		boolean kt=true;
+		if (phong.getTen().trim().length() == 0) {
+			errors.rejectValue("ten", "phong", "Vui lòng nhập tên !");
+			kt=false;
+		}
+		 if (phong.getSoGiuong() < 1) {
+			errors.rejectValue("soGiuong", "phong", "Số giường phải lớn hơn 0 !");kt=false;
+		}
+		 if (phong.getsLNMax() < 1  ) {
+				errors.rejectValue("sLNMax", "phong", "Số lượng người tối đa phải lớn hơn 0 !");kt=false;
+			}
+		if(kt==true) {
 		Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
 			try {
@@ -240,7 +278,7 @@ public class diemluutruController {
 				
 			} finally {
 				session.close();
-			}
+			}}
 
 			model.addAttribute("phong",phong);
 		
@@ -248,12 +286,16 @@ public class diemluutruController {
 	}
 	@RequestMapping(value="xoaphong/{id}")
 	public String xoaphong(ModelMap model ,@PathVariable int id) {
-	Phong phong= searchPhong(id);
+		Phong phong= searchPhong(id);
+		int idNLT=phong.getNoiLuuTru1().getId();
 
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			session.delete(phong);
+			String hql = "delete from Phong where id =:id ";
+			Query query1 = session.createQuery(hql);
+			query1.setParameter("id", id);
+			int result1 = query1.executeUpdate();
 			t.commit();
 			model.addAttribute("message", 1);
 		} catch (Exception e) {
@@ -263,7 +305,6 @@ public class diemluutruController {
 		} finally {
 			session.close();
 		}
-		int idNLT=phong.getNoiLuuTru1().getId();
 		model.addAttribute("idNLT",idNLT);
 		return"redirect:/dsphong/{idNLT}.htm";
 	}

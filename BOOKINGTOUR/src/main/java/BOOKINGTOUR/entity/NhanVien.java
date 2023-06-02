@@ -46,7 +46,7 @@ public class NhanVien {
 	private  int trangThai;
 	
 	@OneToOne(mappedBy = "nhanVien", fetch = FetchType.EAGER)
-    private TaiKhoan taikhoan;
+    private TaiKhoan taiKhoan;
 
 	@OneToMany(mappedBy = "nhanVienXN", fetch = FetchType.EAGER)
 	private List<CTVe> ctVeXN;
@@ -147,11 +147,11 @@ public class NhanVien {
 	}
 
 	public TaiKhoan getTaikhoan() {
-		return taikhoan;
+		return taiKhoan;
 	}
 
 	public void setTaikhoan(TaiKhoan taikhoan) {
-		this.taikhoan = taikhoan;
+		this.taiKhoan = taikhoan;
 	}
 
 	public Date getNgaySinh() {

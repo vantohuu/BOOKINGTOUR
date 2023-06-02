@@ -91,8 +91,7 @@
 										<label for="recipient-name" class="col-form-label">Tên điểm :</label> 
 											<form:input path="ten" type="text" class="form-control"  />
 											<form:errors path="ten" />
-											 <span
-											style="color: red;">${messageMaNV}</span>
+											
 									</div>
 									</div>
 									<div class="row">
@@ -100,8 +99,8 @@
 										<label for="recipient-name" class="col-form-label">Địa chỉ :</label> 
 											<form:input path="diaChi" type="text" class="form-control"  />
 											<form:errors path="diaChi" />
-											 <span
-											style="color: red;">${messageMaNV}</span>
+											 
+											
 									</div>
 									</div>
 									<div class="row">
@@ -109,8 +108,7 @@
 										<label for="recipient-name" class="col-form-label">Mô tả :</label> 
 										<textarea name="moTa" class="form-control"></textarea>
 											<%-- <form:input path="moTa" type="textarea" class="form-control"/> --%>
-											 <span
-											style="color: red;">${messageMaNV}</span>
+											
 									</div>
 									</div>
 									

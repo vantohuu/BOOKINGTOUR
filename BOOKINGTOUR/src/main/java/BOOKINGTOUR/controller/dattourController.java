@@ -18,6 +18,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,16 +54,44 @@ public class dattourController {
 	}
 	
 	@RequestMapping(value="insertdattour", method = RequestMethod.POST) 
-	public String insertdattour(@ModelAttribute("bookingtour") BookingTour bookingtour,ModelMap model) {
+	public String insertdattour(@ModelAttribute("bookingtour") BookingTour bookingtour,ModelMap model,BindingResult errors) {
+		boolean kiemtra =true;
 		
-		System.out.println(bookingtour.gettGBD());
-		System.out.println(bookingtour.gettGKT());
-		System.out.println(bookingtour.getTour1().getId());
-		/*
-		 * bookingtour.setTour1(searchTour(bookingtour.getTour1().getId()));
-		 */
+		if (bookingtour.gettGBD() == null) {
+			errors.rejectValue("tGBD", "bookingtour", "Vui lòng nhập thời gian bắt đầu !");
+			kiemtra=false;
+		}
+		 if (bookingtour.gettGKT() == null) {
+			errors.rejectValue("tGKT", "bookingtour", "Vui lòng nhập thời gian kết thúc !");
+			kiemtra=false;
+			}
+		 else {
+		 int compareResult = bookingtour.gettGBD().compareTo(bookingtour.gettGKT());
+		if (compareResult > 0) {
+				errors.rejectValue("tGBD", "bookingtour", "Ngày bắt đầu phải trước ngày kết thúc !");
+				kiemtra=false;
+			}}
+		 if (bookingtour.getMaxNL() < bookingtour.getMinNL()){
+			errors.rejectValue("maxNL", "bookingtour", "Số lượng tối đa nhỏ hơn số lượng tối thiểu!");
+			kiemtra=false;}
+		 if (bookingtour.getMaxTN() < bookingtour.getMinTN()){
+			errors.rejectValue("maxTN", "bookingtour",  "Số lượng tối đa nhỏ hơn số lượng tối thiểu!");
+			kiemtra=false;}
+		 if (bookingtour.getMaxTE() < bookingtour.getMinTE()){
+			errors.rejectValue("maxTE", "bookingtour", "Số lượng tối đa nhỏ hơn số lượng tối thiểu!");
+			kiemtra=false;}
+		if ((bookingtour.getMaxNL() + bookingtour.getMaxTE() + bookingtour.getMaxTN()) < 5) {
+			errors.rejectValue("maxTE", "bookingtour", "Số lượng quá ít để đăng kí tour!");
+			kiemtra = false;
+		}
+		if(kiemtra==true) {
+		
 
-		
+
+		if(bookingtour.getLoaiTour().getId()==2) {
+			bookingtour.setTrangThai(1);
+		}
+		else {bookingtour.setTrangThai(1);}
 		Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
 			try {
@@ -76,9 +105,11 @@ public class dattourController {
 				
 			} finally {
 				session.close();
-			}
+			}}
 			
 			model.addAttribute("bookingtours",this.geBookingTours());
+			model.addAttribute("loaitours",gettLoaiTours());
+			model.addAttribute("tours", getTours());
 		
 			return "dattour/themdattour";
 	}
@@ -90,9 +121,35 @@ public class dattourController {
 		model.addAttribute("tours", getTours());
 		return"dattour/suadattour";
 	}
-	@RequestMapping(value="updatetour", method = RequestMethod.POST) 
-	public String editdiemluutru(@ModelAttribute("bookingtour") BookingTour bookingtour,ModelMap model) {
-		
+	@RequestMapping(value="suadattour/updatetour", method = RequestMethod.POST) 
+	public String editdiemluutru(@ModelAttribute("bookingtour") BookingTour bookingtour,ModelMap model,BindingResult errors) {
+		boolean kiemtra =true;
+		int compareResult = bookingtour.gettGBD().compareTo(bookingtour.gettGKT());
+		if (bookingtour.gettGBD() == null) {
+			errors.rejectValue("tGBD", "bookingtour", "Vui lòng nhập thời gian bắt đầu !");
+			kiemtra=false;
+		}
+		 if (bookingtour.gettGKT() == null) {
+			errors.rejectValue("tGKT", "bookingtour", "Vui lòng nhập thời gian kết thúc !");
+			kiemtra=false;}
+		if (compareResult > 0) {
+				errors.rejectValue("tGBD", "bookingtour", "Ngày bắt đầu phải trước ngày kết thúc !");
+				kiemtra=false;
+			}
+		 if (bookingtour.getMaxNL() < bookingtour.getMinNL()){
+			errors.rejectValue("maxNL", "bookingtour", "Số lượng tối đa nhỏ hơn số lượng tối thiểu!");
+			kiemtra=false;}
+		 if (bookingtour.getMaxTN() < bookingtour.getMinTN()){
+			errors.rejectValue("maxTN", "bookingtour",  "Số lượng tối đa nhỏ hơn số lượng tối thiểu!");
+			kiemtra=false;}
+		 if (bookingtour.getMaxTE() < bookingtour.getMinTE()){
+			errors.rejectValue("maxTE", "bookingtour", "Số lượng tối đa nhỏ hơn số lượng tối thiểu!");
+			kiemtra=false;}
+		if ((bookingtour.getMaxNL() + bookingtour.getMaxTE() + bookingtour.getMaxTN()) < 5) {
+			errors.rejectValue("maxTE", "bookingtour", "Số lượng quá ít để đăng kí tour!");
+			kiemtra = false;
+		}
+		if(kiemtra==true) {
 		Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
 			try {
@@ -105,7 +162,7 @@ public class dattourController {
 				
 			} finally {
 				session.close();
-			}
+			}}
 			model.addAttribute("bookingtour", bookingtour);
 			model.addAttribute("loaitours",gettLoaiTours());
 			model.addAttribute("tours", getTours());
@@ -141,7 +198,7 @@ public class dattourController {
 		return"redirect:/dsdattour.htm";
 	}
 	
-	@RequestMapping(value="themdatphong/{id}")
+	@RequestMapping(value="dsdatphong/themdatphong/{id}")
 	public String themdatphong(HttpServletRequest request,ModelMap model,@PathVariable int id,@ModelAttribute("message") String message) {
 		BookingTour bookingTour= new BookingTour();
 		bookingTour=searchbBookingTour(id);
@@ -155,12 +212,18 @@ public class dattourController {
 		model.addAttribute("phongs",phongConLai(listPhong,getPhongs()));
 		return"dattour/themdatphong";
 	}
-	@RequestMapping(value="themdatphong/insertdatphong", method = RequestMethod.POST)
+	@RequestMapping(value="dsdatphong/themdatphong/insert", method = RequestMethod.POST)
 	public String insertdatphong(HttpServletRequest request,ModelMap model ,@ModelAttribute("id") String id,@ModelAttribute("idBK") String idBK) throws ParseException {
 		System.out.println(id);
 		System.out.println(idBK);
 		System.out.println(request.getParameter("tgden"));
 		System.out.println(request.getParameter("tgdi"));
+		
+		
+		if(request.getParameter("tgden")==null ) {model.addAttribute("erroNgayDen", "Nhập thời gian đến !");}
+		else if(request.getParameter("tgdi")==null ){model.addAttribute("erroNgayDi", "Nhập thời gian đi !");}
+		else {
+		
 		
 	
 		
@@ -190,11 +253,11 @@ public class dattourController {
 				
 			} finally {
 				session.close();
-			}
+			}}
 			int id1=Integer.parseInt(idBK);
 			
 			
-			return "redirect:/themdatphong/" + id1 + ".htm";
+			return "redirect:/dsdatphong/themdatphong/" + id1 + ".htm";
 			
 			
 	}
@@ -202,6 +265,10 @@ public class dattourController {
 	
 	@RequestMapping(value="dsdatphong/{id}")
 	public String dsdatphong(ModelMap model ,@PathVariable int id,@ModelAttribute("message") String message) {
+		
+		
+		
+		
 		BookingTour bookingTour= this.searchbBookingTour(id);
 		model.addAttribute("message", message);
 		model.addAttribute("idBK",id);

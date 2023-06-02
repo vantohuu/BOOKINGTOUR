@@ -44,17 +44,33 @@ public class dotkhuyenmaiController {
 	}
 	@RequestMapping(value="insertDotKhuyenMai", method = RequestMethod.POST) 
 	public String insertDotKhuyenMai(@ModelAttribute("dotKhuyenMai1") KhuyenMai dotkhuyenmai,ModelMap model,BindingResult errors) {
-		int compareResult = dotkhuyenmai.gettGBD().compareTo(dotkhuyenmai.gettGKT());
+		boolean kiemtra =true;
+		
 		if (dotkhuyenmai.getTen().trim().length() == 0) {
 			errors.rejectValue("ten", "dotkhuyenmai", "Vui lòng nhập tên!");
+			kiemtra=false;
 		}
-		else if (compareResult > 0) {
-			errors.rejectValue("tGBD", "dotkhuyenmai", "Ngày bắt đầu phải trước ngày kết thúc !");
+		if (dotkhuyenmai.gettGBD() == null) {
+			errors.rejectValue("tGBD", "dotkhuyenmai", "Vui lòng nhập thời gian bắt đầu !");
+			kiemtra=false;
 		}
-		else if (dotkhuyenmai.getPhanTramGiam() >100||dotkhuyenmai.getPhanTramGiam() <=0  ) {
+		 if (dotkhuyenmai.gettGKT() == null) {
+			errors.rejectValue("tGKT", "dotkhuyenmai", "Vui lòng nhập thời gian kết thúc !");
+			kiemtra=false;
+			}
+		 else {
+			 int compareResult = dotkhuyenmai.gettGBD().compareTo(dotkhuyenmai.gettGKT());
+		if (compareResult > 0) {
+				errors.rejectValue("tGBD", "dotkhuyenmai", "Ngày bắt đầu phải trước ngày kết thúc !");
+				kiemtra=false;
+			}}
+		
+		
+		 if (dotkhuyenmai.getPhanTramGiam() >100||dotkhuyenmai.getPhanTramGiam() <=0  ) {
 			errors.rejectValue("phanTramGiam", "dotkhuyenmai", "Vui lòng nhập đúng phần trăm muốn giảm !");
+			kiemtra=false;
 		}
-		else {
+		if(kiemtra==true) {
 		
 		Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
@@ -118,12 +134,15 @@ public class dotkhuyenmaiController {
 	
 	@RequestMapping(value="xoadotkhuyenmai/{id}")
 	public String xoadotkhuyenmai(ModelMap model ,@PathVariable int id) {
-		KhuyenMai dotkhuyenmai = searchKhuyenMai(id);
-
+		
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			session.delete(dotkhuyenmai);
+			String hql = "delete from KhuyenMai where id= :id";
+			Query query = session.createQuery(hql);
+			query.setParameter("id", id);
+			System.out.println(query.executeUpdate());
+			
 			t.commit();
 			model.addAttribute("message", 1);
 		} catch (Exception e) {

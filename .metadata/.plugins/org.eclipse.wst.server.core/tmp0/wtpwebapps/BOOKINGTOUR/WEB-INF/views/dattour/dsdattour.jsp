@@ -73,8 +73,9 @@
 				<div class="container form-dang-nhap">
 					<div style='display: flex; justify-content: space-between;'>
 
-						<button type="button" class="btn btn-success"
-							onclick="location.href = 'themdattour.htm'">Thêm đặt tour mới</button>
+						
+							<a href="themdattour.htm"><button
+								class="btn btn-success">Thêm đặt tour mới</button> </a>
 
 						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
 							style='padding: 3px'>
