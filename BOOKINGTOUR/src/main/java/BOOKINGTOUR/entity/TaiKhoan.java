@@ -44,17 +44,18 @@ public class TaiKhoan {
 	public void setNhanVien(NhanVien nhanVien) {
 		this.nhanVien = nhanVien;
 	}
-	public String getPASSWORD() {
-		return PASSWORD;
-	}
-	public void setPASSWORD(String pASSWORD) {
-		PASSWORD = pASSWORD;
-	}
+	
 	public int getIsAdmin() {
 		return isAdmin;
 	}
 	public void setIsAdmin(int isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+	public String getPASSWORD() {
+		return PASSWORD;
+	}
+	public void setPASSWORD(String pASSWORD) {
+		PASSWORD = pASSWORD;
 	}
 	
 

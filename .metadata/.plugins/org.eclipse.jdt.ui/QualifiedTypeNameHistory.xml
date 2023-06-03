@@ -48,6 +48,6 @@
     <fullyQualifiedTypeName name="javassist.expr.NewArray"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.NhanVien"/>
     <fullyQualifiedTypeName name="javax.persistence.PrimaryKeyJoinColumn"/>
-    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.TaiKhoan"/>
     <fullyQualifiedTypeName name="javax.persistence.MapsId"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.TaiKhoan"/>
 </qualifiedTypeNameHistroy>

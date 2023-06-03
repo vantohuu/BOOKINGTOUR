@@ -70,7 +70,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
    
-                        <li><a class="dropdown-item" href="nhanvien-thongtin.htm">Chỉnh sửa thông tin cá nhân</a></li>
+                        <li><a class="dropdown-item" href="suattcanhan.htm">Chỉnh sửa thông tin cá nhân</a></li>
                         <li><a class="dropdown-item" href="doimatkhau.htm">Đổi mật khẩu</a></li>
                         <li>
                             <hr class="dropdown-divider">
