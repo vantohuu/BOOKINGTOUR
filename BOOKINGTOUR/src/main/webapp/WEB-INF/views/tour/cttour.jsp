@@ -107,12 +107,55 @@
 										<button
 											onclick="if(confirm('bạn có chắc chắn muốn xóa nhân viên này không ?')){location.href='../xoacttour/${cttour.id}.htm'}"
 											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button>
-</td>
+
+<a href="#submenu${cttour.id}" style="display: inline;"
+										data-bs-toggle="collapse"
+										class="nav-link text-white px-0 align-middle "> <i
+											class="fa-solid fa-map-location-dot"></i><
+											<button class="btn btn-success">Đổi thứ tự</button>
+									</a>
+										<ul class="collapse nav flex-column ms-1" id="submenu${cttour.id}" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <form action="capNhapThuTu.htm" method="post" >
+							<div class="form-group">
+							<div>
+								</div>
+								<input name="id" type="text" class="form-control" value ="${cttour.id}" style='display: none'/>
+									             <input name="idTour" type="text" class="form-control" value ="${id}"style='display: none'/>
+								<label for="recipient-name" class="col-form-label">Thứ Tự:</label>
+								<input name="thuTu" type="text" class="form-control"  />
+									           
+				
+								</div>
+								
+							
+							 <button class="btn btn-success">Cập nhật </button>
+							 
+						</form>
+                           
+                        </ul></td>
 								</tr>
 
 							</c:forEach>
 						</tbody>
 					</table>
+					<div style="
+    margin: 50px;
+">
+					<ul class="pagination" style="position: absolute; bottom: 0; right: 0;width:400px;">
+			    <li class="page-item ${currentPage == 0 ? 'disabled' : ''}">
+			        <a class="page-link" href="../cttour/${id }.htm?currentPage=${currentPage - 1}">Trước</a>
+			    </li>
+			    <c:forEach begin="0" end="${totalPages - 1}" var="i">
+			        <li class="page-item ${currentPage == i ? 'active' : ''}">
+			            <a class="page-link" href="../cttour/${id }.htm?currentPage=${i}">${i + 1}</a>
+			        </li>
+			    </c:forEach>
+			    <li class="page-item ${currentPage == totalPages - 1 ? 'disabled' : ''}">
+			        <a class="page-link" href="../cttour/${id }.htm?currentPage=${currentPage + 1}">Sau</a>
+			    </li>
+			</ul>
+			</div>
 				</div>
 			</div>
 		</div>

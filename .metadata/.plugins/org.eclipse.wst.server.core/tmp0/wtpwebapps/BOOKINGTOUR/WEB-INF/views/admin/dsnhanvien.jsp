@@ -76,10 +76,17 @@
 						<button type="button" class="btn btn-success"
 							onclick="location.href = 'themnhanvien.htm'">Thêm nhân
 							viên mới</button>
-
-						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
-							style='padding: 3px'>
-
+<div style="
+    text-align: end;
+">
+						<form class = "d-flex my-2" action = "danhsachnhanvien.htm">
+						<label class = "mx-1 mt-2">Tìm kiếm:</label>
+						 <input 
+							type="text" class="form-control w-25 mx-2 " name = "timkiem" placeholder="Tên">
+					<button type="submit" class="btn btn-primary">Tra</button>
+				</form>
+<button type="button" class="btn btn-success"
+							onclick="location.href = 'danhsachnhanvien.htm'">Bỏ lọc</button></div>
 					</div>
 					<br>
 					<table class="table">
@@ -206,10 +213,28 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					<div style="
+    margin: 50px;
+">
+					<ul class="pagination" style="position: absolute; bottom: 0; right: 0;width:400px;">
+			    <li class="page-item ${currentPage == 0 ? 'disabled' : ''}">
+			        <a class="page-link" href="danhsachnhanvien.htm?page=${currentPage - 1}">Trước</a>
+			    </li>
+			    <c:forEach begin="0" end="${totalPages - 1}" var="i">
+			        <li class="page-item ${currentPage == i ? 'active' : ''}">
+			            <a class="page-link" href="danhsachnhanvien.htm?page=${i}">${i + 1}</a>
+			        </li>
+			    </c:forEach>
+			    <li class="page-item ${currentPage == totalPages - 1 ? 'disabled' : ''}">
+			        <a class="page-link" href="danhsachnhanvien.htm?page=${currentPage + 1}">Sau</a>
+			    </li>
+			</ul>
+			</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script>
   setTimeout(function() {
     document.querySelector('.alert').classList.add('d-none');

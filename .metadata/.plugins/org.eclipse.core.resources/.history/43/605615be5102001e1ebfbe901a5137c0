@@ -1,0 +1,15 @@
+package BOOKINGTOUR.bean;
+
+public class UploadFile {
+	String basePath;
+
+	public String getBasePath() {
+		return basePath;
+	}
+
+	public void setBasePath(String basePath) {
+		this.basePath = basePath;
+	}
+	
+	
+}

@@ -1,6 +1,10 @@
 package BOOKINGTOUR.controller;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +22,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import BOOKINGTOUR.entity.BookingTour;
 import BOOKINGTOUR.entity.DiemDuLich;
 import BOOKINGTOUR.entity.KhuyenMai;
+import BOOKINGTOUR.entity.NhanVien;
 
 @Transactional
 @Controller
@@ -29,8 +36,22 @@ public class dotkhuyenmaiController {
 	@Autowired
     SessionFactory factory;
 	@RequestMapping("dsdotkhuyenmai")
-	public String dsdotkhuyenmai(HttpServletRequest request,ModelMap model,@ModelAttribute("message") String message) {
-		model.addAttribute("dotkhuyenmais",getKhuyenMais());
+	public String dsdotkhuyenmai(HttpServletRequest request,ModelMap model,@ModelAttribute("message") String message,@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "") String tungay,
+			@RequestParam(defaultValue = "") String denngay) {
+		
+		int pageSize = 6;
+		int totalUsers = getSize();
+		List<KhuyenMai> khuyenMai = this.getKhuyenMai(page,pageSize,tungay,denngay);
+	    int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+	    if(totalPages==0) {
+			totalPages=1;
+		}
+	   
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("currentPage", page);
+		
+	    model.addAttribute("offset", page * pageSize);
+		model.addAttribute("dotkhuyenmais",khuyenMai);
 		model.addAttribute("message", message);
 		return "dotkhuyenmai/dsdotkhuyenmai";
 	}
@@ -168,5 +189,72 @@ public class dotkhuyenmaiController {
 		String hql = "FROM KhuyenMai";
 		List<KhuyenMai> khuyenmai = session.createQuery(hql).list();
 		return  khuyenmai;
+	}
+	public int  getSize() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM KhuyenMai";
+		Query query = session.createQuery(hql);
+		List<KhuyenMai> list = query.list();
+
+		return list.size();
+	}
+	public List<KhuyenMai> getKhuyenMai(int page, int pageSize) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM KhuyenMai";
+		Query query = session.createQuery(hql);
+		int offset = page * pageSize;
+		List<KhuyenMai> list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+
+		return list;
+	}
+	
+	public List<KhuyenMai> getKhuyenMai(int page, int pageSize, String tungay, String denngay) {
+		
+		
+		Session session = factory.getCurrentSession();
+		String hql;
+		Query query;
+		List<KhuyenMai> list;
+		if (tungay.length() !=0 && denngay.length() !=0)
+		{
+			LocalDate localDate1 = LocalDate.parse(tungay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			Date date1 = Date.from(localDate1.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			LocalDate localDate2 = LocalDate.parse(denngay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			Date date2 = Date.from(localDate2.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			 hql ="FROM KhuyenMai t where t.tGKT <=:tGKT and t.tGBD >=:tGBD  ORDER BY t.id DESC";
+				query = session.createQuery(hql);
+				int offset = page * pageSize;
+				query.setParameter("tGKT", date2);
+				query.setParameter("tGBD", date1);
+				list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+
+		} else if (tungay.length() !=0)
+		{LocalDate localDate1 = LocalDate.parse(tungay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		Date date1 = Date.from(localDate1.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			hql ="FROM KhuyenMai t where t.tGBD >=:tGBD ORDER BY t.id DESC";
+			query = session.createQuery(hql);
+			int offset = page * pageSize;
+			query.setParameter("tGBD", date1);
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		}
+	 else if (denngay.length() !=0)
+	{
+		
+			LocalDate localDate2 = LocalDate.parse(denngay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			Date date2 = Date.from(localDate2.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		hql ="FROM KhuyenMai t where t.tGKT >=:tGKT ORDER BY t.id DESC";
+		query = session.createQuery(hql);
+		int offset = page * pageSize;
+		query.setParameter("tGKT", date2);
+		list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+	}
+	 else {
+		
+		 hql ="FROM KhuyenMai t ORDER BY t.tGBD DESC";
+			query = session.createQuery(hql);
+			int offset = page * pageSize;
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+	 }
+		return list;
 	}
 }

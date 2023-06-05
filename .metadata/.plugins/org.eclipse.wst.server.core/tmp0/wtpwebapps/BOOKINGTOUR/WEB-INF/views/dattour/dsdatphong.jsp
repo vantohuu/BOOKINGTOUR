@@ -91,11 +91,11 @@
 							</tr>
 						</thead>
 						<tbody>
-						
+						<c:set var="counter" value="${offset+1 }" />
 							<c:forEach var="ctphongluutru" items="${ctphongluutrus}">
 
 								<tr>
-									<td></td>
+										<th scope="row">${counter}</th>
 									
 									<td>${ctphongluutru.phong.ten} - ${ctphongluutru.phong.noiLuuTru1.tenNLT} </td>
 									<td>${ctphongluutru.ngayDen} - ${ctphongluutru.ngayDi} </td>
@@ -189,10 +189,26 @@
 											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button>
 </td>
 								</tr>
-
+<c:set var="counter" value="${counter+1}" />
 							</c:forEach>
 						</tbody>
-					</table>
+					</table><div style="
+    margin: 50px;
+">
+					<ul class="pagination" style="position: absolute; bottom: 0; right: 0;width:400px;">
+			    <li class="page-item ${currentPage == 0 ? 'disabled' : ''}">
+			        <a class="page-link" href="../dsdatphong/${idBK }.htm?currentPage=${currentPage - 1}">Trước</a>
+			    </li>
+			    <c:forEach begin="0" end="${totalPages - 1}" var="i">
+			        <li class="page-item ${currentPage == i ? 'active' : ''}">
+			            <a class="page-link" href="../dsdatphong/${idBK }.htm?currentPage=${i}">${i + 1}</a>
+			        </li>
+			    </c:forEach>
+			    <li class="page-item ${currentPage == totalPages - 1 ? 'disabled' : ''}">
+			        <a class="page-link" href="../dsdatphong/${idBK }.htm?currentPage=${currentPage + 1}">Sau</a>
+			    </li>
+			</ul>
+			</div>
 				</div>
 			</div>
 		</div>

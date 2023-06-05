@@ -23,12 +23,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import BOOKINGTOUR.entity.BookingTour;
 import BOOKINGTOUR.entity.CTPhongLuuTru;
 import BOOKINGTOUR.entity.CTTour;
 import BOOKINGTOUR.entity.DiemDuLich;
 import BOOKINGTOUR.entity.LoaiTour;
+import BOOKINGTOUR.entity.NhanVien;
 import BOOKINGTOUR.entity.NoiLuuTru;
 import BOOKINGTOUR.entity.Phong;
 import BOOKINGTOUR.entity.Tour;
@@ -40,8 +42,20 @@ public class dattourController {
 	@Autowired
     SessionFactory factory;
 	@RequestMapping("dsdattour")
-	public String dsdattour(HttpServletRequest request,ModelMap model,@ModelAttribute("message") String message) {
-		model.addAttribute("bookingtours",this.geBookingTours());
+	public String dsdattour(HttpServletRequest request,ModelMap model,@RequestParam(defaultValue = "0") int page,@ModelAttribute("message") String message,@RequestParam(defaultValue = "0") int idTour) {
+		
+		int pageSize = 6;
+		int totalUsers = getSize();
+		List<BookingTour> dattour = this.getDatTour(page,pageSize,idTour);
+	    int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+	    if(totalPages==0) {
+			totalPages=1;
+		}
+	    model.addAttribute("offset", page * pageSize);
+	    model.addAttribute("tours", getTours());
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("currentPage", page);
+		model.addAttribute("bookingtours",dattour);
 		model.addAttribute("message", message);
 		return "dattour/dsdattour";
 	}
@@ -84,6 +98,7 @@ public class dattourController {
 			errors.rejectValue("maxTE", "bookingtour", "Số lượng quá ít để đăng kí tour!");
 			kiemtra = false;
 		}
+		
 		if(kiemtra==true) {
 		
 
@@ -264,18 +279,40 @@ public class dattourController {
 	
 	
 	@RequestMapping(value="dsdatphong/{id}")
-	public String dsdatphong(ModelMap model ,@PathVariable int id,@ModelAttribute("message") String message) {
-		
-		
-		
-		
+	public String dsdatphong(ModelMap model ,@PathVariable int id,@ModelAttribute("message") String message,@RequestParam(defaultValue = "0") int currentPage) {
 		BookingTour bookingTour= this.searchbBookingTour(id);
+	
+		
+		// Giả sử danh sách CTPhongLuuTru đã được khởi tạo và lưu trữ trong biến ctPhongLuuTruList
+		int pageSize = 7; // Số lượng phần tử trên mỗi trang
+		
+
+		int totalCount = bookingTour.getCtPhongLuuTrus().size(); // Tổng số lượng phần tử trên toàn bộ danh sách
+		 int totalPages = (int) Math.ceil((double) totalCount / pageSize);
+		 System.out.println(totalCount);
+		 if(totalPages==0) {
+				totalPages=1;
+			}
+		
+		
+		int startIndex = (currentPage)  * pageSize;
+		int endIndex = Math.min(startIndex + pageSize, totalCount);
+		System.out.println(startIndex);
+		System.out.println(endIndex);
+		// Lấy phần tử của danh sách theo giới hạn kết quả trả về
+		List<CTPhongLuuTru> result = bookingTour.getCtPhongLuuTrus().subList(startIndex, endIndex);
+		
+		 
+		
+		
+		 model.addAttribute("offset", currentPage * pageSize);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("currentPage", currentPage);
+	    
 		model.addAttribute("message", message);
 		model.addAttribute("idBK",id);
 		model.addAttribute("bookingtour",bookingTour);
-		
-
-		model.addAttribute("ctphongluutrus",bookingTour.getCtPhongLuuTrus());
+		model.addAttribute("ctphongluutrus",result);
 		return"dattour/dsdatphong";
 	}
 	
@@ -375,10 +412,47 @@ public class dattourController {
 	    
 	    combined.addAll(list2);
 	    combined.removeAll(list1);
-
-	   
-
 	    return combined;
 	}
+	public int  getSize() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM BookingTour";
+		Query query = session.createQuery(hql);
+		List<BookingTour> list = query.list();
+
+		return list.size();
+	}
+	public List<BookingTour> getDatTour(int page, int pageSize) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM BookingTour";
+		Query query = session.createQuery(hql);
+		int offset = page * pageSize;
+		List<BookingTour> list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+
+		return list;
+	}
+	public List<BookingTour> getDatTour(int page, int pageSize, int idTour) {
+		Session session = factory.getCurrentSession();
+		String hql;
+		Query query;
+		List<BookingTour> list;
+		if (idTour == 0 )
+		{
+			hql ="FROM BookingTour t ORDER BY t.tGBD DESC";
+			query = session.createQuery(hql);
+			int offset = page * pageSize;
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		} else
+		{
+			hql ="FROM BookingTour t where t.tour1.id =:idTour ORDER BY t.id DESC";
+			query = session.createQuery(hql);
+			int offset = page * pageSize;
+			query.setParameter("idTour", idTour);
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		}
+		return list;
+	}
+	
+	
 	
 }

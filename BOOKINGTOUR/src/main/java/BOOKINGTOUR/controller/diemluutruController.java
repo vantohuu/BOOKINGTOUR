@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import BOOKINGTOUR.entity.BookingTour;
+import BOOKINGTOUR.entity.CTPhongLuuTru;
 import BOOKINGTOUR.entity.DiemDuLich;
 import BOOKINGTOUR.entity.LoaiLuuTru;
 import BOOKINGTOUR.entity.NoiLuuTru;
@@ -31,8 +34,18 @@ public class diemluutruController {
 	@Autowired
     SessionFactory factory;
 	@RequestMapping("dsdiemluutru")
-	public String dsdiemluutru(HttpServletRequest request,ModelMap model,@ModelAttribute("message") String message) {
-		model.addAttribute("diemluutrus",this.gettNoiLuuTrus());
+	public String dsdiemluutru(HttpServletRequest request,ModelMap model,@RequestParam(defaultValue = "0") int page,@ModelAttribute("message") String message,@RequestParam(defaultValue = "") String timkiem) {
+		int pageSize = 6;
+		int totalUsers = getSize();
+		List<NoiLuuTru> diemLuuTru = this.getDiemLuuTru(page,pageSize,timkiem);
+	    int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+	    if(totalPages==0) {
+			totalPages=1;
+		}
+	    model.addAttribute("offset", page * pageSize);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("currentPage", page);
+		model.addAttribute("diemluutrus",diemLuuTru);
 		model.addAttribute("message", message);
 		return "diemluutru/dsdiemluutru";
 	}
@@ -197,12 +210,38 @@ public class diemluutruController {
 	}
 	
 	@RequestMapping(value="dsphong/{id}")
-	public String dsphong(ModelMap model ,@PathVariable int id,@ModelAttribute("message") String message) {
+	public String dsphong(ModelMap model ,@PathVariable int id,@ModelAttribute("message") String message,@RequestParam(defaultValue = "0") int currentPage) {
 		NoiLuuTru diemdulich= this.searchDiemLuuTru(id);
+int pageSize = 7; // Số lượng phần tử trên mỗi trang
+		
+
+		int totalCount = diemdulich.getPhong().size(); // Tổng số lượng phần tử trên toàn bộ danh sách
+		 int totalPages = (int) Math.ceil((double) totalCount / pageSize);
+		 System.out.println(totalCount);
+		 if(totalPages==0) {
+				totalPages=1;
+			}
+		
+		
+		int startIndex = (currentPage)  * pageSize;
+		int endIndex = Math.min(startIndex + pageSize, totalCount);
+		System.out.println(startIndex);
+		System.out.println(endIndex);
+		// Lấy phần tử của danh sách theo giới hạn kết quả trả về
+		List<Phong> result = diemdulich.getPhong().subList(startIndex, endIndex);
+		
+		 
+		
+		
+	    
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("currentPage", currentPage);
+		
+		
 		model.addAttribute("message", message);
 		model.addAttribute("idNLT",id);
 		model.addAttribute("diemluutru",this.searchDiemLuuTru(id));
-		model.addAttribute("phongs",diemdulich.getPhong());
+		model.addAttribute("phongs",result);
 		return"diemluutru/dsphong";
 	}
 	
@@ -308,17 +347,42 @@ public class diemluutruController {
 		model.addAttribute("idNLT",idNLT);
 		return"redirect:/dsphong/{idNLT}.htm";
 	}
-//	public LoaiLuuTru searchLLT(int id) {
-//		Session session = factory.getCurrentSession();
-//		String hql = "FROM LoaiLuuTru where id = :id";
-//		Query query = session.createQuery(hql);
-//		query.setParameter("id", id);
-//		if(query.list().size()==0) {
-//			return null;
-//		}
-//		LoaiLuuTru llt = (LoaiLuuTru) query.list().get(0);
-//
-//		return llt;
-//	}
+	public int  getSize() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM NoiLuuTru";
+		Query query = session.createQuery(hql);
+		List<BookingTour> list = query.list();
 
+		return list.size();
+	}
+	public List<NoiLuuTru> getDiemLuuTru(int page, int pageSize) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM NoiLuuTru";
+		Query query = session.createQuery(hql);
+		int offset = page * pageSize;
+		List<NoiLuuTru> list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+
+		return list;
+	}
+	public List<NoiLuuTru> getDiemLuuTru(int page, int pageSize, String ten) {
+		Session session = factory.getCurrentSession();
+		String hql;
+		Query query;
+		List<NoiLuuTru> list;
+		if (ten.length() == 0 )
+		{
+			hql ="FROM NoiLuuTru t ORDER BY t.id DESC";
+			query = session.createQuery(hql);
+			int offset = page * pageSize;
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		} else
+		{
+			hql ="FROM NoiLuuTru t where t.tenNLT LIKE CONCAT( '%' ,:ten, '%') ORDER BY t.id DESC";
+			query = session.createQuery(hql);
+			int offset = page * pageSize;
+			query.setParameter("ten", ten);
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		}
+		return list;
+	}
 }

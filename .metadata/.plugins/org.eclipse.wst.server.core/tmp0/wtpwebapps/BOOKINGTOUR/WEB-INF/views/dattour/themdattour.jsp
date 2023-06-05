@@ -193,14 +193,14 @@
 						</form:form>
 					</div>
 				</div>
-				<div class="modal-footer">
+				<%-- <div class="modal-footer">
 					<div style='display: block;'>
 						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
 							style='padding: 3px'>
 					</div>
 
 					<br>
-					<%-- <table class="table">
+					<table class="table">
 						<thead>
 							<tr>
 								<th scope="col">ID</th>
@@ -282,8 +282,8 @@
 
 							</c:forEach>
 						</tbody>
-					</table> --%>
-				</div>
+					</table>
+				</div> --%>
 			</div>
 		</div>
 	</div>

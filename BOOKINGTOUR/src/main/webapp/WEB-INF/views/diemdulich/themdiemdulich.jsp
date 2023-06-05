@@ -120,7 +120,7 @@
 						</form:form>
 					</div>
 				</div>
-				<div class="modal-footer">
+			<%-- 	<div class="modal-footer">
 					<div style='display: block;'>
 						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
 							style='padding: 3px'>
@@ -179,13 +179,13 @@
 																	${diemdulich.moTa}</label>
 															</div>
 														</div>
-													<%-- 	<div class="row">
+														<div class="row">
 															<div class="col">
 																<label for="recipient-name" class="col-form-label">Hình ảnh
 																	:</label> <label for="recipient-name" class="col-form-label">
 																	${diemdulich.hinhAnh}</label>
 															</div>
-														</div> --%>
+														</div>
 								
 													
 
@@ -210,7 +210,7 @@
 							</c:forEach>
 						</tbody>
 					</table>
-				</div>
+				</div> --%>
 			</div>
 		</div>
 	</div>

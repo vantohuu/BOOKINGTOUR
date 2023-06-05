@@ -55,7 +55,7 @@
 					<div class="alert alert-success fade show" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>xóa nhân viên thành công</p>
+						<p>xóa tour thành công</p>
 						<hr>
 					</div>
 				</c:if>
@@ -64,7 +64,7 @@
 					<div class="alert alert-danger" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>xóa nhân viên thất bại</p>
+						<p>xóa tour thất bại</p>
 						<hr>
 					</div>
 				</c:if>
@@ -72,20 +72,34 @@
 <c:set var="message" value="0" />
 				<div class="container form-dang-nhap">
 					<div style='display: flex; justify-content: space-between;'>
+								<button type="button" class="btn btn-success"
+							onclick="location.href = 'themdattour.htm'">Thêm đặt tour</button>
 
-						
-							<a href="themdattour.htm"><button
-								class="btn btn-success">Thêm đặt tour mới</button> </a>
-
-						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
-							style='padding: 3px'>
-
+						<div style="
+    text-align: end;
+">
+							<form class = "d-flex my-2" action = "dsdattour.htm">
+						<label class = "mx-1 mt-2">Tìm kiếm:</label>
+						<select  name="idTour"class="form-select" aria-label="Default select example" style="
+    /* margin-left: 10px; */
+    margin-inline: 20px;
+    padding-inline: 10px;
+">
+ <c:forEach var="tour" items="${tours}">
+  <option value="${tour.id}">${tour.ten}</option>
+  </c:forEach>
+</select>
+					<button type="submit" class="btn btn-primary">Tra</button>
+				</form>
+				<button type="submit" class="btn btn-success"
+							onclick="location.href = 'dsdattour.htm'">Xóa lọc</button>
+							</div>
 					</div>
 					<br>
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col">ID</th>
+								<th scope="col">STT</th>
 								<th scope="col">Tên</th>
 								<th scope="col">Bắt đầu</th>
 								<th scope="col">Kết thúc</th>
@@ -96,11 +110,11 @@
 							</tr>
 						</thead>
 						<tbody>
-						
+						<c:set var="counter" value="${offset +1}" />
 							<c:forEach var="bookingtour" items="${bookingtours}">
 
 								<tr>
-									<th scope="row">${bookingtour.id}</th>
+									<th scope="row">${counter}</th>
 									<td>${bookingtour.tour1.ten}</td>
 									<td>${bookingtour.tGBD}</td>
 									<td>${bookingtour.tGKT}</td>
@@ -227,10 +241,27 @@
 											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button>
 </td>
 								</tr>
-
+<c:set var="counter" value="${counter+1}" />
 							</c:forEach>
 						</tbody>
 					</table>
+					<div style="
+    margin: 50px;
+">
+					<ul class="pagination" style="position: absolute; bottom: 0; right: 0;width:400px;">
+			    <li class="page-item ${currentPage == 0 ? 'disabled' : ''}">
+			        <a class="page-link" href="dsdattour.htm?page=${currentPage - 1}">Trước</a>
+			    </li>
+			    <c:forEach begin="0" end="${totalPages - 1}" var="i">
+			        <li class="page-item ${currentPage == i ? 'active' : ''}">
+			            <a class="page-link" href="dsdattour.htm?page=${i}">${i + 1}</a>
+			        </li>
+			    </c:forEach>
+			    <li class="page-item ${currentPage == totalPages - 1 ? 'disabled' : ''}">
+			        <a class="page-link" href="dsdattour.htm?page=${currentPage + 1}">Sau</a>
+			    </li>
+			</ul>
+			</div>
 				</div>
 			</div>
 		</div>
@@ -240,6 +271,7 @@
     document.querySelector('.alert').classList.add('d-none');
   }, 2000);
 </script>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"

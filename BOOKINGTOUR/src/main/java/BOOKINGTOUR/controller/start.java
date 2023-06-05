@@ -1,8 +1,11 @@
 package BOOKINGTOUR.controller;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
@@ -12,6 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -19,7 +23,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import BOOKINGTOUR.bean.Company;
+import BOOKINGTOUR.bean.UploadFile;
 import BOOKINGTOUR.entity.BookingTour;
 import BOOKINGTOUR.entity.CTVe;
 import BOOKINGTOUR.entity.DiemDuLich;
@@ -36,6 +44,16 @@ public class start {
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	@Autowired
 	SessionFactory factory;
+	@Autowired
+	ServletContext context;
+
+	@Autowired
+	@Qualifier("poly")
+	Company company;
+	@Autowired
+	UploadFile baseUploadFile;
+	
+	
 
 	@RequestMapping("index")
 	public String welcome(HttpServletRequest request, ModelMap model) {
@@ -61,6 +79,7 @@ public class start {
 		}
 		if (kt == true) {
 			HttpSession session = request.getSession();
+			session.setMaxInactiveInterval(3600);
 			String username = taiKhoan.getMANV();
 			String password = taiKhoan.getPASSWORD();
 			TaiKhoan taikhoan = queryLogin(username, password);
@@ -69,7 +88,7 @@ public class start {
 
 					session.setAttribute("TaiKhoan", taikhoan);
 					if (taikhoan.getIsAdmin() == 1) {
-						return "admin/admin";
+						return "redirect:/homeshow.htm";
 					} else {
 						return "manager/manager";
 					}
@@ -93,13 +112,99 @@ public class start {
 		return "redirect:/index.htm";
 	}
 
+	@RequestMapping("homeshow")
+	public String homeshow1(ModelMap model) {
+		model.addAttribute("company", company);
+		return "home/homeshow";
+	}
+
+	@RequestMapping("homeshow1")
+	public String homeshow1(ModelMap model, @RequestParam("photo") MultipartFile photo) {
+		model.addAttribute("company", company);
+		if (photo.isEmpty()) {
+			model.addAttribute("message1", "vui lòng chọn file !");
+		} else {
+			try {
+
+				String photoPath1 = baseUploadFile.getBasePath() + File.separator + "logo1.jpg";
+				photo.transferTo(new File(photoPath1));
+				Thread.sleep(5000);
+				return "home/homeshow";
+			} catch (Exception e) {
+				model.addAttribute("Message1", "Lỗi lưu file !");
+			}
+		}
+		return "home/homeshow";
+	}
+	@RequestMapping("homeshow2")
+	public String homeshow2(ModelMap model, @RequestParam("photo") MultipartFile photo) {
+		model.addAttribute("company", company);
+		if (photo.isEmpty()) {
+			model.addAttribute("message1", "vui lòng chọn file !");
+		} else {
+			try {
+
+				String photoPath2 = baseUploadFile.getBasePath() + File.separator + "logo2.jpg";
+				photo.transferTo(new File(photoPath2));
+				Thread.sleep(5000);
+				return "home/homeshow";
+			} catch (Exception e) {
+				model.addAttribute("Message1", "Lỗi lưu file !");
+			}
+		}
+		return "home/homeshow";
+	}
+	@RequestMapping("homeshow3")
+	public String homeshow3(ModelMap model, @RequestParam("photo") MultipartFile photo) {
+		model.addAttribute("company", company);
+		if (photo.isEmpty()) {
+			model.addAttribute("message1", "vui lòng chọn file !");
+		} else {
+			try {
+
+				String photoPath3 = baseUploadFile.getBasePath() + File.separator + "logo3.jpg";
+				photo.transferTo(new File(photoPath3));
+				Thread.sleep(5000);
+				model.addAttribute("Message1", "Thêm thành công !");
+				return "home/homeshow";
+			} catch (Exception e) {
+				model.addAttribute("Message1", "Lỗi lưu file !");
+			}
+		}
+		return "home/homeshow";
+	}
+
 	@RequestMapping(value = "danhsachnhanvien")
-	public String danhsachtaikhoan(HttpServletRequest request, ModelMap model,
+	public String danhsachtaikhoan(HttpServletRequest request, ModelMap model,@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "") String timkiem,
 			@ModelAttribute("message") String message) {
-		model.addAttribute("nhanviens", getListNhanVien());
+		int pageSize = 6;
+		int totalUsers = getSize();
+		
+		List<NhanVien> thongTinNhanVien = this.getNhanVien(page,pageSize,timkiem);
+	    int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+	    if(totalPages==0) {
+			totalPages=1;
+		}
+	
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("currentPage", page);
+		model.addAttribute("nhanviens", thongTinNhanVien);
 		model.addAttribute("message", message);
 		return "admin/dsnhanvien";
 	}
+	/*
+	 * @RequestMapping(value="/nhanvien") public String thongTinNhanVien(HttpSession
+	 * session, ModelMap model, @RequestParam(defaultValue = "0") int page) {
+	 * 
+	 * int pageSize = 10; List<NhanVien> thongTinNhanVien =
+	 * this.getNhanVien(page,pageSize);
+	 * model.addAttribute("nhanVien",thongTinNhanVien); int totalUsers = getSize();
+	 * int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+	 * model.addAttribute("totalPages", totalPages);
+	 * model.addAttribute("currentPage", page); return "nhanvien/nhanvien";
+	 * 
+	 * }
+	 */
 
 	@RequestMapping(value = "themnhanvien")
 	public String themnhanvien(HttpServletRequest request, ModelMap model) {
@@ -204,31 +309,32 @@ public class start {
 	 * } finally { session.close(); }} model.addAttribute("taikhoan",taiKhoan);
 	 * return"admin/doimatkhau"; }
 	 */
-	@RequestMapping(value="doimatkhau") public String doimatkhau(ModelMap model
-			  ,HttpSession session) { TaiKhoan taiKhoan = (TaiKhoan)
-			  session.getAttribute("TaiKhoan"); 
-			  model.addAttribute("username",taiKhoan.getMANV());
-			  model.addAttribute("message1","");
-			  return"admin/doimatkhau"; }
-	
-	@RequestMapping(value="/thaydoimatkhau", method = RequestMethod.POST)
+	@RequestMapping(value = "doimatkhau")
+	public String doimatkhau(ModelMap model, HttpSession session) {
+		TaiKhoan taiKhoan = (TaiKhoan) session.getAttribute("TaiKhoan");
+		model.addAttribute("username", taiKhoan.getMANV());
+		model.addAttribute("message1", "");
+		return "admin/doimatkhau";
+	}
+
+	@RequestMapping(value = "/thaydoimatkhau", method = RequestMethod.POST)
 	public String doiMatKhau(HttpSession session1, ModelMap model, HttpServletRequest request) {
 		TaiKhoan taiKhoan = (TaiKhoan) session1.getAttribute("TaiKhoan");
-		String username =taiKhoan.getMANV().trim();
-		model.addAttribute("username",username);
+		String username = taiKhoan.getMANV().trim();
+		model.addAttribute("username", username);
 		TaiKhoan check = searchTaiKhoan(username);
 		String mk = request.getParameter("password");
-		if(!mk.equals(check.getPASSWORD().trim())) {
+		if (!mk.equals(check.getPASSWORD().trim())) {
 			model.addAttribute("message1", "** Mật khẩu cũ không chính xác !");
 			return "admin/doimatkhau";
 		}
 		String mk1 = request.getParameter("password1");
-		if(mk.equals(mk1) ) {
+		if (mk.equals(mk1)) {
 			model.addAttribute("message1", "** Mật khẩu mới không thể trùng với mật khẩu cũ !");
 			return "admin/doimatkhau";
 		}
 		String mk2 = request.getParameter("password2");
-		if(!mk1.equals(mk2) ) {
+		if (!mk1.equals(mk2)) {
 			model.addAttribute("message1", "** Xác nhận mật khẩu không chính xác !");
 			return "admin/doimatkhau";
 		}
@@ -239,14 +345,14 @@ public class start {
 			session.update(check);
 			t.commit();
 			return "redirect:/logout.htm";
-			
+
 		} catch (Exception e) {
 			t.rollback();
-			model.addAttribute("message", "Đổi mật khẩu thất bại !");	
+			model.addAttribute("message", "Đổi mật khẩu thất bại !");
 		} finally {
 			session.close();
 		}
-		
+
 		return "admin/doimatkhau";
 	}
 
@@ -317,7 +423,7 @@ public class start {
 
 		return "redirect:/danhsachnhanvien.htm";
 	}
-
+	
 	public List<NhanVien> getListNhanVien() {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM NhanVien";
@@ -457,6 +563,49 @@ public class start {
 		String ho = hoTen.substring(0, index);
 
 		return ho.trim();
+	}
+	public List<NhanVien> getNhanVien(int page, int pageSize) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM NhanVien";
+		Query query = session.createQuery(hql);
+		int offset = page * pageSize;
+		List<NhanVien> list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+
+		return list;
+	}
+	
+	public List<NhanVien> getNhanVien(int page, int pageSize, String ten) {
+		Session session = factory.getCurrentSession();
+		String hql;
+		Query query;
+		List<NhanVien> list;
+		if (ten.length() == 0 )
+		{
+			hql ="FROM NhanVien t ORDER BY t.taiKhoan.isAdmin DESC";
+			query = session.createQuery(hql);
+			int offset = page * pageSize;
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		} else
+		{
+			hql ="FROM NhanVien t where t.ten LIKE CONCAT( :ten, '%') ORDER BY t.ten DESC";
+			query = session.createQuery(hql);
+			int offset = page * pageSize;
+			query.setParameter("ten", ten);
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		}
+		return list;
+	}
+	
+	
+	
+	
+	public int  getSize() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM NhanVien";
+		Query query = session.createQuery(hql);
+		List<NhanVien> list = query.list();
+
+		return list.size();
 	}
 
 }

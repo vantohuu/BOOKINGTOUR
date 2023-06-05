@@ -23,9 +23,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import BOOKINGTOUR.entity.BookingTour;
 import BOOKINGTOUR.entity.CTPhongLuuTru;
+import BOOKINGTOUR.entity.CTTour;
 import BOOKINGTOUR.entity.CTVe;
 import BOOKINGTOUR.entity.DiemDuLich;
 import BOOKINGTOUR.entity.KhachHang;
@@ -54,17 +56,41 @@ public class vetourController {
 	 */
 	
 	@RequestMapping(value="dsve/{id}")
-	public String dsve(ModelMap model ,@PathVariable int id,@ModelAttribute("message") String message) {
+	public String dsve(ModelMap model ,@PathVariable int id,@ModelAttribute("message") String message,@RequestParam(defaultValue = "0") int currentPage,@RequestParam(defaultValue = "") String timkiem) {
 		BookingTour bookingTour= this.searchbBookingTour(id);
+        int pageSize = 6; // Số lượng phần tử trên mỗi trang
+        
+		/*
+		 * List<CTVe> vetours1 =new ArrayList<CTVe>(); for (VeTour s :
+		 * bookingTour.getVeTours()) { vetours1.addAll(s.getcTve()); }
+		 * 
+		 * 
+		 * 
+		 * int totalCount = vetours1.size(); // Tổng số lượng phần tử trên toàn bộ danh
+		 * sách int totalPages = (int) Math.ceil((double) totalCount / pageSize); int
+		 * startIndex = (currentPage) * pageSize; int endIndex = Math.min(startIndex +
+		 * pageSize, totalCount); // Lấy phần tử của danh sách theo giới hạn kết quả trả
+		 * về List<CTVe> result = vetours1.subList(startIndex, endIndex);
+		 */
+        List<CTVe> vetours1 =new ArrayList<CTVe>(); for (VeTour s :
+   		 bookingTour.getVeTours()) { vetours1.addAll(s.getcTve()); }
+        
+        
+        int totalUsers = vetours1.size();
+		List<CTVe> ctTours = this.getCTVe(currentPage,pageSize,id,timkiem);
+	    int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+	    if(totalPages==0) {
+			totalPages=1;
+		}
+		
+		
+		 model.addAttribute("totalPages", totalPages);
+		    model.addAttribute("currentPage", currentPage);
+		    model.addAttribute("offset", currentPage * pageSize);
 		model.addAttribute("message", message);
 		model.addAttribute("idBK",id);
 		model.addAttribute("bookingtour",bookingTour);
-		Set<CTVe> vetours =new HashSet<CTVe>();
-		for (VeTour s : bookingTour.getVeTours()) {
-			vetours.addAll(s.getcTve());
-		}
-
-		model.addAttribute("ctvetours",vetours);
+		model.addAttribute("ctvetours",ctTours);
 		return"vetour/dsve";
 	}
 	
@@ -84,8 +110,10 @@ public class vetourController {
 		ctVe.setKhachHang(khachHang);
 		TaiKhoan taiKhoan = (TaiKhoan) session.getAttribute("TaiKhoan");
 		ctVe.setNhanVienXN(taiKhoan.getNhanVien());
+		ctVe.setKhuyenMai(getKhuyenMais().get(0));
+		ctVe.setVeTour(searchbBookingTour(Integer.parseInt(idBK)).getVeTours().get(0));
 			model.addAttribute("ctve", ctVe);
-			model.addAttribute("vetours", bookingTour.getVeTours());
+			model.addAttribute("vetours", searchbBookingTour(Integer.parseInt(idBK)).getVeTours());
 			model.addAttribute("dotkhuyenmai", getKhuyenMais());
 			model.addAttribute("tennvXN",taiKhoan.getNhanVien().getHo() + " "+taiKhoan.getNhanVien().getTen());
 		 
@@ -134,9 +162,10 @@ public class vetourController {
 				session.close();
 			}}
 		else {
+			List<VeTour> veTours=searcVeTour(ctVe.getVeTour().getId()).getBookingTour1().getVeTours();
 			ctVe.setNhanVienXN(searchNhanVien(ctVe.getNhanVienXN().getcCCD()));
 				model.addAttribute("ctve", ctVe);
-				model.addAttribute("vetours", searcVeTour(ctVe.getVeTour().getId()).getBookingTour1().getVeTours());
+				model.addAttribute("vetours", veTours);
 				model.addAttribute("dotkhuyenmai", getKhuyenMais());
 				model.addAttribute("tennvXN",ctVe.getNhanVienXN().getHo() + " "+ctVe.getNhanVienXN().getTen());
 			 
@@ -152,7 +181,9 @@ public class vetourController {
 		ctVe =this.searchctCtVe(id);
 		NhanVien nhanVienXN =ctVe.getNhanVienXN();
 		BookingTour bookingTour = ctVe.getVeTour().getBookingTour1();
-		model.addAttribute("ctve",this.searchctCtVe(id));
+		ctVe.setKhuyenMai(getKhuyenMais().get(0));
+		ctVe.setVeTour(bookingTour.getVeTours().get(0));
+		model.addAttribute("ctve",ctVe);
 		model.addAttribute("vetours", bookingTour.getVeTours());
 		model.addAttribute("dotkhuyenmai", getKhuyenMais());
 		model.addAttribute("tennvXN",nhanVienXN.getHo() + " "+nhanVienXN.getTen());
@@ -215,12 +246,31 @@ public class vetourController {
 	}
 	
 	@RequestMapping(value="dsvetour/{id}")
-	public String dsvetour(ModelMap model ,@PathVariable int id,@ModelAttribute("message") String message) {
+	public String dsvetour(ModelMap model ,@PathVariable int id,@ModelAttribute("message") String message,@RequestParam(defaultValue = "0") int currentPage) {
 		BookingTour bookingTour= this.searchbBookingTour(id);
+int pageSize = 7; // Số lượng phần tử trên mỗi trang
+		
+
+		int totalCount = bookingTour.getVeTours().size(); // Tổng số lượng phần tử trên toàn bộ danh sách
+		 int totalPages = (int) Math.ceil((double) totalCount / pageSize);
+		if(totalPages==0) {
+			totalPages=1;
+		}
+	
+		
+		int startIndex = (currentPage)  * pageSize;
+		int endIndex = Math.min(startIndex + pageSize, totalCount);
+		System.out.println(startIndex);
+		System.out.println(endIndex);
+		// Lấy phần tử của danh sách theo giới hạn kết quả trả về
+		List<VeTour> result = bookingTour.getVeTours().subList(startIndex, endIndex);
+		
+		 model.addAttribute("totalPages", totalPages);
+		    model.addAttribute("currentPage", currentPage);
 		model.addAttribute("message", message);
 		model.addAttribute("idBK",id);
 		model.addAttribute("bookingtour",bookingTour);
-		model.addAttribute("vetours",bookingTour.getVeTours());
+		model.addAttribute("vetours",result);
 		return"vetour/dsvetour";
 	}
 	
@@ -347,8 +397,22 @@ public class vetourController {
 	
 	
 	@RequestMapping(value="dskhachhang")
-	public String dskhachhang(ModelMap model ,@ModelAttribute("message") String message) {
-		model.addAttribute("khachhangs",getKhachHangs());
+	public String dskhachhang(ModelMap model ,@ModelAttribute("message") String message,@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "") String timkiem) {
+		int pageSize = 7;
+		int totalUsers = getSize();
+		List<KhachHang> khachHang = this.getKhachHang(page,pageSize,timkiem);
+	    int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+	    if(totalPages==0) {
+			totalPages=1;
+		}
+	
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("currentPage", page);
+		
+		
+		
+		
+		model.addAttribute("khachhangs",khachHang);
 		return"khachhang/dskhachhang";
 	}
 	
@@ -426,5 +490,68 @@ public class vetourController {
 		String hql = "FROM KhuyenMai";
 		List<KhuyenMai> khuyenmai = session.createQuery(hql).list();
 		return  khuyenmai;
+	}
+	
+	public int  getSize() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM KhachHang";
+		Query query = session.createQuery(hql);
+		List<KhachHang> list = query.list();
+
+		return list.size();
+	}
+	public List<KhachHang> getKhachHang(int page, int pageSize) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM KhachHang";
+		Query query = session.createQuery(hql);
+		int offset = page * pageSize;
+		List<KhachHang> list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+
+		return list;
+	}
+	public List<KhachHang> getKhachHang(int page, int pageSize, String ten) {
+		Session session = factory.getCurrentSession();
+		String hql;
+		Query query;
+		List<KhachHang> list;
+		if (ten.length() == 0 )
+		{
+			hql ="FROM KhachHang t ORDER BY t.cCCD DESC";
+			query = session.createQuery(hql);
+			int offset = page * pageSize;
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		} else
+		{
+			hql ="FROM KhachHang t where t.ten LIKE CONCAT( :ten, '%') ORDER BY t.cCCD DESC";
+			query = session.createQuery(hql);
+			int offset = page * pageSize;
+			query.setParameter("ten", ten);
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		}
+		return list;
+	}
+	
+	public List<CTVe> getCTVe(int page, int pageSize, int idTour,String ten) {
+		Session session = factory.getCurrentSession();
+		String hql;
+		Query query;
+		List<CTVe> list;
+		if (idTour == 0 )
+		{
+			hql ="FROM CTVe t where t.veTour.bookingTour1.id =:idTour ORDER BY t.khachHang.ten";
+			query = session.createQuery(hql);
+			query.setParameter("idTour", idTour);
+			int offset = page * pageSize;
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		} else
+		{
+			hql ="FROM CTVe t where t.khachHang.ten LIKE CONCAT( :ten, '%') and  t.veTour.bookingTour1.id =:idTour ORDER BY t.khachHang.ten";
+			query = session.createQuery(hql);
+			int offset = page * pageSize;
+			query.setParameter("idTour", idTour);
+			query.setParameter("ten", ten);
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		}
+		return list;
 	}
 }

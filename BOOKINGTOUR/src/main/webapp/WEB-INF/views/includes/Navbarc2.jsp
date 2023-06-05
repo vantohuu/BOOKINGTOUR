@@ -9,7 +9,7 @@
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start " id="menu">
                     <li class="nav-item">
-                        <a href="../home.htm" class="nav-link text-white align-middle px-0">
+                        <a href="../homeshow.htm" class="nav-link text-white align-middle px-0">
                            <i class="fa-solid fa-house"></i>
                             <span class="ms-1 d-none d-sm-inline">Home</span>
                         </a>
@@ -58,7 +58,7 @@
                     </li>
                     
                 <hr>
-              
+              </ul>
                 <div class="dropdown pb-4">
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
@@ -73,7 +73,9 @@
                         </li>
                         <li><a class="dropdown-item" href="../logout.htm">Đăng xuất</a></li>
                     </ul>
+                    
                 </div>
+                
             </div>
         </div>
        

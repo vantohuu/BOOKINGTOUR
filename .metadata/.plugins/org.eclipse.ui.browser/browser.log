@@ -167,3 +167,63 @@ Jun 01, 2023 19:46:06.546 [3628:12304:0601/194606.545:ERROR:interface_endpoint_c
 Jun 01, 2023 20:03:35.848 [3628:12304:0601/200335.847:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
 Jun 01, 2023 20:04:04.414 [3628:12304:0601/200404.414:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
 Jun 01, 2023 20:21:27.914 [3628:12304:0601/202127.914:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
+
+Jun 04, 2023 02:03:34.367 NEW SESSION
+Jun 04, 2023 02:03:34.368 [21444:1524:0604/020334.362:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+Jun 04, 2023 02:03:36.203 [21444:1524:0604/020336.202:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+Jun 04, 2023 02:10:22.544 [libprotobuf ERROR ..\..\third_party\protobuf\src\google\protobuf\message_lite.cc:133] Can't parse message of type "safe_browsing.ClientDownloadRequest" because it is missing required fields: (cannot determine missing fields for lite message)
+Jun 04, 2023 02:14:08.886 [libprotobuf ERROR ..\..\third_party\protobuf\src\google\protobuf\message_lite.cc:133] Can't parse message of type "safe_browsing.ClientDownloadRequest" because it is missing required fields: (cannot determine missing fields for lite message)
+Jun 04, 2023 02:33:51.40 [21444:15160:0604/023351.036:ERROR:interface_endpoint_client.cc(696)] Message 5 rejected by interface blink.mojom.WidgetHost
+Jun 04, 2023 02:35:22.454 [21444:15160:0604/023522.453:ERROR:device_event_log_impl.cc(222)] [02:35:22.452] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: Element not found. (0x490)
+Jun 04, 2023 02:35:34.496 [21444:15160:0604/023534.495:ERROR:device_event_log_impl.cc(222)] [02:35:34.495] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: Element not found. (0x490)
+Jun 04, 2023 02:35:40.389 [21444:15160:0604/023540.388:ERROR:device_event_log_impl.cc(222)] [02:35:40.388] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: Element not found. (0x490)
+Jun 04, 2023 03:05:50.610 [21444:1524:0604/030550.602:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+Jun 04, 2023 03:57:15.994 [21444:15160:0604/035715.988:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 03:58:00.207 [21444:15160:0604/035800.207:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 03:58:26.18 [21444:15160:0604/035826.017:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 03:59:05.216 [21444:15160:0604/035905.215:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 03:59:34.424 [21444:15160:0604/035934.424:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:00:10.221 [21444:15160:0604/040010.221:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:00:47.512 [21444:15160:0604/040047.512:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:01:40.198 [21444:15160:0604/040140.197:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:03:01.437 [21444:15160:0604/040301.437:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:03:03.861 [21444:15160:0604/040303.861:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:04:08.734 [21444:15160:0604/040408.734:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:04:08.864 [21444:15160:0604/040408.864:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:05:34.167 [21444:15160:0604/040534.167:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:05:34.170 [21444:15160:0604/040534.170:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:06:49.963 [21444:15160:0604/040649.963:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:06:49.963 [21444:15160:0604/040649.963:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:07:54.969 [21444:15160:0604/040754.969:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:07:54.969 [21444:15160:0604/040754.969:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:09:01.458 [21444:15160:0604/040901.458:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:09:09.872 [21444:15160:0604/040909.872:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:10:06.466 [21444:15160:0604/041006.466:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:10:14.877 [21444:15160:0604/041014.876:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:11:15.11 [21444:15160:0604/041115.010:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:11:19.902 [21444:15160:0604/041119.902:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:12:20.29 [21444:15160:0604/041220.028:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:12:24.906 [21444:15160:0604/041224.906:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:13:42.45 [21444:15160:0604/041342.045:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:13:42.46 [21444:15160:0604/041342.045:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:14:51.246 [21444:15160:0604/041451.246:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:14:51.246 [21444:15160:0604/041451.246:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:16:01.479 [21444:15160:0604/041601.478:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:16:14.677 [21444:15160:0604/041614.677:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:17:06.489 [21444:15160:0604/041706.489:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:17:19.685 [21444:15160:0604/041719.684:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:18:19.792 [21444:15160:0604/041819.792:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:18:24.691 [21444:15160:0604/041824.691:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:19:24.802 [21444:15160:0604/041924.802:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:19:29.709 [21444:15160:0604/041929.709:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:20:34.904 [21444:15160:0604/042034.904:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:20:34.904 [21444:15160:0604/042034.904:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:21:54.516 [21444:15160:0604/042154.516:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:21:54.517 [21444:15160:0604/042154.516:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:23:01.279 [21444:15160:0604/042301.279:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:23:01.279 [21444:15160:0604/042301.279:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:24:06.285 [21444:15160:0604/042406.285:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:24:12.583 [21444:15160:0604/042412.583:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:25:11.293 [21444:15160:0604/042511.292:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail ogdlpmhglpejoiomcodnpjnfgcpmgale: 14
+Jun 04, 2023 04:25:17.587 [21444:15160:0604/042517.587:ERROR:service_worker_task_queue.cc(234)] DidStartWorkerFail jcbmcnpepaddcedmjdcmhbekjhbfnlff: 14
+Jun 04, 2023 04:25:49.650 [0604/042549.649:ERROR:(-1)] Check failed: false. 

@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import BOOKINGTOUR.entity.BookingTour;
 import BOOKINGTOUR.entity.DiemDuLich;
 import BOOKINGTOUR.entity.NhanVien;
 import BOOKINGTOUR.entity.TaiKhoan;
@@ -30,8 +32,19 @@ public class diemdulichController {
 	@Autowired
     SessionFactory factory;
 	@RequestMapping("diemdulich")
-	public String diemdulich(HttpServletRequest request,ModelMap model,@ModelAttribute("message") String message) {
-		model.addAttribute("diemDuLichs",getListDiemDuLich());
+	public String diemdulich(HttpServletRequest request,ModelMap model,@RequestParam(defaultValue = "0") int page,@ModelAttribute("message") String message,@RequestParam(defaultValue = "") String timkiem) {
+		int pageSize = 6;
+		int totalUsers = getSize();
+		List<DiemDuLich> diemdulich = this.getDiemDuLich(page,pageSize,timkiem);
+	    int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+	    if(totalPages==0) {
+			totalPages=1;
+		}
+	    model.addAttribute("offset", page * pageSize);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("currentPage", page);
+		
+		model.addAttribute("diemDuLichs",diemdulich);
 		model.addAttribute("message", message);
 		return "diemdulich/dsdiemdulich";
 	}
@@ -115,12 +128,20 @@ public class diemdulichController {
 	
 	@RequestMapping(value="xoadiemdulich/{id}")
 	public String xoadiemdulich(ModelMap model ,@PathVariable int id) {
-		DiemDuLich diemDuLich = searchDiemDuLich(id);
+		/* DiemDuLich diemDuLich = searchDiemDuLich(id); */
 
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			session.delete(diemDuLich);
+			/* session.delete(diemDuLich); */
+			
+			String hql = "delete from DiemDuLich where id=:id";
+
+			
+			Query query1 = session.createQuery(hql);
+			query1.setParameter("id", id);
+			int result1 = query1.executeUpdate();
+
 			t.commit();
 			model.addAttribute("message", 1);
 		} catch (Exception e) {
@@ -161,6 +182,46 @@ public class diemdulichController {
 		if(list.size() == 0) return 0;
 		return 1;
 	}
+	
+	public int  getSize() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM DiemDuLich";
+		Query query = session.createQuery(hql);
+		List<DiemDuLich> list = query.list();
+
+		return list.size();
+	}
+	public List<DiemDuLich> getDiemDuLich(int page, int pageSize) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM DiemDuLich";
+		Query query = session.createQuery(hql);
+		int offset = page * pageSize;
+		List<DiemDuLich> list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+
+		return list;
+	}
+	public List<DiemDuLich> getDiemDuLich(int page, int pageSize, String ten) {
+		Session session = factory.getCurrentSession();
+		String hql;
+		Query query;
+		List<DiemDuLich> list;
+		if (ten.length() == 0 )
+		{
+			hql ="FROM DiemDuLich t ORDER BY t.id DESC";
+			query = session.createQuery(hql);
+			int offset = page * pageSize;
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		} else
+		{
+			hql ="FROM DiemDuLich t where t.ten LIKE CONCAT( '%' ,:ten, '%') ORDER BY t.id DESC";
+			query = session.createQuery(hql);
+			int offset = page * pageSize;
+			query.setParameter("ten", ten);
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		}
+		return list;
+	}
+	
 }
 
 

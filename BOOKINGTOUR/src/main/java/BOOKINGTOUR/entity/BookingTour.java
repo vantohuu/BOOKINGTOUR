@@ -53,8 +53,8 @@ public class BookingTour {
 	private String ghiChu;
 
 	
-	@OneToMany(mappedBy = "bookingTour1", fetch = FetchType.EAGER)
-	private Set<VeTour> veTours;
+	@OneToMany(mappedBy = "bookingTour1", fetch = FetchType.LAZY)
+	private List<VeTour> veTours;
 	
 	@ManyToOne()
 	@JoinColumn(name="IDTOUR")
@@ -65,8 +65,8 @@ public class BookingTour {
 	@JoinColumn(name="IDLT")
 	private LoaiTour loaiTour;
 	
-	@OneToMany(mappedBy = "bookingTour", fetch = FetchType.EAGER)
-	private Set<CTPhongLuuTru> ctPhongLuuTrus;
+	@OneToMany(mappedBy = "bookingTour", fetch = FetchType.LAZY)
+	private List<CTPhongLuuTru> ctPhongLuuTrus;
 
 	public int getId() {
 		return id;
@@ -174,21 +174,24 @@ public class BookingTour {
 		this.loaiTour = loaiTour;
 	}
 
-	public Set<CTPhongLuuTru> getCtPhongLuuTrus() {
+	
+
+	public List<CTPhongLuuTru> getCtPhongLuuTrus() {
 		return ctPhongLuuTrus;
 	}
 
-	public void setCtPhongLuuTrus(Set<CTPhongLuuTru> ctPhongLuuTrus) {
+	public void setCtPhongLuuTrus(List<CTPhongLuuTru> ctPhongLuuTrus) {
 		this.ctPhongLuuTrus = ctPhongLuuTrus;
 	}
 
-	public Set<VeTour> getVeTours() {
+	public List<VeTour> getVeTours() {
 		return veTours;
 	}
 
-	public void setVeTours(Set<VeTour> veTours) {
+	public void setVeTours(List<VeTour> veTours) {
 		this.veTours = veTours;
 	}
+
 
 	
 	

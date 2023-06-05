@@ -55,7 +55,7 @@
 					<div class="alert alert-success fade show" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>xóa nhân viên thành công</p>
+						<p>Xóa diểm du lịch thành công</p>
 						<hr>
 					</div>
 				</c:if>
@@ -64,7 +64,7 @@
 					<div class="alert alert-danger" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>xóa nhân viên thất bại</p>
+						<p>Xóa điểm du lịch thất bại</p>
 						<hr>
 					</div>
 				</c:if>
@@ -76,25 +76,34 @@
 						<button type="button" class="btn btn-success"
 							onclick="location.href = 'themdiemdulich.htm'">Thêm địa điểm mới</button>
 
-						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
-							style='padding: 3px'>
+						<div style="
+    text-align: end;
+">
+						<form class = "d-flex my-2" action = "diemdulich.htm">
+						<label class = "mx-1 mt-2">Tìm kiếm:</label>
+						 <input 
+							type="text" class="form-control w-25 mx-2 " name = "timkiem" placeholder="Tên">
+					<button type="submit" class="btn btn-primary">Tra</button>
+				</form>
+<button type="button" class="btn btn-success"
+							onclick="location.href = 'diemdulich.htm'">Bỏ lọc</button></div>
 
 					</div>
 					<br>
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col">ID</th>
+								<th scope="col">STT</th>
 								<th scope="col">Tên</th>
 								<th scope="col">Xử lý</th>
 							</tr>
 						</thead>
 						<tbody>
-						
+						<c:set var="counter" value="${offset+1 }" />
 							<c:forEach var="diemdulich" items="${diemDuLichs}">
 
 								<tr>
-									<th scope="row">${diemdulich.id}</th>
+									<th scope="row">${counter}</th>
 									<td>${diemdulich.ten}</td>
 																	<td style='display: flex; justify-content: flex-start;'>
 									<div class="dropdown" style="margin-right: 10px;">
@@ -166,10 +175,27 @@
 											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button>
 </td>
 								</tr>
-
+<c:set var="counter" value="${counter+1}" />
 							</c:forEach>
 						</tbody>
 					</table>
+					<div style="
+    margin: 50px;
+">
+					<ul class="pagination" style="position: absolute; bottom: 0; right: 0;width:400px;">
+			    <li class="page-item ${currentPage == 0 ? 'disabled' : ''}">
+			        <a class="page-link" href="diemdulich.htm?page=${currentPage - 1}">Trước</a>
+			    </li>
+			    <c:forEach begin="0" end="${totalPages - 1}" var="i">
+			        <li class="page-item ${currentPage == i ? 'active' : ''}">
+			            <a class="page-link" href="diemdulich.htm?page=${i}">${i + 1}</a>
+			        </li>
+			    </c:forEach>
+			    <li class="page-item ${currentPage == totalPages - 1 ? 'disabled' : ''}">
+			        <a class="page-link" href="diemdulich.htm?page=${currentPage + 1}">Sau</a>
+			    </li>
+			</ul>
+			</div>
 				</div>
 			</div>
 		</div>

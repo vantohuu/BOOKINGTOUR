@@ -55,7 +55,7 @@
 					<div class="alert alert-success fade show" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>xóa nhân viên thành công</p>
+						<p>xóa khuyến mãi thành công</p>
 						<hr>
 					</div>
 				</c:if>
@@ -64,7 +64,7 @@
 					<div class="alert alert-danger" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>xóa nhân viên thất bại</p>
+						<p>xóa khuyến mãi thất bại</p>
 						<hr>
 					</div>
 				</c:if>
@@ -75,27 +75,51 @@
 
 						<button type="button" class="btn btn-success"
 							onclick="location.href = 'themdotkhuyenmai.htm'">Thêm đợt khuyến mãi</button>
+						<div style="
+    text-align: end;
+">
+						<form action="dsdotkhuyenmai.htm"
+						class="d-flex justify-content-center align-items-center">
 
-						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
-							style='padding: 3px'>
-
+						<p class="text-nowrap mt-2">Từ ngày:</p>
+						<input class="form-control mx-2" name="tungay"
+							data-provide="datepicker" type="date">
+						<p class="text-nowrap mt-2">Đến ngày:</p>
+						<input class="form-control mx-2" name="denngay"
+							data-provide="datepicker" type="date">
+						
+						
+								<button type="submit" class="btn btn-primary">Lọc</button>
+							
+						
+					</form>
+					<button type="submit" class="btn btn-success"
+							onclick="location.href = 'dsdotkhuyenmai.htm'">Xóa lọc</button>
+							</div>	
+							
+</div>
 					</div>
+					<div>
 					<br>
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col">ID</th>
+								<th scope="col">STT</th>
 								<th scope="col">Tên</th>
+								<th scope="col">Ngày bắt đầu</th>
+								<th scope="col">Ngày kết thúc</th>
 								<th scope="col">Xử lý</th>
 							</tr>
 						</thead>
 						<tbody>
-						
+						<c:set var="counter" value="${offset }" />
 							<c:forEach var="dotkhuyenmai" items="${dotkhuyenmais}">
 
 								<tr>
-									<th scope="row">${dotkhuyenmai.id}</th>
+									<th scope="row">${counter}</th>
 									<td>${dotkhuyenmai.ten}</td>
+									<td>${dotkhuyenmai.tGBD}</td>
+									<td>${dotkhuyenmai.tGKT}</td>
 																	<td style='display: flex; justify-content: flex-start;'>
 									<div class="dropdown" style="margin-right: 10px;">
 											<button class="btn btn-primary dropdown-toggle"
@@ -174,10 +198,27 @@
 											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button>
 </td>
 								</tr>
-
+  <c:set var="counter" value="${counter+1}" />
 							</c:forEach>
 						</tbody>
 					</table>
+					<div style="
+    margin: 50px;
+">
+					<ul class="pagination" style="position: absolute; bottom: 0; right: 0;width:400px;">
+			    <li class="page-item ${currentPage == 0 ? 'disabled' : ''}">
+			        <a class="page-link" href="dsdotkhuyenmai.htm?page=${currentPage - 1}">Trước</a>
+			    </li>
+			    <c:forEach begin="0" end="${totalPages - 1}" var="i">
+			        <li class="page-item ${currentPage == i ? 'active' : ''}">
+			            <a class="page-link" href="dsdotkhuyenmai.htm?page=${i}">${i + 1}</a>
+			        </li>
+			    </c:forEach>
+			    <li class="page-item ${currentPage == totalPages - 1 ? 'disabled' : ''}">
+			        <a class="page-link" href="dsdotkhuyenmai.htm?page=${currentPage + 1}">Sau</a>
+			    </li>
+			</ul>
+			</div>
 				</div>
 			</div>
 		</div>
