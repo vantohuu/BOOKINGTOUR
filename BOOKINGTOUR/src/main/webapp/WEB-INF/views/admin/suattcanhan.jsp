@@ -52,7 +52,10 @@
 <body>
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc1.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc1.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc1.jsp"%></c:if>
 			<div class="col py-3">
 			<c:if test="${message==1}">
 				

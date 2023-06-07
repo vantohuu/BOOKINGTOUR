@@ -53,19 +53,23 @@
 <body>
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc3.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc3.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc3.jsp"%></c:if>
 			<div class="col py-3">
+			<button onclick="location.href = '../../dsvetour/${vetour.bookingTour1.id}.htm'"  class="btn btn-outline-secondary my-2 my-sm-0" type="submit"><< Trở lại</button>
 					<c:if test="${message==1}">
 					<div class="alert alert-success fade show" role="alert"style='position: fixed; width:50%; margin-left:300px; z-index: 100 '>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>Thêm địa điểm viên thành công</p>
+						<p>Thêm vé tour thành công</p>
 						<hr>
 					</div>
 				</c:if>
 				<c:if test="${message==2}">
 					<div class="alert alert-danger fade show"" role="alert"style='position: fixed; width:50%; margin-left:230px;'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>Thêm địa điểm thất bại</p>
+						<p>Thêm vé tour thất bại</p>
 						<hr>
 					</div>
 					</c:if>
@@ -141,97 +145,7 @@
 						</form:form>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<div style='display: block;'>
-						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
-							style='padding: 3px'>
-					</div>
-
-					<br>
-					<%-- <table class="table">
-						<thead>
-							<tr>
-								<th scope="col">ID</th>
-								<th scope="col">Tên</th>
-								<th scope="col">Xử lý</th>
-							</tr>
-						</thead>
-						<tbody>
-						
-							<c:forEach var="diemdulich" items="${diemDuLichs}">
-
-								<tr>
-									<th scope="row">${diemdulich.id}</th>
-									<td>${diemdulich.ten}</td>
-																	<td style='display: flex; justify-content: flex-start;'>
-									<div class="dropdown" style="margin-right: 10px;">
-											<button class="btn btn-primary dropdown-toggle"
-												data-toggle="dropdown">Chi tiết</button>
-											<div class="dropdown-menu"
-												aria-labelledby="dropdownMenuButton">
-												<div class="container">
-													<div class="modal-header">
-														<h5 class="modal-title" id="exampleModalLabel">Thông
-															tin địa điểm</h5>
-														<button type="button" class="close" data-dismiss="modal"
-															aria-label="Close"></button>
-													</div>
-													<div class="modal-body" style="width: 500px;">
-
-														<div class="row">
-															<div class="col">
-																<label for="recipient-name" class="col-form-label">Tên :</label>
-																 <label for="recipient-name"
-																	class="col-form-label"> 
-																	${diemdulich.ten}</label>
-															</div>
-														</div>
-														<div class="row">
-															<div class="col">
-																<label for="recipient-name" class="col-form-label">Địa chỉ :</label> 
-																<label for="recipient-name"
-																	class="col-form-label">${diemdulich.diaChi}</label>
-															</div>
-														</div>
-														<div class="row">
-															<div class="col">
-																<label for="recipient-name" class="col-form-label">Mô tả
-																	:</label> <label for="recipient-name" class="col-form-label">
-																	${diemdulich.moTa}</label>
-															</div>
-														</div>
-														<div class="row">
-															<div class="col">
-																<label for="recipient-name" class="col-form-label">Hình ảnh
-																	:</label> <label for="recipient-name" class="col-form-label">
-																	${diemdulich.hinhAnh}</label>
-															</div>
-														</div>
-								
-													
-
-														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary"
-																data-dismiss="modal">Đóng</button>
-														</div>
-
-
-													</div>
-												</div>
-											</div>
-										</div>
-									
-									
-											
-									
-										
-</td>
-								</tr>
-
-							</c:forEach>
-						</tbody>
-					</table> --%>
-				</div>
+				
 			</div>
 		</div>
 	</div>

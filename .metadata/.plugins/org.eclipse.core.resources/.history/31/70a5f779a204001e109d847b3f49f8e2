@@ -1,0 +1,32 @@
+package QLXB.controller;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import QLXB.entity.TaiKhoan;
+
+
+
+
+@Transactional
+@Controller
+public class userController {
+	@Autowired
+	SessionFactory factory;
+	@Autowired
+	ServletContext context;
+	
+	@RequestMapping("index")
+	public String welcome(HttpServletRequest request, ModelMap model) {
+		model.addAttribute("taiKhoan", new TaiKhoan());
+		return "login/login";
+	}
+	
+}

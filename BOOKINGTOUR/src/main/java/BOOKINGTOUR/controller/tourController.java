@@ -44,7 +44,7 @@ public class tourController {
 	    if(totalPages==0) {
 			totalPages=1;
 		}
-	
+	    model.addAttribute("offset", page * pageSize);
 	    model.addAttribute("totalPages", totalPages);
 	    model.addAttribute("currentPage", page);
 		  model.addAttribute("tours",tour);
@@ -147,7 +147,7 @@ public class tourController {
 	public String cttour(ModelMap model ,@PathVariable int id,@ModelAttribute("message") String message,@RequestParam(defaultValue = "0") int currentPage) {
 		Tour tour= this.searchTour(id);
 		
-int pageSize = 7; // Số lượng phần tử trên mỗi trang
+int pageSize = 9; // Số lượng phần tử trên mỗi trang
 		
 
 		int totalCount = tour.getCtTours().size(); // Tổng số lượng phần tử trên toàn bộ danh sách

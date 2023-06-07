@@ -47,7 +47,10 @@
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc1.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc1.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc1.jsp"%></c:if>
 			<div class="col py-3">
 				<c:if test="${message==1}">
 				
@@ -55,7 +58,7 @@
 					<div class="alert alert-success fade show" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>xóa nhân viên thành công</p>
+						<p>xóa tour thành công</p>
 						<hr>
 					</div>
 				</c:if>
@@ -64,7 +67,7 @@
 					<div class="alert alert-danger" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>xóa nhân viên thất bại</p>
+						<p>xóa tour thất bại</p>
 						<hr>
 					</div>
 				</c:if>
@@ -72,30 +75,28 @@
             <c:set var="message" value="0" />
 				<div class="container form-dang-nhap">
 					<div style='display: flex; justify-content: space-between;'>
-
+<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
 						<button type="button" class="btn btn-success"
-							onclick="location.href = 'themtour.htm'">Thêm tour mới</button>
+							onclick="location.href = 'themtour.htm'">Thêm tour mới</button></c:if>
 
-						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
-							style='padding: 3px'>
 
 					</div>
 					<br>
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col">ID</th>
+								<th scope="col">STT</th>
 								<th scope="col">Tên</th>
 								<th scope="col">Quản lý</th>
 								<th scope="col">Xử lý</th>
 							</tr>
 						</thead>
 						<tbody>
-						
+							<c:set var="counter" value="${offset+1 }" />
 							<c:forEach var="tour" items="${tours}">
 
 								<tr>
-									<th scope="row">${tour.id}</th>
+									<th scope="row">${counter}</th>
 									
 									<td>${tour.ten}</td>
 									<td><a
@@ -149,17 +150,17 @@
 									
 									
 											
-									
+									<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
 										<a
 										href="suatour/${tour.id}.htm"><button
 												class="btn btn-primary">chỉnh sửa</button> </a> 
 
 										<button
 											onclick="if(confirm('bạn có chắc chắn muốn xóa nhân viên này không ?')){location.href='xoatour/${tour.id}.htm'}"
-											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button>
+											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button></c:if>
 </td>
 								</tr>
-
+<c:set var="counter" value="${counter+1}" />
 							</c:forEach>
 						</tbody>
 					</table>

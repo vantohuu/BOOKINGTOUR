@@ -47,7 +47,10 @@
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc2.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc2.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc2.jsp"%></c:if>
 			<div class="col py-3">
 				<c:if test="${message==1}">
 				
@@ -55,7 +58,7 @@
 					<div class="alert alert-success fade show" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>xóa nhân viên thành công</p>
+						<p>xóa đặt phòng thành công</p>
 						<hr>
 					</div>
 				</c:if>
@@ -64,7 +67,7 @@
 					<div class="alert alert-danger" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>xóa nhân viên thất bại</p>
+						<p>xóa đặt phòng thất bại</p>
 						<hr>
 					</div>
 				</c:if>
@@ -72,13 +75,15 @@
 <c:set var="message" value="0" />
 				<div class="container form-dang-nhap">
 					<div style='display: flex; justify-content: space-between;'>
+					<button onclick="location.href = '../dsdattour.htm'"  class="btn btn-outline-secondary my-2 my-sm-0" type="submit"> << Trở lại</button>
 						<a href="themdatphong/${idBK}.htm"><button
 								class="btn btn-success">Thêm Phòng vào danh sách</button> </a>
 
-						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
-							style='padding: 3px'>
+						
 
 					</div>
+					<br>
+					 <h2>Danh sách phòng lưu trú của tour</h2>
 					<br>
 					<table class="table">
 						<thead>

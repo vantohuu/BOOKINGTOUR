@@ -52,30 +52,36 @@
 <body>
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc2.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc2.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc2.jsp"%></c:if>
 			<div class="col py-3">
 					<c:if test="${message==1}">
 					<div class="alert alert-success fade show" role="alert"style='position: fixed; width:50%; margin-left:300px; z-index: 100 '>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>Thêm địa điểm viên thành công</p>
+						<p>Sửa địa điểm viên thành công</p>
 						<hr>
 					</div>
 				</c:if>
 				<c:if test="${message==2}">
 					<div class="alert alert-danger fade show"" role="alert"style='position: fixed; width:50%; margin-left:230px;'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>Thêm địa điểm thất bại</p>
+						<p>Sửa địa điểm thất bại</p>
 						<hr>
 					</div>
 					</c:if>
 					<c:if test="${message==3}">
 					<div class="alert alert-danger fade show" role="alert"style='position: fixed; width:50%; margin-left:300px; z-index: 100 '>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>Tên địa điểm đã tồn tại</p>
+						<p>Tên điểm lưu trú đã tồn tại</p>
 						<hr>
 					</div>
 				</c:if>
 					<c:set var="message" value="0" />
+					<button onclick="location.href = '../dsdiemluutru.htm'"
+					class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
+					<< Trở lại</button>
 				<div class="container form-dang-nhap">
 					<div class="modal-body">
 						<form:form action="update.htm" modelAttribute="diemluutru" >
@@ -83,7 +89,7 @@
 							<div>
 									<h1>Sửa thông tin địa điểm lưu trú</h1>
 								</div>
-								<div class="row">
+								<div class="row"style="  display: none;">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">ID :</label> 
 											<form:input path="id" type="text" class="form-control"  readonly="true" />

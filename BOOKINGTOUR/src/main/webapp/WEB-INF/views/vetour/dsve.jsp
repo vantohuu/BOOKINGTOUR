@@ -47,11 +47,72 @@
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc2.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc2.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc2.jsp"%></c:if>
 			<div class="col py-3">
-				<c:if test="${message==1}">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+  <button onclick="location.href = '../dsdattour.htm'"  class="btn btn-outline-secondary my-2 my-sm-0" type="submit"> << Trở lại</button>
+    <a href="#submenu" style="display: inline;"
+										data-bs-toggle="collapse"
+										class="nav-link text-white px-0 align-middle "> <i
+											class="fa-solid fa-map-location-dot"></i><
+											<button class="btn btn-success">Thêm vào danh sách</button>
+									</a>
+										
+
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+       
+      </li>
+    </ul>
+    <form action = "../dsve/${idBK}.htm" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Tên" name = "timkiem" >
+      <button style="
+    margin: 20px;
+" class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+      
+    
+    </form>
+      <button onclick="location.href = '../dsve/${idBK}.htm'"  class="btn btn-outline-success my-2 my-sm-0" type="submit">Bỏ lọc</button>
+  </div>
+</nav>
+<ul class="collapse nav flex-column ms-1" id="submenu" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <form action="themvetg.htm" method="post"  style="
+    width: 30%;
+    /* text-align: center; */
+">
+							<div class="form-group">
+							<div>
+								</div>
+								<label for="recipient-name" class="col-form-label">Căn cước công dân:</label>
+								<input name="CCCD" type="text" class="form-control"  />
+									             <input name=idBK type="text" class="form-control" value ="${idBK}"style='display: none'/>
+									             
 				
-					
+								</div>
+								
+							
+							 <button class="btn btn-info">thêm </button>
+							 
+						</form>
+                           
+                        </ul>
+			<c:if test="${message==3}">
+					<div class="alert alert-danger fade show" role="alert"
+						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
+						<h4 class="alert-heading">ERROR!</h4>
+						<p>Chưa tạo vé tour nào để lựa chọn</p>
+						<hr>
+					</div>
+				</c:if>
+				<c:if test="${message==1}">
 					<div class="alert alert-success fade show" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">SUCCESS!</h4>
@@ -68,10 +129,55 @@
 						<hr>
 					</div>
 				</c:if>
+				<c:if test="${message==4}">
+				
+					<div class="alert alert-danger" role="alert"
+						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
+						<h4 class="alert-heading">Không thể thêm!</h4>
+						<p>Vé người lớn đã đủ</p>
+						<hr>
+					</div>
+				</c:if>
+				<c:if test="${message==5}">
+				
+					<div class="alert alert-danger" role="alert"
+						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
+						<h4 class="alert-heading">Không thể thêm!</h4>
+						<p>Vé trẻ nhỏ đã đủ</p>
+						<hr>
+					</div>
+				</c:if>
+				<c:if test="${message==6}">
+				
+					<div class="alert alert-danger" role="alert"
+						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
+						<h4 class="alert-heading">Không thể thêm!</h4>
+						<p>Vé trẻ em đã đủ</p>
+						<hr>
+					</div>
+				</c:if>
+				<c:if test="${message==7}">
+				
+					<div class="alert alert-danger" role="alert"
+						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
+						<h4 class="alert-heading">CCCD không đúng</h4>
+						<p>Nhập lại CCCD chính xác</p>
+						<hr>
+					</div>
+				</c:if>
+				<c:if test="${message==8}">
+				
+					<div class="alert alert-danger" role="alert"
+						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
+						<h4 class="alert-heading">Tour đã đủ</h4>
+						<p>không thể nhập thêm</p>
+						<hr>
+					</div>
+				</c:if>
 				
             <c:set var="message" value="0" />
 				<div class="container form-dang-nhap">
-					<div style='display: flex; justify-content: space-between;'>
+					<%-- <div style='display: flex; justify-content: space-between;'>
 
 						<a href="#submenu" style="display: inline;"
 										data-bs-toggle="collapse"
@@ -111,7 +217,9 @@
 <button type="button" class="btn btn-success"
 							onclick="location.href = '../dsve/${idBK}.htm'">Bỏ lọc</button></div>
 
-					</div>
+					</div> --%>
+						<br>
+					 <h2>Danh sách vé tham gia tour</h2>
 					<br>
 					<table class="table">
 						<thead>

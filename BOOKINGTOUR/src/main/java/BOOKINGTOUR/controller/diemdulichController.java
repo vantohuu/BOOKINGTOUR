@@ -1,7 +1,11 @@
 package BOOKINGTOUR.controller;
 
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
@@ -18,7 +22,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import BOOKINGTOUR.bean.UploadFile;
 import BOOKINGTOUR.entity.BookingTour;
 import BOOKINGTOUR.entity.DiemDuLich;
 import BOOKINGTOUR.entity.NhanVien;
@@ -31,9 +37,11 @@ import BOOKINGTOUR.entity.TaiKhoan;
 public class diemdulichController {
 	@Autowired
     SessionFactory factory;
+	@Autowired
+	UploadFile baseUploadFile;
 	@RequestMapping("diemdulich")
 	public String diemdulich(HttpServletRequest request,ModelMap model,@RequestParam(defaultValue = "0") int page,@ModelAttribute("message") String message,@RequestParam(defaultValue = "") String timkiem) {
-		int pageSize = 6;
+		int pageSize = 3;
 		int totalUsers = getSize();
 		List<DiemDuLich> diemdulich = this.getDiemDuLich(page,pageSize,timkiem);
 	    int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
@@ -57,7 +65,7 @@ public class diemdulichController {
 	}
 	
 	@RequestMapping(value="insertDiemDuLich", method = RequestMethod.POST) 
-	public String insertdiemdulich(@ModelAttribute("diemDuLich1") DiemDuLich diemDuLich,ModelMap model, BindingResult errors) {
+	public String insertdiemdulich(@RequestParam("photo") MultipartFile photo,HttpServletRequest request,@ModelAttribute("diemDuLich1") DiemDuLich diemDuLich,ModelMap model, BindingResult errors) {
 		if (diemDuLich.getTen().trim().length() == 0) {
 			errors.rejectValue("ten", "diemDuLich", "Vui lòng nhập tên điểm du lịch !");
 		}
@@ -72,6 +80,27 @@ public class diemdulichController {
 			System.out.println(3);
 			return "diemdulich/themdiemdulich";
 		}
+		
+		diemDuLich.setMoTa( request.getParameter("moTa"));
+		if (photo.isEmpty()) {
+			
+			diemDuLich.setHinhAnh(null);
+		} else {
+			try {
+		String date =LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss-"));
+		String filename =date+photo.getOriginalFilename();
+		String photoPath =baseUploadFile.getBasePath()+ File.separator +filename;
+		photo.transferTo(new File(photoPath));
+		diemDuLich.setHinhAnh(filename);
+		Thread.sleep(5000);
+		
+		
+	} catch (Exception e) {
+		model.addAttribute("Message", 4);
+	}
+			}
+			
+		
 		Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
 			try {
@@ -102,11 +131,28 @@ public class diemdulichController {
 		return"diemdulich/suadiemdulich";
 	}
 	@RequestMapping(value="suadiemdulich/update", method = RequestMethod.POST) 
-	public String editdiemdulich(@ModelAttribute("diemDuLich1") DiemDuLich diemDuLich,ModelMap model) {
+	public String editdiemdulich(@RequestParam("photo") MultipartFile photo,HttpServletRequest request,@ModelAttribute("diemDuLich1") DiemDuLich diemDuLich,ModelMap model) {
 		System.out.println(diemDuLich.getId());
 		System.out.println(diemDuLich.getTen());
 		System.out.println(diemDuLich.getDiaChi());
 		System.out.println(diemDuLich.getMoTa());
+		diemDuLich.setMoTa( request.getParameter("moTa"));
+		if (photo.isEmpty()) {
+			
+			diemDuLich.setHinhAnh(null);
+		} else {
+			try {
+		String date =LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss-"));
+		String filename =date+photo.getOriginalFilename();
+		String photoPath =baseUploadFile.getBasePath()+ File.separator +filename;
+		photo.transferTo(new File(photoPath));
+		diemDuLich.setHinhAnh(filename);
+		Thread.sleep(5000);
+		
+		
+	} catch (Exception e) {
+		model.addAttribute("Message", 4);
+	}}
 		Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
 			try {

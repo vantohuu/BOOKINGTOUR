@@ -40,14 +40,26 @@
 .dropdown-menu.show {
 	left: -800px;
 	background-color: aliceblue;
+	
 }
+.previous {
+  background-color: #f1f1f1;
+  color: black;
+   text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
 </style>
 </head>
 <body>
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc2.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc2.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc2.jsp"%></c:if>
 			<div class="col py-3">
 				<c:if test="${message==1}">
 				
@@ -55,7 +67,7 @@
 					<div class="alert alert-success fade show" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>xóa nhân viên thành công</p>
+						<p>xóa phòng thành công</p>
 						<hr>
 					</div>
 				</c:if>
@@ -64,36 +76,40 @@
 					<div class="alert alert-danger" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>xóa nhân viên thất bại</p>
+						<p>xóa phòng thất bại</p>
 						<hr>
 					</div>
 				</c:if>
 				
 <c:set var="message" value="0" />
-				<div class="container form-dang-nhap">
-					<div style='display: flex; justify-content: space-between;'>
-						<a href="themphong/${idNLT}.htm"><button
-								class="btn btn-success">Thêm Phòng</button> </a>
+			<div style='display: flex; justify-content: space-between;'>
+					
+ <button onclick="location.href = '../dsdiemluutru.htm'"
+					class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
+					<< Trở lại</button>
+					<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">	<a href="themphong/${idNLT}.htm"><button
+								class="btn btn-success">Thêm Phòng</button> </a></c:if>
 
-						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
-							style='padding: 3px'>
 
 					</div>
+				<div class="container form-dang-nhap">
+		<br>
+					<h2>Danh sách phòng</h2>
 					<br>
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col">ID</th>
+								<th scope="col">STT</th>
 								<th scope="col">Tên</th>
 								<th scope="col">Xử lý</th>
 							</tr>
 						</thead>
 						<tbody>
-						
+						<c:set var="counter" value="${offset+1 }" />
 							<c:forEach var="phong" items="${phongs}">
 
 								<tr>
-									<th scope="row">${phong.id}</th>
+									<th scope="row">${counter}</th>
 									
 									<td>${phong.ten}</td>
 								
@@ -175,17 +191,17 @@
 									
 									
 											
-									
+									<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
 										<a
 										href="suaphong/${phong.id}.htm"><button
 												class="btn btn-primary">chỉnh sửa</button> </a> 
 
 										<button
 											onclick="if(confirm('bạn có chắc chắn muốn xóa nhân viên này không ?')){location.href='../xoaphong/${phong.id}.htm'}"
-											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button>
+											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button></c:if>
 </td>
 								</tr>
-
+<c:set var="counter" value="${counter+1}" />
 							</c:forEach>
 						</tbody>
 					</table>
@@ -200,6 +216,7 @@
 			        <li class="page-item ${currentPage == i ? 'active' : ''}">
 			            <a class="page-link" href="../dsphong/${id }.htm?currentPage=${i}">${i + 1}</a>
 			        </li>
+			        <c:set var="counter" value="${counter+1}" />
 			    </c:forEach>
 			    <li class="page-item ${currentPage == totalPages - 1 ? 'disabled' : ''}">
 			        <a class="page-link" href="../dsphong/${id }.htm?currentPage=${currentPage + 1}">Sau</a>

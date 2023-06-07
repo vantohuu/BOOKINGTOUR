@@ -47,15 +47,20 @@
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc2.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc2.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc2.jsp"%></c:if>
 			<div class="col py-3">
+			
+			
 				<c:if test="${message==1}">
 				
 					
 					<div class="alert alert-success fade show" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>xóa nhân viên thành công</p>
+						<p>xóa vé tour thành công</p>
 						<hr>
 					</div>
 				</c:if>
@@ -64,27 +69,30 @@
 					<div class="alert alert-danger" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>xóa nhân viên thất bại</p>
+						<p>xóa vé tour thất bại</p>
 						<hr>
 					</div>
 				</c:if>
 				
             <c:set var="message" value="0" />
+           
 				<div class="container form-dang-nhap">
 					<div style='display: flex; justify-content: space-between;'>
+								<button onclick="location.href = '../dsdattour.htm'"  class="btn btn-outline-secondary my-2 my-sm-0" type="submit"> << Trở lại</button>
 
 						<button type="button" class="btn btn-success"
 							onclick="location.href = 'themvetour/${idBK}.htm'">Thêm vé tour mới</button>
 
-						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
-							style='padding: 3px'>
+						
 
 					</div>
+					<br>
+					 <h2>Danh sách vé tour</h2>
 					<br>
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col">ID</th>
+								<th scope="col">STT</th>
 								<th scope="col">Giá vé</th>
 								<th scope="col">Phí di chuyển</th>
 								<th scope="col">Giá cọc</th>
@@ -93,11 +101,11 @@
 							</tr>
 						</thead>
 						<tbody>
-						
+						<c:set var="counter" value="${offset+1 }" />
 							<c:forEach var="vetour" items="${vetours}">
-
+	
 								<tr>
-									<th scope="row">${vetour.id}</th>
+									<th scope="row">${counter}</th>
 									<td scope="row">${vetour.giaVe}</td>
 									<td scope="row">${vetour.phiDiChuyen}</td>
 									<%-- <td>${ctvetour.veTour.phiDiChuyen}</td> --%>
@@ -132,7 +140,9 @@
 			        <li class="page-item ${currentPage == i ? 'active' : ''}">
 			            <a class="page-link" href="../dsvetour/${idBK }.htm?currentPage=${i}">${i + 1}</a>
 			        </li>
+			        <c:set var="counter" value="${counter+1}" />
 			    </c:forEach>
+			    
 			    <li class="page-item ${currentPage == totalPages - 1 ? 'disabled' : ''}">
 			        <a class="page-link" href="../dsvetour/${idBK }.htm?currentPage=${currentPage + 1}">Sau</a>
 			    </li>

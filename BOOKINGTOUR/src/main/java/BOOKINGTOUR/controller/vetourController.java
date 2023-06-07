@@ -15,6 +15,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -60,6 +61,7 @@ public class vetourController {
 		BookingTour bookingTour= this.searchbBookingTour(id);
         int pageSize = 6; // Số lượng phần tử trên mỗi trang
         
+        
 		/*
 		 * List<CTVe> vetours1 =new ArrayList<CTVe>(); for (VeTour s :
 		 * bookingTour.getVeTours()) { vetours1.addAll(s.getcTve()); }
@@ -88,6 +90,7 @@ public class vetourController {
 		    model.addAttribute("currentPage", currentPage);
 		    model.addAttribute("offset", currentPage * pageSize);
 		model.addAttribute("message", message);
+		
 		model.addAttribute("idBK",id);
 		model.addAttribute("bookingtour",bookingTour);
 		model.addAttribute("ctvetours",ctTours);
@@ -96,12 +99,21 @@ public class vetourController {
 	
 	@RequestMapping(value="dsve/themvetg", method = RequestMethod.POST)
 	public String thembvetg(HttpServletRequest request,HttpSession session,ModelMap model,@ModelAttribute("CCCD") String CCCD,@ModelAttribute("idBK") String idBK )  {
+		BookingTour bookingTour =searchbBookingTour(Integer.parseInt(idBK));
+		if(bookingTour.getTrangThai() !=0 && listctCtVes(bookingTour.getId()).size() >=1  ) {
+			model.addAttribute("message",8);
+			return "redirect:/dsve/" + idBK + ".htm";}
 		
+		if(bookingTour.getVeTours().size()==0) { 
+			model.addAttribute("message",3);
+			return "redirect:/dsve/" + idBK + ".htm";}
+		else {
 		if(CCCD.trim().length()<4) {
+			model.addAttribute("message",7);
 			return "redirect:/dsve/" + idBK + ".htm";
 		}
 		KhachHang khachHang = searchKhachHang(CCCD);
-		BookingTour bookingTour = searchbBookingTour(Integer.parseInt(idBK));
+		/* BookingTour bookingTour = searchbBookingTour(Integer.parseInt(idBK)); */
 		if (khachHang == null) {
 			khachHang = new KhachHang();
 			khachHang.setcCCD(CCCD);
@@ -117,11 +129,11 @@ public class vetourController {
 			model.addAttribute("dotkhuyenmai", getKhuyenMais());
 			model.addAttribute("tennvXN",taiKhoan.getNhanVien().getHo() + " "+taiKhoan.getNhanVien().getTen());
 		 
-			return "vetour/themctve";	
+			return "vetour/themctve";	}
 	}
 	@RequestMapping(value="dsve/insert", method = RequestMethod.POST) 
 	public String insertdattour(@ModelAttribute("ctve") CTVe ctVe,ModelMap model, BindingResult errors) {
-		
+		BookingTour bookingTour = searchVeTour(ctVe.getVeTour().getId()).getBookingTour1();
 		boolean kt=true;
 		if (ctVe.getKhachHang().getHo().trim().length() == 0) {
 			errors.rejectValue("khachHang.ho", "ctVe", "Vui lòng nhập họ !");
@@ -138,6 +150,22 @@ public class vetourController {
 		if(kt==true) {
 		ctVe.setNhanVienXN(searchNhanVien(ctVe.getNhanVienXN().getcCCD()));
 		ctVe.setVeTour(searcVeTour(ctVe.getVeTour().getId()));
+		
+		
+		if(ctVe.getVeTour().getLoaiVe().getId()==1 && bookingTour.getMaxNL() <= ListLoaiVe(bookingTour.getId(), 1).size() ) {
+			model.addAttribute("message", 4);
+			return "redirect:/dsve/" + bookingTour.getId() + ".htm";
+		}
+		else if(ctVe.getVeTour().getLoaiVe().getId()==2 && bookingTour.getMaxTN() <= ListLoaiVe(bookingTour.getId(), 2).size() ) { 
+			model.addAttribute("message", 5);
+			return "redirect:/dsve/" + bookingTour.getId() + ".htm";
+			
+		}
+		else if(ctVe.getVeTour().getLoaiVe().getId()==3 && bookingTour.getMaxTE() <= ListLoaiVe(bookingTour.getId(), 3).size() ) { 
+			model.addAttribute("message", 6);
+			return "redirect:/dsve/" + bookingTour.getId() + ".htm";
+		}
+		else {
 		ctVe.setKhuyenMai(searchKhuyenMai(ctVe.getKhuyenMai().getId()));
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
@@ -147,10 +175,10 @@ public class vetourController {
 					session.save(khachHang);
 					System.out.println(111111);
 				}
-				else {session.update(khachHang);	System.out.println(222222);}
+				else {session.update(khachHang);}
 				
 				session.save(ctVe);
-				System.out.println(3333333);
+				
 				t.commit();
 				
 				model.addAttribute("message", 1);
@@ -160,9 +188,10 @@ public class vetourController {
 				
 			} finally {
 				session.close();
-			}}
+			}}}
 		else {
-			List<VeTour> veTours=searcVeTour(ctVe.getVeTour().getId()).getBookingTour1().getVeTours();
+			List<VeTour> veTours=bookingTour.getVeTours();
+			ctVe.setVeTour(veTours.get(0));
 			ctVe.setNhanVienXN(searchNhanVien(ctVe.getNhanVienXN().getcCCD()));
 				model.addAttribute("ctve", ctVe);
 				model.addAttribute("vetours", veTours);
@@ -264,7 +293,7 @@ int pageSize = 7; // Số lượng phần tử trên mỗi trang
 		System.out.println(endIndex);
 		// Lấy phần tử của danh sách theo giới hạn kết quả trả về
 		List<VeTour> result = bookingTour.getVeTours().subList(startIndex, endIndex);
-		
+		model.addAttribute("offset", currentPage * pageSize);
 		 model.addAttribute("totalPages", totalPages);
 		    model.addAttribute("currentPage", currentPage);
 		model.addAttribute("message", message);
@@ -354,7 +383,6 @@ int pageSize = 7; // Số lượng phần tử trên mỗi trang
 		try {
 			String hql = "delete from VeTour where id= :id";
 			Query query = session.createQuery(hql);
-			
 			query.setParameter("id", id);
 			System.out.println(query.executeUpdate());
 			t.commit();
@@ -366,9 +394,7 @@ int pageSize = 7; // Số lượng phần tử trên mỗi trang
 		} finally {
 			session.close();
 		}
-		model.addAttribute("idBK",veTour.getBookingTour1().getId());
-		model.addAttribute("bookingtour",veTour.getBookingTour1());
-		model.addAttribute("vetours",veTour.getBookingTour1().getVeTours());
+		
 		return"redirect:/dsvetour/"+veTour.getBookingTour1().getId()+".htm";
 	}
 		
@@ -405,7 +431,7 @@ int pageSize = 7; // Số lượng phần tử trên mỗi trang
 	    if(totalPages==0) {
 			totalPages=1;
 		}
-	
+	    model.addAttribute("offset", page * pageSize);
 	    model.addAttribute("totalPages", totalPages);
 	    model.addAttribute("currentPage", page);
 		
@@ -468,6 +494,14 @@ int pageSize = 7; // Số lượng phần tử trên mỗi trang
 		query.setParameter("id", id);
 		if(query.list().size()==0) return null;
 		return (CTVe) query.list().get(0);
+	}
+	public VeTour searchVeTour(int id) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM VeTour WHERE id = :id";
+		Query query = session.createQuery(hql);
+		query.setParameter("id", id);
+		if(query.list().size()==0) return null;
+		return (VeTour) query.list().get(0);
 	}
 	public NhanVien searchNhanVien(String cCCD) {
 		Session session = factory.getCurrentSession();
@@ -536,7 +570,7 @@ int pageSize = 7; // Số lượng phần tử trên mỗi trang
 		String hql;
 		Query query;
 		List<CTVe> list;
-		if (idTour == 0 )
+		if (ten.length() == 0 )
 		{
 			hql ="FROM CTVe t where t.veTour.bookingTour1.id =:idTour ORDER BY t.khachHang.ten";
 			query = session.createQuery(hql);
@@ -554,4 +588,31 @@ int pageSize = 7; // Số lượng phần tử trên mỗi trang
 		}
 		return list;
 	}
+	
+	private List<CTVe> ListLoaiVe(int idBK,int idLoaiVe) {
+		Session session = factory.getCurrentSession();
+		String hql;
+		Query query;
+		List<CTVe> list;
+		hql ="FROM CTVe t where t.veTour.loaiVe.id =:idLoaiVe and t.veTour.bookingTour1.id =:idTour";
+		query = session.createQuery(hql);
+		query.setParameter("idTour", idBK);
+		query.setParameter("idLoaiVe", idLoaiVe);
+		list = query.list();
+		return list;
+	}
+	private List<CTVe> listctCtVes(int idBK) {
+		Session session = factory.getCurrentSession();
+		String hql;
+		Query query;
+		List<CTVe> list;
+		hql ="FROM CTVe t where  t.veTour.bookingTour1.id =:idTour";
+		query = session.createQuery(hql);
+		query.setParameter("idTour", idBK);
+		list = query.list();
+		return list;
+	}
+	
+	
+	
 }

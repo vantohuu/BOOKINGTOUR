@@ -233,7 +233,7 @@ int pageSize = 7; // Số lượng phần tử trên mỗi trang
 		 
 		
 		
-	    
+		model.addAttribute("offset", currentPage * pageSize);
 	    model.addAttribute("totalPages", totalPages);
 	    model.addAttribute("currentPage", currentPage);
 		

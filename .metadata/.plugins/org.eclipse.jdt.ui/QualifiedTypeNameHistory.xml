@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javax.persistence.EmbeddedId"/>
-    <fullyQualifiedTypeName name="java.io.Serializable"/>
-    <fullyQualifiedTypeName name="javax.persistence.Embeddable"/>
-    <fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
-    <fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
-    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.CTDiemDuLichPK"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.CTDiemDuLich"/>
     <fullyQualifiedTypeName name="javax.persistence.Id"/>
     <fullyQualifiedTypeName name="javax.persistence.ManyToMany"/>
@@ -24,26 +18,18 @@
     <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
     <fullyQualifiedTypeName name="test.CTDiemDuLich"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.LoaiTour"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
     <fullyQualifiedTypeName name="java.util.HashSet"/>
     <fullyQualifiedTypeName name="java.util.Set"/>
-    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.LoaiVe"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="javax.persistence.PrimaryKeyJoinColumn"/>
     <fullyQualifiedTypeName name="javax.persistence.MapsId"/>
-    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.TaiKhoan"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Qualifier"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.bean.Company"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.bean.UploadFile"/>
     <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="java.lang.Thread"/>
-    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.BookingTour"/>
-    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.CTPhongLuuTru"/>
     <fullyQualifiedTypeName name="javassist.expr.NewArray"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.VeTour"/>
-    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.Phong"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.lang.Math"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.Tour"/>
@@ -51,10 +37,27 @@
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.NhanVien"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.KhachHang"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.KhuyenMai"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.DiemDuLich"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.NoiLuuTru"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.CTTour"/>
     <fullyQualifiedTypeName name="BOOKINGTOUR.entity.CTVe"/>
+    <fullyQualifiedTypeName name="org.hibernate.annotations.Check"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.LoaiVe"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.VeTour"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+    <fullyQualifiedTypeName name="org.springframework.ui.ModelMap"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.BookingTour"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.TaiKhoan"/>
+    <fullyQualifiedTypeName name="org.hibernate.Session"/>
+    <fullyQualifiedTypeName name="javax.management.Query"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.controller.doanhthuController"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.Phong"/>
+    <fullyQualifiedTypeName name="BOOKINGTOUR.entity.CTPhongLuuTru"/>
+    <fullyQualifiedTypeName name="QLXB.entity.ChucVu"/>
+    <fullyQualifiedTypeName name="QLXB.entity.TaiKhoan"/>
+    <fullyQualifiedTypeName name="QLXB.entity.NhanVien"/>
 </qualifiedTypeNameHistroy>

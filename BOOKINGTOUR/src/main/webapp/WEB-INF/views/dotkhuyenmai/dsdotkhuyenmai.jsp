@@ -47,8 +47,39 @@
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc1.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc1.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc1.jsp"%></c:if>
 			<div class="col py-3">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <c:if test="${sessionScope.TaiKhoan.isAdmin==1}"><a class="navbar-brand " href="themdotkhuyenmai.htm"> <button type="button" class="btn btn-success"
+																data-dismiss="modal">Thêm đợt khuyến mãi</button></a></c:if>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+       
+      </li>
+    </ul>
+    <form action = "dsdotkhuyenmai.htm" class="form-inline my-2 my-lg-0">
+      <p class="text-nowrap mt-2">Từ ngày:</p>
+						<input class="form-control mx-2" name="tungay"
+							data-provide="datepicker" type="date">
+						<p class="text-nowrap mt-2">Đến ngày:</p>
+						<input class="form-control mx-2" name="denngay"
+							data-provide="datepicker" type="date">
+      <button style="
+    margin: 20px;
+" class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+      
+    
+    </form>
+      <button onclick="location.href = 'dsdotkhuyenmai.htm'"  class="btn btn-outline-success my-2 my-sm-0" type="submit">Bỏ lọc</button>
+  </div>
+</nav>
 				<c:if test="${message==1}">
 				
 					
@@ -68,13 +99,25 @@
 						<hr>
 					</div>
 				</c:if>
-				
+				<h2>Danh sách đợt khuyến mãi</h2>
 <c:set var="message" value="0" />
-				<div class="container form-dang-nhap">
+	<%-- 			<div class="container form-dang-nhap">
+				
+				
+				
+				
+				
+				
+				
 					<div style='display: flex; justify-content: space-between;'>
 
 						<button type="button" class="btn btn-success"
 							onclick="location.href = 'themdotkhuyenmai.htm'">Thêm đợt khuyến mãi</button>
+							
+							
+							
+							
+							
 						<div style="
     text-align: end;
 ">
@@ -97,8 +140,8 @@
 							onclick="location.href = 'dsdotkhuyenmai.htm'">Xóa lọc</button>
 							</div>	
 							
-</div>
-					</div>
+</div> --%>
+					
 					<div>
 					<br>
 					<table class="table">
@@ -112,7 +155,7 @@
 							</tr>
 						</thead>
 						<tbody>
-						<c:set var="counter" value="${offset }" />
+						<c:set var="counter" value="${offset+1}" />
 							<c:forEach var="dotkhuyenmai" items="${dotkhuyenmais}">
 
 								<tr>
@@ -187,7 +230,7 @@
 										</div>
 									
 									
-											
+										<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">	
 									
 										<a
 										href="suadotkhuyenmai/${dotkhuyenmai.id}.htm"><button
@@ -195,7 +238,7 @@
 
 										<button
 											onclick="if(confirm('bạn có chắc chắn muốn xóa nhân viên này không ?')){location.href='xoadotkhuyenmai/${dotkhuyenmai.id}.htm'}"
-											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button>
+											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button></c:if>
 </td>
 								</tr>
   <c:set var="counter" value="${counter+1}" />

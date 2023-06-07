@@ -53,19 +53,25 @@
 <body>
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc1.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc2.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc2.jsp"%></c:if>
 			<div class="col py-3">
+			<button onclick="location.href = '../dsdattour.htm'"
+					class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
+					<< Trở lại</button>
 					<c:if test="${message==1}">
 					<div class="alert alert-success fade show" role="alert"style='position: fixed; width:50%; margin-left:300px; z-index: 100 '>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>Thêm địa điểm viên thành công</p>
+						<p>Sửa đặt tour thành công</p>
 						<hr>
 					</div>
 				</c:if>
 				<c:if test="${message==2}">
 					<div class="alert alert-danger fade show"" role="alert"style='position: fixed; width:50%; margin-left:230px;'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>Thêm địa điểm thất bại</p>
+						<p>Sửa đặt tour thất bại</p>
 						<hr>
 					</div>
 					</c:if>
@@ -85,7 +91,7 @@
 									<h1>Sửa đặt tour</h1>
 								</div>
 								<div class="row">
-									<div class="col">
+									<div class="col" style="  display: none;">
 										<label for="recipient-name" class="col-form-label">ID
 											</label><form:input path="id" type="text" class="form-control"  readonly="true" />
 									</div></div>

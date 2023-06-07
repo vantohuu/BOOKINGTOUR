@@ -48,19 +48,22 @@
 <body>
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc1.jsp"%>
+		<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc1.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc1.jsp"%></c:if>
 			<div class="col py-3">
 					<c:if test="${message==1}">
 					<div class="alert alert-success fade show" role="alert"style='position: fixed; width:50%; margin-left:300px; z-index: 100 '>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>Thêm địa điểm viên thành công</p>
+						<p>Thêm tour viên thành công</p>
 						<hr>
 					</div>
 				</c:if>
 				<c:if test="${message==2}">
 					<div class="alert alert-danger fade show"" role="alert"style='position: fixed; width:50%; margin-left:230px;'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>Thêm địa điểm thất bại</p>
+						<p>Thêm tour thất bại</p>
 						<hr>
 					</div>
 					</c:if>

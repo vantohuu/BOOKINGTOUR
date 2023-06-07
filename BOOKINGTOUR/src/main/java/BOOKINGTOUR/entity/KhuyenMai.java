@@ -29,6 +29,7 @@ public class KhuyenMai {
 	private  int id;
 	@Column(name="TEN")
 	private  String ten;
+	
 	public List<CTVe> getcTve() {
 		return cTve;
 	}

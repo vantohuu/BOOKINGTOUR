@@ -47,8 +47,33 @@
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc1.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc1.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc1.jsp"%></c:if>
 			<div class="col py-3">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+       
+      </li>
+    </ul>
+    <form action = "dskhachhang.htm" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Tên" name = "timkiem" >
+      <button style="
+    margin: 20px;
+" class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+      
+    
+    </form>
+      <button onclick="location.href = 'dskhachhang.htm'"  class="btn btn-outline-success my-2 my-sm-0" type="submit">Bỏ lọc</button>
+  </div>
+</nav>
 				<c:if test="${message==1}">
 				
 					
@@ -70,9 +95,10 @@
 				</c:if>
 				
             <c:set var="message" value="0" />
+            <h2>Danh sách khách hàng</h2>
 				<div class="container form-dang-nhap">
 					
-<form class = "d-flex my-2" action = "dskhachhang.htm">
+<%-- <form class = "d-flex my-2" action = "dskhachhang.htm">
 						<label class = "mx-1 mt-2">Tìm kiếm:</label>
 						 <input 
 							type="text" class="form-control w-25 mx-2 " name = "timkiem" placeholder="Nhập tên">
@@ -81,7 +107,7 @@
 				</form><button type="button" class="btn btn-success"
 							onclick="location.href = 'diemdulich.htm'">Bỏ lọc</button></div>
 						
-
+ --%>
 						
 					<br>
 					<table class="table">
@@ -92,26 +118,27 @@
 								<th scope="col">CCCD</th>
 								<th scope="col">Sđt</th>
 								<th scope="col">Email</th>
-								<th scope="col">Xử lý</th>
+								<c:if test="${sessionScope.TaiKhoan.isAdmin==1}"><th scope="col">Xử lý</th></c:if>
 							</tr>
 						</thead>
 						<tbody>
-						
+						<c:set var="counter" value="${offset+1 }" />
 							<c:forEach var="khachhang" items="${khachhangs}">
 
 								<tr>
-								<td scope="row"></td>
-									
+								
+									<th scope="row">${counter}</th>
 									<th scope="row">${khachhang.ho} ${khachhang.ten}</th>
 									<th scope="row">${khachhang.cCCD}</th>
 									<td scope="row">${khachhang.sDT}</td>
 									<td scope="row">${khachhang.email}</td>
-									<td>
+									<c:if test="${sessionScope.TaiKhoan.isAdmin==1}"><td>
+									
 									<button
 											onclick="if(confirm('bạn có chắc chắn muốn xóa nhân viên này không ?')){location.href='xoakhachang/${khachhang.cCCD}.htm'}"
-											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button></td>
+											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button></td></c:if>
 								</tr>
-
+<c:set var="counter" value="${counter+1}" />
 							</c:forEach>
 						</tbody>
 					</table>
@@ -135,6 +162,7 @@
 				
 			</div>
 		</div>
+	</div>
 	</div>
 	<script>
   setTimeout(function() {

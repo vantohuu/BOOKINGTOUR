@@ -53,26 +53,33 @@
 <body>
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc1.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc1.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc1.jsp"%></c:if>
 			<div class="col py-3">
+			<button onclick="location.href = 'dsdattour.htm'"
+					class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
+					<< Trở lại</button>
+				<br>
 					<c:if test="${message==1}">
 					<div class="alert alert-success fade show" role="alert"style='position: fixed; width:50%; margin-left:300px; z-index: 100 '>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>Thêm địa điểm viên thành công</p>
+						<p>Thêm đặt tour thành công</p>
 						<hr>
 					</div>
 				</c:if>
 				<c:if test="${message==2}">
 					<div class="alert alert-danger fade show"" role="alert"style='position: fixed; width:50%; margin-left:230px;'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>Thêm địa điểm thất bại</p>
+						<p>Thêm đặt tour thất bại</p>
 						<hr>
 					</div>
 					</c:if>
 					<c:if test="${message==3}">
 					<div class="alert alert-danger fade show" role="alert"style='position: fixed; width:50%; margin-left:300px; z-index: 100 '>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>Tên địa điểm đã tồn tại</p>
+						<p>Tên đặt tour đã tồn tại</p>
 						<hr>
 					</div>
 				</c:if>
@@ -132,10 +139,12 @@
 											</label><form:input path="maxNL" type="text" class="form-control"  />
 											<form:errors path="maxNL" />
 									</div>
-									<div class="col">
+									<div class="col "  >
+									<div class="div1" style="display:block">
 										<label for="recipient-name" class="col-form-label">SL người lớn :tối thiểu
 											</label><form:input path="minNL" type="text" class="form-control"  />
 											<form:errors path="minNL" />
+											</div>
 									</div>
 									</div>
 									<div class="row">
@@ -145,10 +154,12 @@
 											</label><form:input path="maxTN" type="text" class="form-control"  />
 											<form:errors path="maxTN" />
 									</div>
-									<div class="col">
+									<div class="col"  style="display:block">
+									<div class="div1" style="display:block">
 										<label for="recipient-name" class="col-form-label">SL trẻ nhỏ :tối thiểu
 											</label><form:input path="minTN" type="text" class="form-control"  />
 											<form:errors path="minTN" />
+											</div>
 									</div>
 									</div>
 									<div class="row">
@@ -157,10 +168,12 @@
 											</label><form:input path="maxTE" type="text" class="form-control"  />
 											<form:errors path="maxTE" />
 									</div>
-									<div class="col">
+									<div class="col" >
+									<div class="div1" style="display:block">
 										<label for="recipient-name" class="col-form-label">SL trẻ em :tối thiểu
 											</label><form:input path="minTE" type="text" class="form-control"  />
 											<form:errors path="minTE" />
+									</div>
 									</div>
 									</div>
 									
@@ -291,6 +304,21 @@
   setTimeout(function() {
     document.querySelector('.alert').classList.add('d-none');
   }, 2000);
+</script>
+<script type="text/javascript">
+    // Bắt sự kiện onchange của select element
+    $('select[name="loaiTour.id"]').on('change', function() {
+        // Lấy giá trị của option được chọn
+        var selectedValue = $(this).val();
+        
+        // Kiểm tra nếu giá trị là 1 thì hiển thị div, ngược lại ẩn div
+        if (selectedValue == 2) {
+        	$('.div1').hide();
+        } else {
+            
+            $('.div1').show();
+        }
+    });
 </script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"

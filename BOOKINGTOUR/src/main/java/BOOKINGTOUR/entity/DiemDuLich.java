@@ -28,9 +28,8 @@ public class DiemDuLich {
 	private  String diaChi;
 	@Column(name="MOTA")
 	private  String moTa;
-//	@Column(name="HINHANH")
-//	@Lob 
-//	   private byte[] image;
+	@Column(name="HINHANH")
+		   private String hinhAnh;
 	
 	 @OneToMany(mappedBy = "diemDuLich", fetch = FetchType.EAGER) private List<CTTour> ctTours ;
 	 
@@ -64,6 +63,18 @@ public class DiemDuLich {
 	 * public List<CTTour> getCtTours() { return ctTours; } public void
 	 * setCtTours(List<CTTour> ctTours) { this.ctTours = ctTours; }
 	 */
+	public String getHinhAnh() {
+		return hinhAnh;
+	}
+	public void setHinhAnh(String hinhAnh) {
+		this.hinhAnh = hinhAnh;
+	}
+	public List<CTTour> getCtTours() {
+		return ctTours;
+	}
+	public void setCtTours(List<CTTour> ctTours) {
+		this.ctTours = ctTours;
+	}
 
 	
 

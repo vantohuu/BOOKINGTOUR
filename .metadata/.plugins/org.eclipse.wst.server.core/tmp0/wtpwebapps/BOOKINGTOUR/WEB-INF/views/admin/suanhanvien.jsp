@@ -54,20 +54,24 @@
 		<div class="row flex-nowrap">
 			<%@ include file="../includes/Navbarc2.jsp"%>
 			<div class="col py-3">
-			<c:if test="${message==1}">
-				
-					
+				<button onclick="location.href = 'danhsachnhanvien.htm'"
+					class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
+					<< Trở lại</button>
+				<br>
+				<c:if test="${message==1}">
+
+
 					<div class="alert alert-success fade show" role="alert"
-						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
+						style='position: fixed; width: 50%; margin-left: 230px; z-index: 100'>
 						<h4 class="alert-heading">SUCCESS!</h4>
 						<p>Cập nhập thông tin nhân viên thành công</p>
 						<hr>
 					</div>
 				</c:if>
 				<c:if test="${message==2}">
-				
+
 					<div class="alert alert-danger fade show" role="alert"
-						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100' >
+						style='position: fixed; width: 50%; margin-left: 230px; z-index: 100'>
 						<h4 class="alert-heading">ERROR!</h4>
 						<p>Cập nhập thông tin nhân viên thất bại</p>
 						<hr>
@@ -84,117 +88,116 @@
 								<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Mã
-											nhân viên :</label> 
-											<form:input path="maNV" type="text" class="form-control" readonly="true" />
-											 
+											nhân viên :</label>
+										<form:input path="maNV" type="text" class="form-control"
+											readonly="true" />
+
 									</div>
 									<div class="col">
-										<label for="recipient-name" class="col-form-label">Họ:</label> 
-											<form:input path="ho" type="text" class="form-control" 
-											/>
-											<form:errors path="ho" />
-											
+										<label for="recipient-name" class="col-form-label">Họ:</label>
+										<form:input path="ho" type="text" class="form-control" />
+										<form:errors path="ho" />
+
 									</div>
 									<div class="col">
-										<label for="recipient-name" class="col-form-label">Tên:</label> 
-											<form:input path="ten" type="text" class="form-control" 
-											/>
-											<form:errors path="ten" />
-											
+										<label for="recipient-name" class="col-form-label">Tên:</label>
+										<form:input path="ten" type="text" class="form-control" />
+										<form:errors path="ten" />
+
 									</div>
 								</div>
 								<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Căn
-											cước công dân :</label> 
-											<form:input type="text" class="form-control"
-											path="cCCD" />
+											cước công dân :</label>
+										<form:input type="text" class="form-control" path="cCCD" />
 										<form:errors path="cCCD" />
 									</div>
-									
+
 									<div class="col">
-									
-										
-											<label for="recipient-name" class="col-form-label">Giới
-												tính :</label>
-											<br>
-											<div class="form-check form-check-inline">
-												<form:radiobutton class="form-check-input"  name="gioiTinh"  path="gioiTinh"
-													value="nam"/> <label class="form-check-label"
-													for="nam">Nam</label>
-											</div>
-											<div class="form-check form-check-inline">
-												<form:radiobutton class="form-check-input" name="gioiTinh"  path="gioiTinh"
-													 value="nữ"/> <label class="form-check-label"
-													for="nữ">Nữ</label>
-											</div>
-										
+
+
+										<label for="recipient-name" class="col-form-label">Giới
+											tính :</label> <br>
+										<div class="form-check form-check-inline">
+											<form:radiobutton class="form-check-input" name="gioiTinh"
+												path="gioiTinh" value="nam" />
+											<label class="form-check-label" for="nam">Nam</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<form:radiobutton class="form-check-input" name="gioiTinh"
+												path="gioiTinh" value="nữ" />
+											<label class="form-check-label" for="nữ">Nữ</label>
+										</div>
+
 									</div>
 								</div>
 								<div class="row">
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Ngày
-											sinh :</label> <form:input type="date" class="form-control" 
-											path="ngaySinh"
-											/>
-											
+											sinh :</label>
+										<form:input type="date" class="form-control" path="ngaySinh" />
+
 									</div>
 									<div class="col">
 										<label for="recipient-name" class="col-form-label">Số
-											điện thoại :</label> <form:input type="tel" class="form-control"
-											id="phone" path="sDT"/>
+											điện thoại :</label>
+										<form:input type="tel" class="form-control" id="phone"
+											path="sDT" />
 									</div>
 								</div>
-									<div class="row">
+								<div class="row">
 									<div class="col">
-								<label for="recipient-name" class="col-form-label">Địa
-									chỉ:</label> <form:input type="text" class="form-control" path="diaChi"
-									/>
+										<label for="recipient-name" class="col-form-label">Địa
+											chỉ:</label>
+										<form:input type="text" class="form-control" path="diaChi" />
 									</div>
-									</div>
-									<div class="row">
-									<div class="col">
-									 <label for="recipient-name"
-									class="col-form-label">Email :</label> <form:input type="email"
-									class="form-control" path="email" id="inputEmail4"
-									/> 
-									</div>
-									</div>
-									<div class="row">
-									<div class="col">
-									<label for="recipient-name"
-									class="col-form-label">Chức vụ :</label><br>
-									<div class="form-check form-check-inline">
-										<form:radiobutton class="form-check-input"  name="isAdmin" path="taikhoan.isAdmin" 
-											value="0"/> <label class="form-check-label" for="0">Nhân
-											viên quản lý</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<form:radiobutton class="form-check-input"  name="isAdmin" path="taikhoan.isAdmin"
-										  value="1"  /> <label class="form-check-label"
-											for="1">Admin</label>
-									</div>
-								
 								</div>
-										<div class="col">
-										<label for="recipient-name"
-									class="col-form-label">Trạng thái :</label>
-									<br>
-								 <%-- <c:if test="${nhanVien.trangThai == 1}"> --%>
-									<div class="form-check form-check-inline">
-										<form:radiobutton class="form-check-input"  path="trangThai" 
-											  value="1" /> <label class="form-check-label"
-											>Hoạt động</label>
+								<div class="row">
+									<div class="col">
+										<label for="recipient-name" class="col-form-label">Email
+											:</label>
+										<form:input type="email" class="form-control" path="email"
+											id="inputEmail4" />
 									</div>
-									<div class="form-check form-check-inline">
-										<form:radiobutton class="form-check-input"  path="trangThai" 
-											value="0"/> <label class="form-check-label">Ngưng hoạt động</label>
-									</div>
-							
 								</div>
+								<div class="row">
+									<div class="col">
+										<label for="recipient-name" class="col-form-label">Chức
+											vụ :</label><br>
+										<div class="form-check form-check-inline">
+											<form:radiobutton class="form-check-input" name="isAdmin"
+												path="taikhoan.isAdmin" value="0" />
+											<label class="form-check-label" for="0">Nhân viên
+												quản lý</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<form:radiobutton class="form-check-input" name="isAdmin"
+												path="taikhoan.isAdmin" value="1" />
+											<label class="form-check-label" for="1">Admin</label>
+										</div>
+
+									</div>
+									<div class="col">
+										<label for="recipient-name" class="col-form-label">Trạng
+											thái :</label> <br>
+										<%-- <c:if test="${nhanVien.trangThai == 1}"> --%>
+										<div class="form-check form-check-inline">
+											<form:radiobutton class="form-check-input" path="trangThai"
+												value="1" />
+											<label class="form-check-label">Hoạt
+												động</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<form:radiobutton class="form-check-input" path="trangThai"
+												value="0" />
+											<label class="form-check-label">Ngưng hoạt động</label>
+										</div>
+
+									</div>
 								</div>
 							</div>
-							 <form:button class="btn btn-primary">cập nhập</form:button>
+							<form:button class="btn btn-primary">cập nhập</form:button>
 						</form:form>
 					</div>
 				</div>

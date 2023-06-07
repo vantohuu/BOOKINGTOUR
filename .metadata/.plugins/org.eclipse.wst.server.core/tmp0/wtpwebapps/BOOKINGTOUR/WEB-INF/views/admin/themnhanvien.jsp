@@ -65,20 +65,21 @@
 					</div>
 				</c:if>
 				<c:if test="${message==2}">
-					<div class="alert alert-danger" role="alert"style='position: fixed; width:50%; margin-left:230px;'>
+					<div class="alert alert-danger fade show" role="alert"style='position: fixed; width:50%; margin-left:230px;'>
 						<h4 class="alert-heading">ERROR!</h4>
 						<p>Thêm nhân viên thất bại</p>
 						<hr>
 					</div>
 					</c:if>
 					<c:set var="message" value="0" />
+					<button onclick="location.href = 'danhsachnhanvien.htm'"  class="btn btn-outline-secondary my-2 my-sm-0" type="submit"> << Trở lại</button>
 				<div class="container form-dang-nhap">
 					<div class="modal-body">
 					<form:form action="insert.htm" modelAttribute="nhanvien">
 						
 							<div class="form-group">
 								<div>
-									<h1>Thêm nhân viên</h1>
+									<h1>Thêm nhân viên</h1>  
 								</div>
 								<div class="row">
 									<div class="col">

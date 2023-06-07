@@ -47,8 +47,46 @@
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc1.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc1.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc1.jsp"%></c:if>
 			<div class="col py-3">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <c:if test="${sessionScope.TaiKhoan.isAdmin==1}"><a class="navbar-brand " href="themdattour.htm"> <button type="button" class="btn btn-success"
+																data-dismiss="modal">Thêm đặt tour</button></a></c:if>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+       
+      </li>
+    </ul>
+    <form action = "dsdattour.htm" class="form-inline my-2 my-lg-0">
+     <select  name="idTour"  class="form-select" aria-label="Default select example" style="
+    /* margin-left: 10px; */
+    margin-inline: 20px;
+    padding-inline: 10px;
+">
+ <c:forEach var="tour" items="${tours}">
+  <option value="${tour.id}">${tour.ten}</option>
+  </c:forEach>
+</select>
+      <button style="
+    margin: 20px;
+" class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+      
+    
+    </form>
+      <button onclick="location.href = 'dsdattour.htm'"  class="btn btn-outline-success my-2 my-sm-0" type="submit">Bỏ lọc</button>
+  </div>
+</nav>
+			
+			
+			
+			
 				<c:if test="${message==1}">
 				
 					
@@ -70,31 +108,9 @@
 				</c:if>
 				
 <c:set var="message" value="0" />
-				<div class="container form-dang-nhap">
-					<div style='display: flex; justify-content: space-between;'>
-								<button type="button" class="btn btn-success"
-							onclick="location.href = 'themdattour.htm'">Thêm đặt tour</button>
-
-						<div style="
-    text-align: end;
-">
-							<form class = "d-flex my-2" action = "dsdattour.htm">
-						<label class = "mx-1 mt-2">Tìm kiếm:</label>
-						<select  name="idTour"class="form-select" aria-label="Default select example" style="
-    /* margin-left: 10px; */
-    margin-inline: 20px;
-    padding-inline: 10px;
-">
- <c:forEach var="tour" items="${tours}">
-  <option value="${tour.id}">${tour.ten}</option>
-  </c:forEach>
-</select>
-					<button type="submit" class="btn btn-primary">Tra</button>
-				</form>
-				<button type="submit" class="btn btn-success"
-							onclick="location.href = 'dsdattour.htm'">Xóa lọc</button>
-							</div>
-					</div>
+				
+		<br>
+					<h2>Danh sách đặt tour</h2>
 					<br>
 					<table class="table">
 						<thead>
@@ -155,6 +171,16 @@
 														</div>
 														<div class="row">
 															<div class="col">
+															<label for="recipient-name" class="col-form-label">Loại Tour:</label>
+														<c:if test="${bookingtour.loaiTour.id==1}">
+																	Tour bình thường
+																	</c:if>
+																	<c:if test="${bookingtour.loaiTour.id==2}">
+																	Tour yêu cầu
+																	</c:if>
+																	</div></div>
+														<div class="row">
+															<div class="col">
 																<label for="recipient-name" class="col-form-label">Thời gian :</label> 
 																<label for="recipient-name"
 																	class="col-form-label">${bookingtour.tGBD} - ${bookingtour.tGKT}</label>
@@ -198,7 +224,22 @@
 															<div class="col">
 																<label for="recipient-name" class="col-form-label">Trạng thái :
 																	</label> <label for="recipient-name" class="col-form-label">
-																	${bookingtour.trangThai}</label>
+																	<c:if test="${bookingtour.trangThai==0}">
+																	Đang mở đặt tour
+																	</c:if>
+																	<c:if test="${bookingtour.trangThai==1}">
+																	Tour đã đủ
+																	</c:if>
+																	<c:if test="${bookingtour.trangThai==2}">
+																	Tour đang diễn ra
+																	</c:if>
+																	<c:if test="${bookingtour.trangThai==3}">
+																	Tour đã kết thúc
+																	
+																	</c:if>
+																	<c:if test="${bookingtour.trangThai==4}">
+																	Tour đã hủy
+																	</c:if>
 															</div>
 														</div>
 														<div class="row">
@@ -231,14 +272,14 @@
 									
 									
 											
-									
+									<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
 										<a
 										href="suadattour/${bookingtour.id}.htm"><button
 												class="btn btn-primary">chỉnh sửa</button> </a> 
 
 										<button
 											onclick="if(confirm('bạn có chắc chắn muốn xóa nhân viên này không ?')){location.href='xoadattour/${bookingtour.id}.htm'}"
-											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button>
+											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button></c:if>
 </td>
 								</tr>
 <c:set var="counter" value="${counter+1}" />
@@ -265,7 +306,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+
 	<script>
   setTimeout(function() {
     document.querySelector('.alert').classList.add('d-none');

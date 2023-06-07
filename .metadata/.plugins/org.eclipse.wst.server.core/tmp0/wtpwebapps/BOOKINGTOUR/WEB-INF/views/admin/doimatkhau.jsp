@@ -52,7 +52,10 @@
 <body>
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc1.jsp"%>
+		<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc1.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc1.jsp"%></c:if>
 			<div class="col py-3">
 			<c:if test="${message==1}">
 				
@@ -60,7 +63,7 @@
 					<div class="alert alert-success fade show" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>Cập nhập thông tin nhân viên thành công</p>
+						<p>Cập nhập mật khẩu thành công</p>
 						<hr>
 					</div>
 				</c:if>
@@ -69,7 +72,7 @@
 					<div class="alert alert-danger fade show" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100' >
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>Cập nhập thông tin nhân viên thất bại</p>
+						<p>Cập nhập mật khẩu thất bại</p>
 						<hr>
 					</div>
 				</c:if>

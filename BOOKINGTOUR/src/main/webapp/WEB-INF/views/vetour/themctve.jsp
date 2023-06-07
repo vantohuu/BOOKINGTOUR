@@ -53,19 +53,22 @@
 <body>
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc2.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc2.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc2.jsp"%></c:if>
 			<div class="col py-3">
 					<c:if test="${message==1}">
 					<div class="alert alert-success fade show" role="alert"style='position: fixed; width:50%; margin-left:300px; z-index: 100 '>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>Thêm địa điểm viên thành công</p>
+						<p>Thêm chi tiết vé thành công</p>
 						<hr>
 					</div>
 				</c:if>
 				<c:if test="${message==2}">
 					<div class="alert alert-danger fade show"" role="alert"style='position: fixed; width:50%; margin-left:230px;'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>Thêm địa điểm thất bại</p>
+						<p>Thêm chi tiết vé thất bại</p>
 						<hr>
 					</div>
 					</c:if>
@@ -77,6 +80,7 @@
 					</div>
 				</c:if>
 					<c:set var="message" value="0" />
+					<button onclick="location.href = '../dsve/${ctve.veTour.bookingTour1.id}.htm'"  class="btn btn-outline-secondary my-2 my-sm-0" type="submit"> << Trở lại</button>
 				<div class="container form-dang-nhap">
 					<div class="modal-body">
 					<div>
@@ -170,14 +174,7 @@
 						</form:form>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<div style='display: block;'>
-						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
-							style='padding: 3px'>
-					</div>
-
-					
-				</div>
+				
 			</div>
 		</div>
 	</div>

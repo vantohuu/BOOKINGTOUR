@@ -49,6 +49,30 @@
 		<div class="row flex-nowrap">
 			<%@ include file="../includes/Navbarc1.jsp"%>
 			<div class="col py-3">
+			
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand " href="themnhanvien.htm"> <button type="button" class="btn btn-success"
+																data-dismiss="modal">Thêm nhân viên</button></a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+       
+      </li>
+    </ul>
+    <form action = "danhsachnhanvien.htm" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Tên" name = "timkiem" >
+      <button style="
+    margin: 20px;
+" class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+      
+    
+    </form>
+      <button onclick="location.href = 'danhsachnhanvien.htm'"  class="btn btn-outline-success my-2 my-sm-0" type="submit">Bỏ lọc</button>
+  </div>
+</nav>
 				<c:if test="${message==1}">
 				
 					
@@ -70,24 +94,8 @@
 				</c:if>
 				
 <c:set var="message" value="0" />
-				<div class="container form-dang-nhap">
-					<div style='display: flex; justify-content: space-between;'>
-
-						<button type="button" class="btn btn-success"
-							onclick="location.href = 'themnhanvien.htm'">Thêm nhân
-							viên mới</button>
-<div style="
-    text-align: end;
-">
-						<form class = "d-flex my-2" action = "danhsachnhanvien.htm">
-						<label class = "mx-1 mt-2">Tìm kiếm:</label>
-						 <input 
-							type="text" class="form-control w-25 mx-2 " name = "timkiem" placeholder="Tên">
-					<button type="submit" class="btn btn-primary">Tra</button>
-				</form>
-<button type="button" class="btn btn-success"
-							onclick="location.href = 'danhsachnhanvien.htm'">Bỏ lọc</button></div>
-					</div>
+				<div class="container form-dang-nhap"><br>
+<h2>Danh sách nhân viên</h2>
 					<br>
 					<table class="table">
 						<thead>

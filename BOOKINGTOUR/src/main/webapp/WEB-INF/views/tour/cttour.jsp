@@ -41,13 +41,24 @@
 	left: -800px;
 	background-color: aliceblue;
 }
+.previous {
+  background-color: #f1f1f1;
+  color: black;
+   text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
 </style>
 </head>
 <body>
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc2.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc2.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc2.jsp"%></c:if>
 			<div class="col py-3">
 				<c:if test="${message==1}">
 				
@@ -55,7 +66,7 @@
 					<div class="alert alert-success fade show" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>xóa nhân viên thành công</p>
+						<p>xóa chi tiết tour thành công</p>
 						<hr>
 					</div>
 				</c:if>
@@ -64,7 +75,7 @@
 					<div class="alert alert-danger" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>xóa nhân viên thất bại</p>
+						<p>xóa chi tiết tour thất bại</p>
 						<hr>
 					</div>
 				</c:if>
@@ -72,11 +83,11 @@
 <c:set var="message" value="0" />
 				<div class="container form-dang-nhap">
 					<div style='display: flex; justify-content: space-between;'>
-						<a href="themcttour/${id}.htm"><button
-								class="btn btn-success">Thêm chi tiết tour</button> </a>
+					<a href="../dsdiemluutru.htm" class="previous">&laquo; Trở lại</a>
+						<c:if test="${sessionScope.TaiKhoan.isAdmin==1}"><a href="themcttour/${id}.htm"><button
+								class="btn btn-success">Thêm chi tiết tour</button> </a></c:if>
 
-						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
-							style='padding: 3px'>
+						
 
 					</div>
 					<br>
@@ -85,7 +96,8 @@
 							<tr>
 								<th scope="col">ID</th>
 								<th scope="col">Tên</th>
-								<th scope="col">Xử lý</th>
+								<th scope="col">Địa chỉ</th>
+								<c:if test="${sessionScope.TaiKhoan.isAdmin==1}"><th scope="col">Xử lý</th></c:if>
 							</tr>
 						</thead>
 						<tbody>
@@ -96,22 +108,21 @@
 									<th scope="row">${cttour.thuTu}</th>
 									
 									<td>${cttour.diemDuLich.ten}</td>
-								
+								<td>${cttour.diemDuLich.diaChi}</td>
 																	
-														
+											<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">			
 									<td>
 									
 											
 									
-										
+										<div style= " display: flex; justify-content: center;">
 										<button
 											onclick="if(confirm('bạn có chắc chắn muốn xóa nhân viên này không ?')){location.href='../xoacttour/${cttour.id}.htm'}"
-											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button>
+											class="btn btn-danger" style="height: 38px;;margin-top: 32px;/* margin-bottom: auto; */margin-inline: 7px;">Xóa</button>
 
 <a href="#submenu${cttour.id}" style="display: inline;"
 										data-bs-toggle="collapse"
-										class="nav-link text-white px-0 align-middle "> <i
-											class="fa-solid fa-map-location-dot"></i><
+										class="nav-link text-white px-0 align-middle "> <
 											<button class="btn btn-success">Đổi thứ tự</button>
 									</a>
 										<ul class="collapse nav flex-column ms-1" id="submenu${cttour.id}" data-bs-parent="#menu">
@@ -133,7 +144,9 @@
 							 
 						</form>
                            
-                        </ul></td>
+                        </ul>
+                        </div>
+                        </td> </c:if>
 								</tr>
 
 							</c:forEach>

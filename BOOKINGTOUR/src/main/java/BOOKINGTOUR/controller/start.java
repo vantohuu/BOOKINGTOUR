@@ -79,7 +79,7 @@ public class start {
 		}
 		if (kt == true) {
 			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(3600);
+			session.setMaxInactiveInterval(360000);
 			String username = taiKhoan.getMANV();
 			String password = taiKhoan.getPASSWORD();
 			TaiKhoan taikhoan = queryLogin(username, password);
@@ -87,11 +87,7 @@ public class start {
 				if (taikhoan.getNhanVien().getTrangThai() == 1) {
 
 					session.setAttribute("TaiKhoan", taikhoan);
-					if (taikhoan.getIsAdmin() == 1) {
 						return "redirect:/homeshow.htm";
-					} else {
-						return "manager/manager";
-					}
 				} else {
 					model.addAttribute("error", "Tài khoản đã ngừng hoạt động !!!");
 					return "login/login";
@@ -424,6 +420,8 @@ public class start {
 		return "redirect:/danhsachnhanvien.htm";
 	}
 	
+	
+	
 	public List<NhanVien> getListNhanVien() {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM NhanVien";
@@ -502,6 +500,8 @@ public class start {
 		model.addAttribute("nhanviens", getListNhanVien());
 		return "admin/themnhanvien";
 	}
+	
+	
 
 	public NhanVien searchNhanVien(String maNV) {
 		Session session = factory.getCurrentSession();

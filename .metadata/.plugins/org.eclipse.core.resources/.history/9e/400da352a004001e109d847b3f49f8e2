@@ -1,0 +1,25 @@
+package QLXB.entity;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+
+@Entity
+@Table(name="CHUCVU")
+public class ChucVu {
+	@Id
+	@Column(name="ID")
+	private  String id;
+	@Column(name="TEN")
+	private  String ten;
+	
+	 @OneToMany(mappedBy = "chucVu", fetch = FetchType.EAGER) 
+	  private List<NhanVien> nhanViens;
+}

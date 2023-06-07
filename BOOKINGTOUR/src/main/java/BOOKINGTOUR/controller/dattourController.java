@@ -3,6 +3,7 @@ package BOOKINGTOUR.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import BOOKINGTOUR.entity.BookingTour;
 import BOOKINGTOUR.entity.CTPhongLuuTru;
 import BOOKINGTOUR.entity.CTTour;
+import BOOKINGTOUR.entity.CTVe;
 import BOOKINGTOUR.entity.DiemDuLich;
 import BOOKINGTOUR.entity.LoaiTour;
 import BOOKINGTOUR.entity.NhanVien;
@@ -101,12 +103,14 @@ public class dattourController {
 		
 		if(kiemtra==true) {
 		
-
-
+			
 		if(bookingtour.getLoaiTour().getId()==2) {
 			bookingtour.setTrangThai(1);
+			bookingtour.setMinNL(bookingtour.getMaxNL());
+			bookingtour.setMinTN(bookingtour.getMaxTN());
+			bookingtour.setMinTE(bookingtour.getMaxTE());
 		}
-		else {bookingtour.setTrangThai(1);}
+		else {bookingtour.setTrangThai(0);}
 		Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
 			try {
@@ -213,48 +217,70 @@ public class dattourController {
 		return"redirect:/dsdattour.htm";
 	}
 	
-	@RequestMapping(value="dsdatphong/themdatphong/{id}")
-	public String themdatphong(HttpServletRequest request,ModelMap model,@PathVariable int id,@ModelAttribute("message") String message) {
-		BookingTour bookingTour= new BookingTour();
-		bookingTour=searchbBookingTour(id);
-		
-		List<Phong> listPhong= new ArrayList<Phong>();
-		
-		for(CTPhongLuuTru c: bookingTour.getCtPhongLuuTrus()) {
-			listPhong.add(c.getPhong());
+	@RequestMapping(value = "dsdatphong/themdatphong/{id}")
+	public String themdatphong(HttpServletRequest request, ModelMap model, @PathVariable int id,
+			@ModelAttribute("message") String message, @RequestParam(defaultValue = "0") int currentPage,
+			@RequestParam(defaultValue = "") String timkiem) {
+		BookingTour bookingTour = searchbBookingTour(id);
+		int pageSize=6;
+		int totalUsers = getSizePhong(id);
+		System.out.println(totalUsers);
+		List<CTPhongLuuTru> ctPhongLuuTrus = this.getPhongs(currentPage, pageSize, id, timkiem);
+		int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+		if (totalPages == 0) {
+			totalPages = 1;
 		}
-		model.addAttribute("idBK",id);
-		model.addAttribute("phongs",phongConLai(listPhong,getPhongs()));
-		return"dattour/themdatphong";
+		List<Phong> listPhong1 = new ArrayList<Phong>();
+		for (CTPhongLuuTru c : ctPhongLuuTrus) {
+			listPhong1.add(c.getPhong());
+		}
+
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("offset", currentPage * pageSize);
+		model.addAttribute("idBK", id);
+		model.addAttribute("phongs", listPhong1);
+		return "dattour/themdatphong";
 	}
 	@RequestMapping(value="dsdatphong/themdatphong/insert", method = RequestMethod.POST)
 	public String insertdatphong(HttpServletRequest request,ModelMap model ,@ModelAttribute("id") String id,@ModelAttribute("idBK") String idBK) throws ParseException {
-		System.out.println(id);
-		System.out.println(idBK);
-		System.out.println(request.getParameter("tgden"));
-		System.out.println(request.getParameter("tgdi"));
 		
-		
-		if(request.getParameter("tgden")==null ) {model.addAttribute("erroNgayDen", "Nhập thời gian đến !");}
-		else if(request.getParameter("tgdi")==null ){model.addAttribute("erroNgayDi", "Nhập thời gian đi !");}
-		else {
-		
-		
-	
-		
-		
-		Phong phong= this.searchPhong(Integer.parseInt(id));
 		BookingTour bookingTour =this.searchbBookingTour( Integer.parseInt(idBK));
 		
+		if(request.getParameter("tgden").length()==0 ) {
+			model.addAttribute("message", 4);
+			return "redirect:/dsdatphong/themdatphong/" + bookingTour.getId() + ".htm";}
+		else if(request.getParameter("tgdi").length()==0 ){
+			
+			model.addAttribute("message", 4);
+			return "redirect:/dsdatphong/themdatphong/" + bookingTour.getId() + ".htm";}
+
+			String tmp = request.getParameter("tgden");
+			String tmp1 = request.getParameter("tgdi");
+	Date tgden =formatter.parse(tmp);
+	Date tgdi =formatter.parse(tmp1);
+	int compareResult = tgden.compareTo(tgdi);
+	int compareResult1 = bookingTour.gettGBD().compareTo(tgden);
+	int compareResult2 = tgdi.compareTo(bookingTour.gettGKT());
+		if(compareResult > 0) {
+			model.addAttribute("message", 5);
+			return "redirect:/dsdatphong/themdatphong/" + bookingTour.getId() + ".htm";}
+		if(compareResult1 >= 0) {
+			model.addAttribute("message", 6);
+			return "redirect:/dsdatphong/themdatphong/" + bookingTour.getId() + ".htm";}
+		if(compareResult2 >= 0) {
+			model.addAttribute("message", 7);
+			return "redirect:/dsdatphong/themdatphong/" + bookingTour.getId() + ".htm";}
 		
+		int loaihinh= Integer.parseInt(request.getParameter("loaihinh"));
+		
+		Phong phong= this.searchPhong(Integer.parseInt(id));
 		CTPhongLuuTru ctPhongLuuTru =new CTPhongLuuTru();
 		ctPhongLuuTru.setPhong(phong);
 		ctPhongLuuTru.setBookingTour(bookingTour);
-
-		String tmp = request.getParameter("tgden");
-		String tmp1 = request.getParameter("tgdi");
-		ctPhongLuuTru.setNgayDen(formatter.parse(tmp));
-		ctPhongLuuTru.setNgayDi(formatter.parse(tmp1));
+		ctPhongLuuTru.setNgayDen(tgden);
+		ctPhongLuuTru.setNgayDi(tgdi);
+		ctPhongLuuTru.setFullNgay(loaihinh);
 		Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
 			try {
@@ -268,7 +294,7 @@ public class dattourController {
 				
 			} finally {
 				session.close();
-			}}
+			}
 			int id1=Integer.parseInt(idBK);
 			
 			
@@ -329,7 +355,6 @@ public class dattourController {
 			
 			String hql = "delete from CTPhongLuuTru where id= :id";
 			Query query = session.createQuery(hql);
-			
 			query.setParameter("id", id);
 			System.out.println(query.executeUpdate());
 			t.commit();
@@ -409,7 +434,6 @@ public class dattourController {
 	}
 	public static List<Phong> phongConLai(List<Phong> list1, List<Phong> list2) {
 	    List<Phong> combined = new ArrayList<>();
-	    
 	    combined.addAll(list2);
 	    combined.removeAll(list1);
 	    return combined;
@@ -453,6 +477,41 @@ public class dattourController {
 		return list;
 	}
 	
+	public List<CTPhongLuuTru> getPhongs(int page, int pageSize, int idTour,String ten) {
+		Session session = factory.getCurrentSession();
+		String hql;
+		Query query;
+		List<CTPhongLuuTru> list;
+		if (ten.length() == 0 )
+		{
+			hql ="FROM CTPhongLuuTru t where t.bookingTour.id !=:idTour ORDER BY t.phong.ten DESC";
+			query = session.createQuery(hql);
+			query.setParameter("idTour", idTour);
+			int offset = page * pageSize;
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		} else
+		{
+			hql ="FROM CTPhongLuuTru t where t.phong.noiLuuTru1.tenNLT LIKE CONCAT( '%',:ten, '%') and  t.bookingTour.id !=:idTour ORDER BY t.phong.ten DESC";
+			query = session.createQuery(hql);
+			int offset = page * pageSize;
+			query.setParameter("idTour", idTour);
+			query.setParameter("ten", ten);
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		}
+		return list;
+	}
 	
+	public int  getSizePhong(int idTour) {
+		Session session = factory.getCurrentSession();
+		String hql;
+		Query query;
+		List<CTPhongLuuTru> list;
+		
+			hql ="FROM CTPhongLuuTru t where t.bookingTour.id !=:idTour";
+			query = session.createQuery(hql);
+			query.setParameter("idTour", idTour);
+			list = query.list();
+		return list.size();
+	}
 	
 }

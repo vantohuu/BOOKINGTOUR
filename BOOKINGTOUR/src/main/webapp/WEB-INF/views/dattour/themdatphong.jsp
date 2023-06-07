@@ -48,15 +48,44 @@
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc3.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc3.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc3.jsp"%></c:if>
 			<div class="col py-3">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <button onclick="location.href = '../../dsdatphong/${idBK}.htm'"  class="btn btn-outline-secondary my-2 my-sm-0" type="submit"> << Trở lại</button>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+       
+      </li>
+    </ul>
+    <form action = "../themdatphong/${idBK}.htm" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Tên khách sạn" name = "timkiem" >
+      <button style="
+    margin: 20px;
+" class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+      
+    
+    </form>
+      <button onclick="location.href = '../themdatphong/${idBK}.htm'"  class="btn btn-outline-success my-2 my-sm-0" type="submit">Bỏ lọc</button>
+  </div>
+</nav>
+			
+			
+			
+			
 				<c:if test="${message==1}">
 				
 					
 					<div class="alert alert-success fade show" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>xóa nhân viên thành công</p>
+						<p>xóa đặt phòng thành công</p>
 						<hr>
 					</div>
 				</c:if>
@@ -65,20 +94,64 @@
 					<div class="alert alert-danger" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>xóa nhân viên thất bại</p>
+						<p>xóa đặt phòng thất bại</p>
 						<hr>
 					</div>
 				</c:if>
+				<c:if test="${message==4}">
 				
+					<div class="alert alert-danger" role="alert"
+						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
+						<h4 class="alert-heading">ERROR!</h4>
+						<p>Nhập thời gian</p>
+						<hr>
+					</div>
+				</c:if>
+				<c:if test="${message==5}">
+				
+					<div class="alert alert-danger" role="alert"
+						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
+						<h4 class="alert-heading">ERROR!</h4>
+						<p>Thời gian đến phải trước thời gian đi</p>
+						<hr>
+					</div>
+				</c:if>
+				<c:if test="${message==6}">
+				
+					<div class="alert alert-danger" role="alert"
+						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
+						<h4 class="alert-heading">ERROR!</h4>
+						<p>Thời gian đến phải nằm trong thời gian tour diễn ra</p>
+						<hr>
+					</div>
+				</c:if>
+				<c:if test="${message==7}">
+				
+					<div class="alert alert-danger" role="alert"
+						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
+						<h4 class="alert-heading">ERROR!</h4>
+						<p>Thời gian đi phải nằm trong thời gian tour diễn ra</p>
+						<hr>
+					</div>
+				</c:if>
             <c:set var="message" value="0" />
 				<div class="container form-dang-nhap">
-					<div style='display: flex; justify-content: space-between;'>
+				<%-- 	<div style='display: flex; justify-content: space-between;'>
 
 						
-						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
-							style='padding: 3px'>
+						<div style="
+    text-align: end;
+">
+						<form class = "d-flex my-2" action = "../themdatphong/${idBK}.htm">
+						<label class = "mx-1 mt-2">Tìm kiếm:</label>
+						 <input 
+							type="text" class="form-control w-25 mx-2 " name = "timkiem" placeholder="Tên">
+					<button type="submit" class="btn btn-primary">Tra</button>
+				</form>
+<button type="button" class="btn btn-success"
+							onclick="location.href = '../themdatphong/${idBK}.htm'">Bỏ lọc</button></div>
 
-					</div>
+					</div> --%>
 					<br>
 	<table class="table">
 						<thead>
@@ -89,11 +162,11 @@
 							</tr>
 						</thead>
 						<tbody>
-						
+						<c:set var="counter" value="${offset+1 }" />
 							<c:forEach var="phong" items="${phongs}">
 
 								<tr>
-									<th scope="row">${phong.id}</th>
+									<th scope="row">${counter}</th>
 									<td>${phong.ten} + ${phong.noiLuuTru1.tenNLT}</td>
 																<td>	<div class="dropdown" style="margin-right: 10px;display: inline-block;">
 											<button class="btn btn-primary dropdown-toggle"
@@ -239,10 +312,27 @@
                     
 </td>
 								</tr>
-
+<c:set var="counter" value="${counter+1}" />
 							</c:forEach>
 						</tbody>
 					</table>
+					<div style="
+    margin: 50px;
+">
+					<ul class="pagination" style="position: absolute; bottom: 0; right: 0;width:400px;">
+			    <li class="page-item ${currentPage == 0 ? 'disabled' : ''}">
+			        <a class="page-link" href="../themdatphong/${idBK }.htm?currentPage=${currentPage - 1}">Trước</a>
+			    </li>
+			    <c:forEach begin="0" end="${totalPages - 1}" var="i">
+			        <li class="page-item ${currentPage == i ? 'active' : ''}">
+			            <a class="page-link" href="../themdatphong/${idBK }.htm?currentPage=${i}">${i + 1}</a>
+			        </li>
+			    </c:forEach>
+			    <li class="page-item ${currentPage == totalPages - 1 ? 'disabled' : ''}">
+			        <a class="page-link" href="../themdatphong/${idBK }.htm?currentPage=${currentPage + 1}">Sau</a>
+			    </li>
+			</ul>
+			</div>
 				</div>
 			</div>
 		</div>

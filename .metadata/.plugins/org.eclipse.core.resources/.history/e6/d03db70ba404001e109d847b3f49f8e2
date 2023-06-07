@@ -1,0 +1,90 @@
+package QLXB.controller;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import QLXB.entity.TaiKhoan;
+
+
+
+
+@Transactional
+@Controller
+public class userController {
+	@Autowired
+	SessionFactory factory;
+	@Autowired
+	ServletContext context;
+	
+	@RequestMapping("index")
+	public String welcome(HttpServletRequest request, ModelMap model) {
+		model.addAttribute("taiKhoan", new TaiKhoan());
+		return "login/login";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(ModelMap model, HttpServletRequest request, @ModelAttribute("taiKhoan") TaiKhoan taiKhoan,
+			BindingResult errors) {
+		boolean kt = true;
+		if (taiKhoan.getMaNV().trim().length() == 0) {
+			errors.rejectValue("MANV", "taiKhoan", "Vui lòng nhập username !");
+			kt = false;
+		}
+		if (taiKhoan.getPASSWORD().trim().length() == 0) {
+			errors.rejectValue("PASSWORD", "taiKhoan", "Vui lòng nhập password !");
+			kt = false;
+		}
+		if (taiKhoan.getPASSWORD().trim().length() < 5) {
+			errors.rejectValue("PASSWORD", "taiKhoan", "Password phải từ 5 kí tự trở lên!");
+			kt = false;
+		}
+		if (kt == true) {
+			HttpSession session = request.getSession();
+			session.setMaxInactiveInterval(36000);
+			String username = taiKhoan.getMaNV();
+			String password = taiKhoan.getPASSWORD();
+			TaiKhoan taikhoan = queryLogin(username, password);
+			if (taikhoan != null) {
+				if (taikhoan.getNhanVien().getTrangThai() == 1) {
+
+					session.setAttribute("TaiKhoan", taikhoan);
+						return "redirect:/homeshow.htm";
+				} else {
+					model.addAttribute("error", "Tài khoản đã ngừng hoạt động !!!");
+					return "login/login";
+				}
+			} else
+				model.addAttribute("error", "Mã tài khoản hoặc mật khẩu chưa đúng !!!");
+		}
+		return "login/login";
+
+	}
+	
+	public TaiKhoan queryLogin(String username, String password) {
+
+		Session session = factory.getCurrentSession();
+
+		String hql = "FROM TaiKhoan WHERE maNV= :USERNAME AND PASSWORD = :PASSWORD";
+		Query query = session.createQuery(hql);
+		query.setParameter("USERNAME", username);
+		query.setParameter("PASSWORD", password);
+		if (query.list().size() == 0) {
+			return null;
+		}
+		return (TaiKhoan) query.list().get(0);
+	}
+	
+}

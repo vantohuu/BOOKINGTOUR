@@ -36,6 +36,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
 	integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
 	crossorigin="anonymous"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 <style>
 .dropdown-menu.show {
 	left: -800px;
@@ -47,8 +48,37 @@
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<%@ include file="../includes/Navbarc1.jsp"%>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==1}">
+			<%@ include file="../includes/Navbarc1.jsp"%></c:if>
+			<c:if test="${sessionScope.TaiKhoan.isAdmin==0}">
+			<%@ include file="../includes/Navbarnvc1.jsp"%></c:if>
 			<div class="col py-3">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <c:if test="${sessionScope.TaiKhoan.isAdmin==1}"><a class="navbar-brand " href="themdiemdulich.htm"> <button type="button" class="btn btn-success"
+																data-dismiss="modal">Thêm điểm du lịch</button></a></c:if>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+       
+      </li>
+    </ul>
+    <form action = "diemdulich.htm" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Tên" name = "timkiem" >
+      <button style="
+    margin: 20px;
+" class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+      
+    
+    </form>
+      <button onclick="location.href = 'diemdulich.htm'"  class="btn btn-outline-success my-2 my-sm-0" type="submit">Bỏ lọc</button>
+  </div>
+</nav>
+			
+			
+			
 				<c:if test="${message==1}">
 				
 					
@@ -71,7 +101,7 @@
 				
 <c:set var="message" value="0" />
 				<div class="container form-dang-nhap">
-					<div style='display: flex; justify-content: space-between;'>
+			<%-- 		<div style='display: flex; justify-content: space-between;'>
 
 						<button type="button" class="btn btn-success"
 							onclick="location.href = 'themdiemdulich.htm'">Thêm địa điểm mới</button>
@@ -88,12 +118,15 @@
 <button type="button" class="btn btn-success"
 							onclick="location.href = 'diemdulich.htm'">Bỏ lọc</button></div>
 
-					</div>
+					</div> --%>
+					<br>
+					<h2>Điểm du lịch</h2>
 					<br>
 					<table class="table">
 						<thead>
 							<tr>
 								<th scope="col">STT</th>
+								<th scope="col">Hình ảnh</th>
 								<th scope="col">Tên</th>
 								<th scope="col">Xử lý</th>
 							</tr>
@@ -104,75 +137,25 @@
 
 								<tr>
 									<th scope="row">${counter}</th>
-									<td>${diemdulich.ten}</td>
+									 
+									<td><div class="event-img"> <img style="width: 150px; height: 150px;border-radius: 0.45rem!important;" src="images/logos/${diemdulich.hinhAnh}" ></div></td>
+									<td><div><h3>${diemdulich.ten}</h3>
+									<h5 class="font-weight-normal">Địa điểm : ${diemdulich.diaChi}</h5>
+									<h6 class="blockquote-footer"> ${diemdulich.moTa}</h6>
+									</div></td>
 																	<td style='display: flex; justify-content: flex-start;'>
-									<div class="dropdown" style="margin-right: 10px;">
-											<button class="btn btn-primary dropdown-toggle"
-												data-toggle="dropdown">Chi tiết</button>
-											<div class="dropdown-menu"
-												aria-labelledby="dropdownMenuButton">
-												<div class="container">
-													<div class="modal-header">
-														<h5 class="modal-title" id="exampleModalLabel">Thông
-															tin địa điểm</h5>
-														<button type="button" class="close" data-dismiss="modal"
-															aria-label="Close"></button>
-													</div>
-													<div class="modal-body" style="width: 500px;">
-
-														<div class="row">
-															<div class="col">
-																<label for="recipient-name" class="col-form-label">Tên :</label>
-																 <label for="recipient-name"
-																	class="col-form-label"> 
-																	${diemdulich.ten}</label>
-															</div>
-														</div>
-														<div class="row">
-															<div class="col">
-																<label for="recipient-name" class="col-form-label">Địa chỉ :</label> 
-																<label for="recipient-name"
-																	class="col-form-label">${diemdulich.diaChi}</label>
-															</div>
-														</div>
-														<div class="row">
-															<div class="col">
-																<label for="recipient-name" class="col-form-label">Mô tả
-																	:</label> <label for="recipient-name" class="col-form-label">
-																	${diemdulich.moTa}</label>
-															</div>
-														</div>
-														<%-- <div class="row">
-															<div class="col">
-																<label for="recipient-name" class="col-form-label">Hình ảnh
-																	:</label> <label for="recipient-name" class="col-form-label">
-																	${diemdulich.hinhAnh}</label>
-															</div>
-														</div>
-								 --%>
-													
-
-														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary"
-																data-dismiss="modal">Đóng</button>
-														</div>
-
-
-													</div>
-												</div>
-											</div>
-										</div>
+									
 									
 									
 											
 									
-										<a
+										<c:if test="${sessionScope.TaiKhoan.isAdmin==1}"><a
 										href="suadiemdulich/${diemdulich.id}.htm"><button
 												class="btn btn-primary">chỉnh sửa</button> </a> 
 
 										<button
 											onclick="if(confirm('bạn có chắc chắn muốn xóa nhân viên này không ?')){location.href='xoadiemdulich/${diemdulich.id}.htm'}"
-											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button>
+											class="btn btn-danger" style='margin-left: 7px;'>Xóa</button></c:if>
 </td>
 								</tr>
 <c:set var="counter" value="${counter+1}" />
