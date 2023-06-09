@@ -77,27 +77,28 @@
 				<div class="container form-dang-nhap">
 					<div style='display: flex; justify-content: space-between;'>
 
+						<div style='display: flex; justify-content: space-between;'>
+											<button onclick="location.href = '../../cttour/${idtour}.htm'"  class="btn btn-outline-secondary my-2 my-sm-0" type="submit"> << Trở lại</button>
 						
-						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
-							style='padding: 3px'>
+						</div>
 
 					</div>
 					<br>
 	<table class="table">
 						<thead>
 							<tr>
-								<th scope="col">ID</th>
+								<th scope="col">STT</th>
 								<th scope="col">Tên</th>
 								<th scope="col">Địa chỉ</th>
 								<th scope="col">Xử lý</th>
 							</tr>
 						</thead>
 						<tbody>
-						
+						<c:set var="counter" value="${offset+1 }" />
 							<c:forEach var="diemdulich" items="${diemDuLichs}">
 
 								<tr>
-									<th scope="row">${diemdulich.id}</th>
+									<th scope="row">${counter}</th>
 									<td>${diemdulich.ten}</td>
 									<td>${diemdulich.diaChi}</td>
 									
@@ -172,7 +173,7 @@
 										
 </td>
 								</tr>
-
+<c:set var="counter" value="${counter+1}" />
 							</c:forEach>
 						</tbody>
 					</table>

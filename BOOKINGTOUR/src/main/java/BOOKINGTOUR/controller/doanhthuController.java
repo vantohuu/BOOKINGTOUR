@@ -273,7 +273,7 @@ public class doanhthuController {
 			Date date1 = Date.from(localDate1.atStartOfDay(ZoneId.systemDefault()).toInstant());
 			LocalDate localDate2 = LocalDate.parse(denngay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			Date date2 = Date.from(localDate2.atStartOfDay(ZoneId.systemDefault()).toInstant());
-			hql1 = "Select sum(veTour.giaVe+ veTour.phiDiChuyen) FROM CTVe  where ((veTour.bookingTour1.loaiTour.id = :loaitour and veTour.loaiVe.id =:loaive) and veTour.bookingTour1.tGBD >= :date1) and veTour.bookingTour1.tGKT <= :date2";
+			hql1 = "Select sum((veTour.giaVe+ veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100) FROM CTVe  where ((veTour.bookingTour1.loaiTour.id = :loaitour and veTour.loaiVe.id =:loaive) and veTour.bookingTour1.tGBD >= :date1) and veTour.bookingTour1.tGKT <= :date2";
 			query = (Query) session.createQuery(hql1);
 			query.setParameter("loaitour", loaitour);
 			query.setParameter("loaive", loaive);
@@ -284,7 +284,7 @@ public class doanhthuController {
 		else if (tungay.length() != 0) {
 			LocalDate localDate1 = LocalDate.parse(tungay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			Date date1 = Date.from(localDate1.atStartOfDay(ZoneId.systemDefault()).toInstant());
-			hql1 = "Select sum(veTour.giaVe+ veTour.phiDiChuyen) FROM CTVe  where ((veTour.bookingTour1.loaiTour.id = :loaitour and veTour.loaiVe.id =:loaive) and veTour.bookingTour1.tGBD >= :date1) ";
+			hql1 = "Select sum((veTour.giaVe+ veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100) FROM CTVe  where ((veTour.bookingTour1.loaiTour.id = :loaitour and veTour.loaiVe.id =:loaive) and veTour.bookingTour1.tGBD >= :date1) ";
 			query = session.createQuery(hql1);
 			query.setParameter("date1", date1);
 			query.setParameter("loaitour", loaitour);
@@ -294,13 +294,13 @@ public class doanhthuController {
 		else if (denngay.length() != 0) {
 			LocalDate localDate2 = LocalDate.parse(denngay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			Date date2 = Date.from(localDate2.atStartOfDay(ZoneId.systemDefault()).toInstant());
-			hql1 = "Select sum(veTour.giaVe+ veTour.phiDiChuyen) FROM CTVe  where ((veTour.bookingTour1.loaiTour.id = :loaitour and veTour.loaiVe.id =:loaive) and veTour.bookingTour1.tGKT <= :date2) ";
+			hql1 = "Select sum((veTour.giaVe+ veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100) FROM CTVe  where ((veTour.bookingTour1.loaiTour.id = :loaitour and veTour.loaiVe.id =:loaive) and veTour.bookingTour1.tGKT <= :date2) ";
 			query = session.createQuery(hql1);
 			query.setParameter("date2", date2);
 			query.setParameter("loaive", loaive);
 			query.setParameter("loaitour", loaitour);
 		} else {
-			hql1 = "Select sum(veTour.giaVe+ veTour.phiDiChuyen) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour and veTour.loaiVe.id =:loaive)  ";
+			hql1 = "Select sum((veTour.giaVe+ veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour and veTour.loaiVe.id =:loaive)  ";
 			query = session.createQuery(hql1);
 			query.setParameter("loaive", loaive);
 			query.setParameter("loaitour", loaitour);
@@ -322,7 +322,7 @@ public class doanhthuController {
 			Date date1 = Date.from(localDate1.atStartOfDay(ZoneId.systemDefault()).toInstant());
 			LocalDate localDate2 = LocalDate.parse(denngay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			Date date2 = Date.from(localDate2.atStartOfDay(ZoneId.systemDefault()).toInstant());
-			hql1 = "Select sum( veTour.bookingTour1.maxNL*(veTour.giaVe+veTour.phiDiChuyen)) FROM CTVe  where( (veTour.bookingTour1.loaiTour.id = :loaitour )and veTour.bookingTour1.tGBD >= :date1) and veTour.bookingTour1.tGKT <= :date2  ";	
+			hql1 = "Select sum( veTour.bookingTour1.maxNL*((veTour.giaVe+veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100)) FROM CTVe  where( (veTour.bookingTour1.loaiTour.id = :loaitour )and veTour.bookingTour1.tGBD >= :date1) and veTour.bookingTour1.tGKT <= :date2  ";	
 			query = (Query) session.createQuery(hql1);
 			query.setParameter("loaitour", loaitour);
 			query.setParameter("date1", date1);
@@ -332,7 +332,7 @@ public class doanhthuController {
 		else if (tungay.length() != 0) {
 			LocalDate localDate1 = LocalDate.parse(tungay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			Date date1 = Date.from(localDate1.atStartOfDay(ZoneId.systemDefault()).toInstant());
-			hql1 = "Select sum( veTour.bookingTour1.maxNL*(veTour.giaVe+veTour.phiDiChuyen)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour )  and veTour.bookingTour1.tGBD >= :date1) ";			query = session.createQuery(hql1);
+			hql1 = "Select sum( veTour.bookingTour1.maxNL*((veTour.giaVe+veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour )  and veTour.bookingTour1.tGBD >= :date1) ";			query = session.createQuery(hql1);
 			query.setParameter("date1", date1);
 			query.setParameter("loaitour", loaitour);
 		}
@@ -340,13 +340,13 @@ public class doanhthuController {
 		else if (denngay.length() != 0) {
 			LocalDate localDate2 = LocalDate.parse(denngay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			Date date2 = Date.from(localDate2.atStartOfDay(ZoneId.systemDefault()).toInstant());
-			hql1 = "Select sum( veTour.bookingTour1.maxNL*(veTour.giaVe+veTour.phiDiChuyen)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour ) and veTour.bookingTour1.tGKT <= :date2)  ";
+			hql1 = "Select sum( veTour.bookingTour1.maxNL*((veTour.giaVe+veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour ) and veTour.bookingTour1.tGKT <= :date2)  ";
 			query = session.createQuery(hql1);
 			query.setParameter("date2", date2);
 
 			query.setParameter("loaitour", loaitour);
 		} else {
-			hql1 = "Select sum( veTour.bookingTour1.maxNL*(veTour.giaVe+veTour.phiDiChuyen)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour )  ";
+			hql1 = "Select sum( veTour.bookingTour1.maxNL*((veTour.giaVe+veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour )  ";
 			query = session.createQuery(hql1);
 
 			query.setParameter("loaitour", loaitour);
@@ -366,7 +366,7 @@ public class doanhthuController {
 			Date date1 = Date.from(localDate1.atStartOfDay(ZoneId.systemDefault()).toInstant());
 			LocalDate localDate2 = LocalDate.parse(denngay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			Date date2 = Date.from(localDate2.atStartOfDay(ZoneId.systemDefault()).toInstant());
-			hql1 = "Select sum( veTour.bookingTour1.maxTN*(veTour.giaVe+veTour.phiDiChuyen)) FROM CTVe  where( (veTour.bookingTour1.loaiTour.id = :loaitour )and veTour.bookingTour1.tGBD >= :date1) and veTour.bookingTour1.tGKT <= :date2  ";	
+			hql1 = "Select sum( veTour.bookingTour1.maxTN*((veTour.giaVe+veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100)) FROM CTVe  where( (veTour.bookingTour1.loaiTour.id = :loaitour )and veTour.bookingTour1.tGBD >= :date1) and veTour.bookingTour1.tGKT <= :date2  ";	
 			query = (Query) session.createQuery(hql1);
 			query.setParameter("loaitour", loaitour);
 			query.setParameter("date1", date1);
@@ -376,7 +376,7 @@ public class doanhthuController {
 		else if (tungay.length() != 0) {
 			LocalDate localDate1 = LocalDate.parse(tungay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			Date date1 = Date.from(localDate1.atStartOfDay(ZoneId.systemDefault()).toInstant());
-			hql1 = "Select sum( veTour.bookingTour1.maxTN*(veTour.giaVe+veTour.phiDiChuyen)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour )  and veTour.bookingTour1.tGBD >= :date1) ";			query = session.createQuery(hql1);
+			hql1 = "Select sum( veTour.bookingTour1.maxTN*((veTour.giaVe+veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour )  and veTour.bookingTour1.tGBD >= :date1) ";			query = session.createQuery(hql1);
 			query.setParameter("date1", date1);
 			query.setParameter("loaitour", loaitour);
 		}
@@ -384,13 +384,13 @@ public class doanhthuController {
 		else if (denngay.length() != 0) {
 			LocalDate localDate2 = LocalDate.parse(denngay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			Date date2 = Date.from(localDate2.atStartOfDay(ZoneId.systemDefault()).toInstant());
-			hql1 = "Select sum( veTour.bookingTour1.maxTN*(veTour.giaVe+veTour.phiDiChuyen)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour ) and veTour.bookingTour1.tGKT <= :date2)  ";
+			hql1 = "Select sum( veTour.bookingTour1.maxTN*((veTour.giaVe+veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour ) and veTour.bookingTour1.tGKT <= :date2)  ";
 			query = session.createQuery(hql1);
 			query.setParameter("date2", date2);
 
 			query.setParameter("loaitour", loaitour);
 		} else {
-			hql1 = "Select sum( veTour.bookingTour1.maxTN*(veTour.giaVe+veTour.phiDiChuyen)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour )  ";
+			hql1 = "Select sum( veTour.bookingTour1.maxTN*((veTour.giaVe+veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour )  ";
 			query = session.createQuery(hql1);
 
 			query.setParameter("loaitour", loaitour);
@@ -410,7 +410,7 @@ public class doanhthuController {
 			Date date1 = Date.from(localDate1.atStartOfDay(ZoneId.systemDefault()).toInstant());
 			LocalDate localDate2 = LocalDate.parse(denngay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			Date date2 = Date.from(localDate2.atStartOfDay(ZoneId.systemDefault()).toInstant());
-			hql1 = "Select sum( veTour.bookingTour1.maxTE*(veTour.giaVe+veTour.phiDiChuyen)) FROM CTVe  where( (veTour.bookingTour1.loaiTour.id = :loaitour )and veTour.bookingTour1.tGBD >= :date1) and veTour.bookingTour1.tGKT <= :date2  ";	
+			hql1 = "Select sum( veTour.bookingTour1.maxTE*((veTour.giaVe+veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100)) FROM CTVe  where( (veTour.bookingTour1.loaiTour.id = :loaitour )and veTour.bookingTour1.tGBD >= :date1) and veTour.bookingTour1.tGKT <= :date2  ";	
 			query = (Query) session.createQuery(hql1);
 			query.setParameter("loaitour", loaitour);
 			query.setParameter("date1", date1);
@@ -420,7 +420,7 @@ public class doanhthuController {
 		else if (tungay.length() != 0) {
 			LocalDate localDate1 = LocalDate.parse(tungay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			Date date1 = Date.from(localDate1.atStartOfDay(ZoneId.systemDefault()).toInstant());
-			hql1 = "Select sum( veTour.bookingTour1.maxTE*(veTour.giaVe+veTour.phiDiChuyen)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour )  and veTour.bookingTour1.tGBD >= :date1) ";			query = session.createQuery(hql1);
+			hql1 = "Select sum( veTour.bookingTour1.maxTE*((veTour.giaVe+veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour )  and veTour.bookingTour1.tGBD >= :date1) ";			query = session.createQuery(hql1);
 			query.setParameter("date1", date1);
 			query.setParameter("loaitour", loaitour);
 		}
@@ -428,13 +428,13 @@ public class doanhthuController {
 		else if (denngay.length() != 0) {
 			LocalDate localDate2 = LocalDate.parse(denngay, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			Date date2 = Date.from(localDate2.atStartOfDay(ZoneId.systemDefault()).toInstant());
-			hql1 = "Select sum( veTour.bookingTour1.maxTE*(veTour.giaVe+veTour.phiDiChuyen)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour ) and veTour.bookingTour1.tGKT <= :date2)  ";
+			hql1 = "Select sum( veTour.bookingTour1.maxTE*((veTour.giaVe+veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour ) and veTour.bookingTour1.tGKT <= :date2)  ";
 			query = session.createQuery(hql1);
 			query.setParameter("date2", date2);
 
 			query.setParameter("loaitour", loaitour);
 		} else {
-			hql1 = "Select sum( veTour.bookingTour1.maxTE*(veTour.giaVe+veTour.phiDiChuyen)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour )  ";
+			hql1 = "Select sum( veTour.bookingTour1.maxTE*( (veTour.giaVe+veTour.phiDiChuyen)*(100-khuyenMai.phanTramGiam)/100)) FROM CTVe  where (veTour.bookingTour1.loaiTour.id = :loaitour )  ";
 			query = session.createQuery(hql1);
 
 			query.setParameter("loaitour", loaitour);

@@ -8,6 +8,7 @@
 		<item key="isRegEx" value="false"/>
 		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="package BOOKINGTOUR.controller;"/>
 			<item value="doanh"/>
 			<item value="xoa"/>
 			<item value="them"/>

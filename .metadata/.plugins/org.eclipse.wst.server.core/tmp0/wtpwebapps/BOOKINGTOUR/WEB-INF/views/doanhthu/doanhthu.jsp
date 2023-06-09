@@ -77,14 +77,14 @@
 						</tr>
 						<tr>
 							<th scope="row">Thành tiền</th>
-							<td>${s_binhthuong_te}</td>
-							<td>${s_binhthuong_tn}</td>
-							<td>${s_binhthuong_nl}</td>
-							<td>${s_binhthuong_tong}</td>
-							<td>${s_yeucau_nl}</td>
-							<td>${s_yeucau_tn}</td>
-							<td>${s_yeucau_te}</td>
-							<td>${s_yeucau_tong}</td>
+							<td>${s_binhthuong_te}đ</td>
+							<td>${s_binhthuong_tn}đ</td>
+							<td>${s_binhthuong_nl}đ</td>
+							<td>${s_binhthuong_tong}đ</td>
+							<td>${s_yeucau_nl}đ</td>
+							<td>${s_yeucau_tn}đ</td>
+							<td>${s_yeucau_te}đ</td>
+							<td>${s_yeucau_tong}đ</td>
 
 							<%-- <td>${s_ga_ngay}</td>
 							<td>${s_so_dem}</td>

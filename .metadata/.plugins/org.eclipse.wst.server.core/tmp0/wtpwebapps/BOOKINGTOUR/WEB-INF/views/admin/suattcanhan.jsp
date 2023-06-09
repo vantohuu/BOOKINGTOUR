@@ -79,7 +79,7 @@
 				<c:set var="message" value="0" />
 				<div class="container form-dang-nhap">
 					<div>
-						<h1>Sửa thông tin nhân viên</h1>
+						<h1>Sửa thông tin cá nhân</h1>
 					</div>
 					<div class="modal-body">
 						<form:form action="updatettcanhan.htm" modelAttribute="nhanVien1">

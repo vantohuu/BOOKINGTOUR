@@ -230,3 +230,11 @@ Jun 04, 2023 04:25:49.650 [0604/042549.649:ERROR:(-1)] Check failed: false.
 
 Jun 06, 2023 15:28:32.729 NEW SESSION
 Jun 06, 2023 15:28:32.729 M? trong phi�n tr�nh duy?t hi?n t?i.
+
+Jun 08, 2023 09:13:38.932 NEW SESSION
+Jun 08, 2023 09:13:38.932 [11184:12112:0608/091338.929:ERROR:interface_endpoint_client.cc(697)] Message 5 rejected by interface blink.mojom.WidgetHost
+
+Jun 08, 2023 16:31:12.635 NEW SESSION
+Jun 08, 2023 16:31:12.635 [18784:1692:0608/163112.634:ERROR:interface_endpoint_client.cc(697)] Message 0 rejected by interface blink.mojom.WidgetHost
+Jun 08, 2023 16:45:53.202 [18784:21280:0608/164553.202:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+Jun 08, 2023 16:48:44.331 [18784:21280:0608/164844.331:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2

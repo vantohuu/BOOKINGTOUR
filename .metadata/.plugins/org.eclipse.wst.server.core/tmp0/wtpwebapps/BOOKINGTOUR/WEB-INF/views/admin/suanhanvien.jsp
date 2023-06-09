@@ -54,7 +54,7 @@
 		<div class="row flex-nowrap">
 			<%@ include file="../includes/Navbarc2.jsp"%>
 			<div class="col py-3">
-				<button onclick="location.href = 'danhsachnhanvien.htm'"
+				<button onclick="location.href = '../danhsachnhanvien.htm'"
 					class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
 					<< Trở lại</button>
 				<br>

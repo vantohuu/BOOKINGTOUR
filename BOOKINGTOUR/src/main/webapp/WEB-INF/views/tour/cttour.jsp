@@ -83,7 +83,7 @@
 <c:set var="message" value="0" />
 				<div class="container form-dang-nhap">
 					<div style='display: flex; justify-content: space-between;'>
-					<a href="../dsdiemluutru.htm" class="previous">&laquo; Trở lại</a>
+					<a href="../dsTour.htm" class="previous">&laquo; Trở lại</a>
 						<c:if test="${sessionScope.TaiKhoan.isAdmin==1}"><a href="themcttour/${id}.htm"><button
 								class="btn btn-success">Thêm chi tiết tour</button> </a></c:if>
 
@@ -94,7 +94,7 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col">ID</th>
+								<th scope="col">STT</th>
 								<th scope="col">Tên</th>
 								<th scope="col">Địa chỉ</th>
 								<c:if test="${sessionScope.TaiKhoan.isAdmin==1}"><th scope="col">Xử lý</th></c:if>
@@ -123,7 +123,7 @@
 <a href="#submenu${cttour.id}" style="display: inline;"
 										data-bs-toggle="collapse"
 										class="nav-link text-white px-0 align-middle "> <
-											<button class="btn btn-success">Đổi thứ tự</button>
+											<button class="btn btn-success">Chèn thứ tự</button>
 									</a>
 										<ul class="collapse nav flex-column ms-1" id="submenu${cttour.id}" data-bs-parent="#menu">
                             <li class="w-100">

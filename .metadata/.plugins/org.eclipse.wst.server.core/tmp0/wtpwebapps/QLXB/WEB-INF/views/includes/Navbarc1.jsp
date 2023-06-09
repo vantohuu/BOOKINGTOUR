@@ -27,16 +27,16 @@
                             <span class="ms-1 d-none d-sm-inline">Quản lí xe buýt</span></a>
                         <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="dsdattour.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Tuyến đường</span></a>
+                                <a href="dstuyenduong.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Tuyến đường</span></a>
                             </li>
                             <li>
-                                <a href="diemdulich.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Xe</span></a>
+                                <a href="dsxe.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Xe</span></a>
                             </li>
                                <li>
-                                <a href="dsdiemluutru.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Trạm xe</span></a>
+                                <a href="dstramxe.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Trạm xe</span></a>
                             </li>
                             <li>
-                                <a href="dsTour.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Trạm vé</span></a>
+                                <a href="dstramve.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Trạm vé</span></a>
                             </li>
                         </ul>
                     </li>
@@ -50,7 +50,10 @@
                             </li>
                             
                             <li>
-                                <a href="dskhachhang.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Giá vé</span></a>
+                                <a href="dsgiave.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Giá vé</span></a>
+                            </li>
+                            <li>
+                                <a href="doanhthungay.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Nhập doanh thu ngày</span></a>
                             </li>
                         </ul>
                     </li>

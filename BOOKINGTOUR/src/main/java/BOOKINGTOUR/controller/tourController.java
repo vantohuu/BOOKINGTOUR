@@ -2,6 +2,8 @@ package BOOKINGTOUR.controller;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -147,7 +149,7 @@ public class tourController {
 	public String cttour(ModelMap model ,@PathVariable int id,@ModelAttribute("message") String message,@RequestParam(defaultValue = "0") int currentPage) {
 		Tour tour= this.searchTour(id);
 		
-int pageSize = 9; // Số lượng phần tử trên mỗi trang
+int pageSize = 7; // Số lượng phần tử trên mỗi trang
 		
 
 		int totalCount = tour.getCtTours().size(); // Tổng số lượng phần tử trên toàn bộ danh sách
@@ -156,14 +158,15 @@ int pageSize = 9; // Số lượng phần tử trên mỗi trang
 		 if(totalPages==0) {
 				totalPages=1;
 			}
-		
-		
+		Tour tourThuTu =tour;
+		 Collections.sort(tourThuTu.getCtTours(), Comparator.comparing(CTTour::getThuTu)); 
 		int startIndex = (currentPage)  * pageSize;
 		int endIndex = Math.min(startIndex + pageSize, totalCount);
 		System.out.println(startIndex);
 		System.out.println(endIndex);
 		// Lấy phần tử của danh sách theo giới hạn kết quả trả về
-		List<CTTour> result = tour.getCtTours().subList(startIndex, endIndex);
+		List<CTTour> result = tourThuTu.getCtTours().subList(startIndex, endIndex);
+		
 		
 		 
 		
@@ -222,6 +225,8 @@ int pageSize = 9; // Số lượng phần tử trên mỗi trang
 		
 		List<DiemDuLich> listDDL= new ArrayList<DiemDuLich>();
 		
+		 
+		
 		for(CTTour c:tour.getCtTours()) {
 			listDDL.add(c.getDiemDuLich());
 		}
@@ -242,8 +247,10 @@ int pageSize = 9; // Số lượng phần tử trên mỗi trang
 		int endIndex = Math.min(startIndex + pageSize, totalCount);
 		System.out.println(startIndex);
 		System.out.println(endIndex);
+		
 		// Lấy phần tử của danh sách theo giới hạn kết quả trả về
 		List<DiemDuLich> result = DDLConLai.subList(startIndex, endIndex);
+		/* Collections.sort(result, Comparator.comparing(DiemDuLich::get)); */
 		
 		 
 		
@@ -252,7 +259,7 @@ int pageSize = 9; // Số lượng phần tử trên mỗi trang
 	    model.addAttribute("totalPages", totalPages);
 	    model.addAttribute("currentPage", currentPage);
 		
-		
+	    model.addAttribute("offset", currentPage * pageSize);
 		
 		model.addAttribute("idtour",id);
 		model.addAttribute("diemDuLichs",result);
@@ -430,10 +437,11 @@ int pageSize = 9; // Số lượng phần tử trên mỗi trang
 	    combined.addAll(list2);
 	    combined.removeAll(list1);
 
-	   
-
 	    return combined;
 	}
+	
+	
+	
 	public int  getSize() {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM Tour";
@@ -451,5 +459,6 @@ int pageSize = 9; // Số lượng phần tử trên mỗi trang
 
 		return list;
 	}
+	
 	
 }

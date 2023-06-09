@@ -227,9 +227,11 @@
 								<th scope="col">STT</th>
 								<th scope="col">CCCD</th>
 								<th scope="col">Họ Tên khách hàng</th>
+								<th scope="col">Loại vé</th>
 								<th scope="col">Phí di chuyển</th>
 								<th scope="col">Giá vé</th>
 								<th scope="col">Giá cọc</th>
+								<th scope="col">Khuyến mãi</th>
 								<th scope="col">Xử lý</th>
 							</tr>
 						</thead>
@@ -242,9 +244,11 @@
 									<td scope="row">${ctvetour.khachHang.cCCD}</td>
 									<td scope="row">${ctvetour.khachHang.ho} ${ctvetour.khachHang.ten}</td>
 									<%-- <td>${ctvetour.veTour.phiDiChuyen}</td> --%>
-									<td>${ctvetour.veTour.phiDiChuyen}</td>
-									<td>${ctvetour.veTour.phiDiChuyen}</td>
-									<td>${ctvetour.veTour.phiDiChuyen}</td>
+									<td>${ctvetour.veTour.loaiVe.ten}</td>
+									<td>${ctvetour.veTour.phiDiChuyen}đ</td>
+									<td>${ctvetour.veTour.giaVe}đ</td>
+									<td>${ctvetour.veTour.giaCoc}đ</td>
+									<td>${ctvetour.khuyenMai.phanTramGiam}%</td>
 									
 																	<td style='display: flex; justify-content: flex-start;'>
 									<div class="dropdown" style="margin-right: 10px;">

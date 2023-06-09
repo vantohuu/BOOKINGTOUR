@@ -113,7 +113,8 @@
 								<tr>
 									<th scope="row">${nhanvien.maNV}</th>
 									<td>${nhanvien.ho} ${nhanvien.ten}</td>
-									<td>
+									<td>${nhanvien.chucVu.ten}</td>
+									
 									
 									<td style='display: flex; justify-content: flex-start;'>
 									<div class="dropdown" style="margin-right: 10px;">
@@ -243,6 +244,7 @@
     document.querySelector('.alert').classList.add('d-none');
   }, 2000);
 </script>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
