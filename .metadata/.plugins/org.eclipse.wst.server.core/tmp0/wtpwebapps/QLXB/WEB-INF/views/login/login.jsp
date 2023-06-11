@@ -34,7 +34,7 @@ height: 100%;
 	font-style: italic;
 }
 </style>
-
+<script src=https://www.google.com/recaptcha/api.js></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> 
      <script src="https://kit.fontawesome.com/ee36f81461.js" crossorigin="anonymous"></script>
@@ -75,10 +75,11 @@ height: 100%;
                       
                       <form:errors path="PASSWORD"/>
                   </div>
-
+					
                   <div class="pt-1 mb-4">
                     <button class="btn btn-dark btn-lg btn-block" >ĐĂNG NHẬP </button>
                   </div>
+                  <div class="g-recapcha" data-sidekey="6Ld5VYQmAAAAAK4BBE8MKiguwWfmNYEJGc2m2BjZ"></div>
                   <a class="small text-muted" href="#!">Quên mật khẩu?</a>
                 </form:form>
 				<div style="color: red;
@@ -91,6 +92,7 @@ height: 100%;
     </div>
   </div>
 </section>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>

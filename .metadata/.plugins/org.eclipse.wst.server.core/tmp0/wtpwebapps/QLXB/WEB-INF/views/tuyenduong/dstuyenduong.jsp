@@ -119,7 +119,15 @@
 									<h6 class="font-weight-normal"> Giản cách :${tuyenduong.gianCach}</h6><h6 class="font-weight-normal">Thời gian hoạt động ${tuyenduong.thoiGianHD}</h6>
 									
 									<h6 class="font-weight-normal">Thời gian một chuyến: ${tuyenduong.thoiGianChuyen} </h6>
-									<h6 class="font-weight-normal">Cự ly: ${tuyenduong.cuLy} </h6></td>
+									<h6 class="font-weight-normal">Cự ly: ${tuyenduong.cuLy} </h6>
+									<h6 class="font-weight-normal">Giá vé : HSSV :${tuyenduong.giaVe.giaVeHSSV} - Bình thường :${tuyenduong.giaVe.giaVeBT}- Tập :${tuyenduong.giaVe.giaVeTap}</h6>
+												<h6 class="font-weight-normal">Loại hình :
+												<c:if test="${tuyenduong.giaVe.loaiHinh.trim().toLowerCase()=='tg'}">
+									Trợ giá
+									</c:if>
+									<c:if test="${tuyenduong.giaVe.loaiHinh.trim().toLowerCase()=='ktg'}">
+									Không trợ giá
+									</c:if></h6></td>
 									<td><a
 										href="cttuyenduong/${tuyenduong.id}.htm"><button
 												class="btn btn-primary">Chi tiết trạm</button> </a></td>

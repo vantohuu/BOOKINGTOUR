@@ -115,13 +115,13 @@
 									
 										<div style= " display: flex; justify-content: center;">
 										<button
-											onclick="if(confirm('bạn có chắc chắn muốn xóa nhân viên này không ?')){location.href='../xoacttour/${cttour.id}.htm'}"
-											class="btn btn-danger" style="height: 38px;;margin-top: 32px;/* margin-bottom: auto; */margin-inline: 7px;">Xóa</button>
+											onclick="if(confirm('bạn có chắc chắn muốn xóa nhân viên này không ?')){location.href='../xoacttuyenduong/${ct_Tuyen_Duong.id}.htm'}"
+											class="btn btn-danger" style="height: 38px;margin-top: 32px;/* margin-bottom: auto; */margin-inline: 7px;margin: auto;">Xóa</button>
 
 <a href="#submenu${ct_Tuyen_Duong.id}" style="display: inline;"
 										data-bs-toggle="collapse"
 										class="nav-link text-white px-0 align-middle "> <
-											<button class="btn btn-success">Đổi thứ tự</button>
+											<button class="btn btn-success">chèn thứ tự</button>
 									</a>
 										<ul class="collapse nav flex-column ms-1" id="submenu${ct_Tuyen_Duong.id}" data-bs-parent="#menu">
                             <li class="w-100">

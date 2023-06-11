@@ -1,0 +1,88 @@
+package QLXB.controller;
+
+import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import QLXB.entity.GiaVe;
+import QLXB.entity.NhanVien;
+import QLXB.entity.TuyenDuong;
+import QLXB.entity.Xe;
+
+@Transactional
+@Controller
+public class qlchungController {
+	@Autowired
+	SessionFactory factory;
+	@Autowired
+	ServletContext context;
+	
+	@RequestMapping("dsgiave")
+	public String dsgiave(HttpServletRequest request, ModelMap model, @RequestParam(defaultValue = "0") int page,
+			@ModelAttribute("message") String message) {
+		int pageSize = 6;
+		int totalUsers = getSizGiaVe();
+		List<GiaVe> giaves = this.getGiaVes(page, pageSize);
+		int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+		if (totalPages == 0) {
+			totalPages = 1;
+		}
+		model.addAttribute("offset", page * pageSize);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("giaves", giaves);
+		model.addAttribute("message", message);
+		return "giave/dsgiave";
+	}
+	public int getSizGiaVe() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM GiaVe";
+		Query query = session.createQuery(hql);
+		List<GiaVe> list = query.list();
+
+		return list.size();
+	}
+	public List<GiaVe> getGiaVes(int page, int pageSize) {
+		Session session = factory.getCurrentSession();
+		String hql;
+		Query query;
+		List<GiaVe> list;
+			hql = "FROM GiaVe t ORDER BY t.id DESC";
+			query = session.createQuery(hql);
+			int offset = page * pageSize;
+			list = query.setFirstResult(offset).setMaxResults(pageSize).list();
+		
+		return list;
+	}
+	@RequestMapping(value = "themgiave")
+	public String themgiave(HttpServletRequest request, ModelMap model) {
+		GiaVe giaVe = new GiaVe();
+		
+		
+		model.addAttribute("giaVe", giaVe);
+		return "giave/themgiave";
+	}
+	
+	@RequestMapping("doanhthungay")
+	public String doanhthungay(HttpServletRequest request, ModelMap model, @RequestParam(defaultValue = "0") int page) {
+		
+		return "nhapdoanhthu/doanhthungay";
+	}
+	@RequestMapping("xemdoanhthu")
+	public String xemdoanhthu(HttpServletRequest request, ModelMap model, @RequestParam(defaultValue = "0") int page) {
+		
+		return "nhapdoanhthu/xemdoanhthu";
+	}
+}

@@ -53,7 +53,7 @@
                                 <a href="dsgiave.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Giá vé</span></a>
                             </li>
                             <li>
-                                <a href="doanhthungay.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Nhập doanh thu ngày</span></a>
+                                <a href="lichsunhap.htm" class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Lịch sử nhập doanh thu</span></a>
                             </li>
                         </ul>
                     </li>

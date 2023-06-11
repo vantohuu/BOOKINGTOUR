@@ -1,6 +1,7 @@
 package BOOKINGTOUR.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -36,6 +37,7 @@ import BOOKINGTOUR.entity.KhuyenMai;
 import BOOKINGTOUR.entity.NhanVien;
 import BOOKINGTOUR.entity.TaiKhoan;
 import BOOKINGTOUR.entity.VeTour;
+import BOOKINGTOUR.recaptcha.RecaptchaVerification;
 import javassist.expr.NewArray;
 
 @Transactional
@@ -54,15 +56,24 @@ public class start {
 	UploadFile baseUploadFile;
 
 	@RequestMapping("index")
-	public String welcome(HttpServletRequest request, ModelMap model) {
+	public String welcome(HttpServletRequest request,HttpSession ss, ModelMap model) {
 		model.addAttribute("taiKhoan", new TaiKhoan());
 		return "login/login";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(ModelMap model, HttpServletRequest request, @ModelAttribute("taiKhoan") TaiKhoan taiKhoan,
-			BindingResult errors) {
+	public String login(ModelMap model, HttpServletRequest request, HttpSession ss,@ModelAttribute("taiKhoan") TaiKhoan taiKhoan,
+			BindingResult errors) throws IOException {
 		boolean kt = true;
+		String gRecaptchaResponse= request.getParameter("g-recaptcha-response");
+		boolean verify =RecaptchaVerification.verify(gRecaptchaResponse);
+		if (!verify) {
+			model.addAttribute("error", "Vui lòng nhâp reCaptra");
+			// System.out.println("có lổi Passwword");
+			kt = false;
+		}
+		
+		
 		if (taiKhoan.getMANV().trim().length() == 0) {
 			errors.rejectValue("MANV", "taiKhoan", "Vui lòng nhập username !");
 			kt = false;

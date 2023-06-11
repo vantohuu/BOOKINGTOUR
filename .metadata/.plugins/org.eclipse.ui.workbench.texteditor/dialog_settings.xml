@@ -8,6 +8,7 @@
 		<item key="isRegEx" value="false"/>
 		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="&#x09;&#x09;    JsonReader jsonReader = Json.createReader(new StringReader(response.toString()));"/>
 			<item value="package BOOKINGTOUR.controller;"/>
 			<item value="doanh"/>
 			<item value="xoa"/>

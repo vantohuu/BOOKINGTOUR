@@ -58,7 +58,7 @@
 					<div class="alert alert-success fade show" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">SUCCESS!</h4>
-						<p>Xóa chi tiết tour thành công</p>
+						<p>Thêm trạm xe thành công</p>
 						<hr>
 					</div>
 				</c:if>
@@ -67,7 +67,7 @@
 					<div class="alert alert-danger" role="alert"
 						style='position: fixed; width: 50%; margin-left: 230px;z-index: 100'>
 						<h4 class="alert-heading">ERROR!</h4>
-						<p>xóa chi tiết tour thất bại</p>
+						<p>xóa trạm xe thất bại</p>
 						<hr>
 					</div>
 				</c:if>
@@ -77,8 +77,8 @@
 					<div style='display: flex; justify-content: space-between;'>
 
 						
-						<input type="text" name="timkiem" placeholder=" Tìm kiếm"
-							style='padding: 3px'>
+						
+							
 
 					</div>
 					<br>
@@ -87,7 +87,7 @@
 							<tr>
 								<th scope="col">ID</th>
 								<th scope="col">Tên</th>
-								<th scope="col">Địa chỉ</th>
+								
 								<th scope="col">Xử lý</th>
 							</tr>
 						</thead>
@@ -98,15 +98,15 @@
 								<tr>
 									<th scope="row">${tramxe.maSo}</th>
 									
-									<td>${tramxe.ten}</td>
-								<td>${tramXe.diaChi}</td>
+									<td><h4>${tramxe.ten}</h4>
+								<h6>${tramxe.diaChi}</h6></td>
 									
 																	<td style='display: flex; justify-content: flex-start;'>
 									
 											
-									           <form action="insertcttour.htm" method="post" >
-									           <input name="id" type="text" class="form-control" value ="${tramxe.maSo}" style='display: none'/>
-									             <input name="idtour" type="text" class="form-control" value ="${idTD}"style='display: none'/>
+									           <form action="insertcttuyenduong.htm" method="post" >
+									           <input name="maSo" type="text" class="form-control" value ="${tramxe.maSo}" style='display: none'/>
+									             <input name="idTD" type="text" class="form-control" value ="${idTD}"style='display: none'/>
 									            
 										
 										<button
